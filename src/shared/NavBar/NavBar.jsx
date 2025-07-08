@@ -1,6 +1,5 @@
-import React, { use } from "react";
+import React from "react";
 import { Link, NavLink, useNavigate } from "react-router";
-import logo from "../../assets/images/logo.png";
 import toast from "react-hot-toast";
 import { LuMoon, LuSun } from "react-icons/lu";
 import AuthContext from "../../context/AuthContext/AuthContext";
@@ -36,9 +35,9 @@ const NavBar = () => {
       <li>
         <NavLink
           className="text-md py-3 px-2 rounded-lg font-bold"
-          to="/allPackages"
+          to="/all-policies"
         >
-          All Packages
+          All Policies
         </NavLink>
       </li>
 
@@ -56,9 +55,22 @@ const NavBar = () => {
       <li>
         <NavLink
           className="text-md py-3 px-2 rounded-lg font-bold"
-          to="/about-us"
+          to="/agents"
         >
-          About Us
+          Agents
+        </NavLink>
+      </li>
+      <li>
+        <NavLink className="text-md py-3 px-2 rounded-lg font-bold" to="/faq">
+          FAQs
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className="text-md py-3 px-2 rounded-lg font-bold"
+          to="/dashboard"
+        >
+          Dashboard
         </NavLink>
       </li>
     </>

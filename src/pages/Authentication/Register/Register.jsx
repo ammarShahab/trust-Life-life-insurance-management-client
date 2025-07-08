@@ -1,143 +1,163 @@
-import React, { use, useState } from "react";
-import { Link, useNavigate } from "react-router";
-
-import toast from "react-hot-toast";
-import AuthContext from "../../../context/AuthContext/AuthContext";
+import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
+import { Link } from "react-router";
 
 const Register = () => {
-  const { createUser, setUser, updateUser, setIsLoading, theme } =
-    use(AuthContext);
-  const [errorMessage, setErrorMessage] = useState("");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-  const navigate = useNavigate();
+  const onSubmit = (data) => {
+    const password = data.password;
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    const name = e.target.name.value;
-    const email = e.target.email.value;
-    const photoURL = e.target.photoURL.value;
-    const password = e.target.password.value;
-    // console.log(name, email, photoURL, password);
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const isLongEnough = password.length >= 6;
 
-    if (password.length < 6) {
-      setErrorMessage(toast.error("Must be at least 6 characters long."));
-
-      return;
-    }
-    if (!/[a-z]/.test(password)) {
-      setErrorMessage(
-        toast.error("Must contain at least one lowercase letter.")
-      );
-
-      return;
-    }
-    if (!/[A-Z]/.test(password)) {
-      setErrorMessage(
-        toast.error("Must contain at least one uppercase letter.")
-      );
-
+    if (!isLongEnough) {
+      toast.error("Password must be at least 6 characters long");
       return;
     }
 
-    createUser(email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        // console.log(user);
-        updateUser({ displayName: name, photoURL: photoURL })
-          .then(() => {
-            setUser({ ...user, displayName: name, photoURL: photoURL });
-            // console.log(user);
-          })
-          .catch((error) => {
-            // console.log(error);
-            setUser(user);
-          });
+    if (!hasUpperCase) {
+      toast.error("Password must include at least one uppercase letter");
+      return;
+    }
 
-        setErrorMessage("");
-        toast.success("You have Registered Successfully");
-        navigate("/");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        // const errorMessage = error.message;
-        // console.log(errorCode);
-        // console.log(errorMessage);
+    if (!hasLowerCase) {
+      toast.error("Password must include at least one lowercase letter");
+      return;
+    }
 
-        setErrorMessage(errorCode);
-      });
+    console.log("Form data:", data);
+    toast.success("Registration successful!");
+    reset();
   };
+
   return (
-    <div
-      className={`min-h-screen flex items-center justify-center bg-[#f4e7e1af] py-10  ${
-        theme ? "dark" : ""
-      } dark:bg-zinc-300`}
-    >
-      <div className="w-full max-w-md p-8 space-y-6 bg-[#F2EDEA] rounded-2xl shadow-lg mt-10 dark:bg-zinc-400">
-        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white">
-          Register Your Account
+    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 bg-gray-50 dark:bg-gray-900 transition-colors ">
+      {/* <Toaster position="top-center" /> */}
+
+      <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 sm:p-8 mb-10 mt-20">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 dark:text-white ">
+          Create an Account
         </h2>
-        <form onSubmit={handleRegister} className="space-y-4">
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          {/* Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-white">
-              Name
+            <label
+              htmlFor="name"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Full Name
             </label>
             <input
               type="text"
-              name="name"
-              className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
-              required
+              id="name"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                         focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+                         dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              placeholder="Your full name"
+              {...register("name", { required: true })}
             />
+
+            {errors.name?.type === "required" && (
+              <p className="text-red-500 text-xs">Name is required</p>
+            )}
           </div>
+
+          {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-white">
-              Email
+            <label
+              htmlFor="email"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Email address
             </label>
             <input
               type="email"
-              name="email"
-              className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
-              required
+              id="email"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                         focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+                         dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              placeholder="example@email.com"
+              {...register("email", { required: true })}
             />
+            {errors.email?.type === "required" && (
+              <p className="text-red-500 text-xs">Email is required</p>
+            )}
           </div>
+
+          {/* Photo Upload */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-white">
-              Photo URL
+            <label
+              htmlFor="photo"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Upload Photo
             </label>
             <input
-              type="text"
-              name="photoURL"
-              className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
+              type="file"
+              id="photo"
+              accept="image/*"
+              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg 
+                         cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none 
+                         dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+              {...register("photo", { required: true })}
             />
+            {errors.photo?.type === "required" && (
+              <p className="text-red-500 text-xs">Upload your photo</p>
+            )}
           </div>
+
+          {/* Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-white">
+            <label
+              htmlFor="password"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
               Password
             </label>
             <input
               type="password"
-              name="password"
-              className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
-              required
+              id="password"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                         focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+                         dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              placeholder="Enter password"
+              {...register("password", { required: true })}
             />
+
+            {errors.password?.type === "required" && (
+              <p className="text-red-500 text-xs">Password is required</p>
+            )}
           </div>
+
+          {/* Submit */}
           <button
             type="submit"
-            className="w-full px-4 py-2 text-white bg-[#fe8d02] rounded-lg hover:bg-[#fe5602]"
+            className="w-full text-white bg-[#baa53a] hover:bg-[#fcd547] focus:ring-4 
+                       focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 
+                       text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-700"
           >
             Register
           </button>
-          {/* <p className=" text-xs text-red-400"> {errorMessage}</p> */}
-        </form>
 
-        <p className="text-sm text-center text-gray-600 dark:text-white">
-          Already have an account?
-          <Link
-            to="/auth/logIn"
-            className="text-blue-500 hover:underline dark:text-white pl-1"
-          >
-            Login
-          </Link>
-        </p>
+          {/* Redirect to login */}
+          <p className="text-sm text-center text-gray-600 dark:text-gray-400">
+            Already have an account?{" "}
+            <Link
+              to="/auth/login"
+              className="text-blue-600 hover:underline dark:text-blue-400"
+            >
+              Login
+            </Link>
+          </p>
+        </form>
       </div>
     </div>
   );

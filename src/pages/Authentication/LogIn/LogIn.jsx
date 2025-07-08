@@ -1,13 +1,14 @@
 import React, { use, useState } from "react";
-import { FcGoogle } from "react-icons/fc";
+
 import { Link, useNavigate } from "react-router";
 import toast from "react-hot-toast";
-import AuthContext from "../../../context/AuthContext/AuthContext";
+import GoogleLoginButton from "../../../shared/GoogleLoginButton/GoogleLoginButton";
+import useAuth from "../../../hooks/useAuth/useAuth";
 
 const LogIn = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const { userLogin, setUser, provider, googleSignIn, setIsLoading, theme } =
-    use(AuthContext);
+    useAuth();
   // console.log(user);
 
   const navigate = useNavigate();
@@ -39,26 +40,6 @@ const LogIn = () => {
       });
   };
 
-  const handleGoogleLogin = () => {
-    googleSignIn(provider)
-      .then((result) => {
-        const user = result.user;
-        setIsLoading(true);
-        setUser(user);
-        // console.log(user);
-        /*   if (location?.state) {
-          navigate(location.state);
-          // navigate(location?.state ? location.state : "/");
-        } else {
-          navigate("/");
-        } */
-        toast.success("Logged In Successfully");
-        navigate("/");
-      })
-      .catch((error) => {
-        // console.log(error.message);
-      });
-  };
   return (
     <div
       className={`min-h-screen flex items-center justify-center bg-[#f4e7e1af] py-7  ${
@@ -110,14 +91,9 @@ const LogIn = () => {
           </Link>
         </div>
 
-        <div className="flex items-center justify-center gap-4">
-          <button
-            onClick={handleGoogleLogin}
-            className="flex justify-center items-center gap-2 w-full px-4 py-2 border rounded-lg hover:bg-gray-100 "
-          >
-            <FcGoogle size={20} /> Continue with Google
-          </button>
-        </div>
+        {/* <div className="flex items-center justify-center gap-4"> */}
+        <GoogleLoginButton></GoogleLoginButton>
+        {/* </div> */}
 
         <p className="text-sm text-center text-gray-600 dark:text-white">
           Don't have an account?
