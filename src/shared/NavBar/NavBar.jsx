@@ -5,11 +5,12 @@ import toast from "react-hot-toast";
 import { LuMoon, LuSun } from "react-icons/lu";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import TrustLife from "../TrustLife/TrustLife";
+import useAuth from "../../hooks/useAuth/useAuth";
 
 const NavBar = () => {
-  const { user, logOut, setUser, theme, setTheme } = use(AuthContext);
+  const { user, logOut, setUser, theme, setTheme } = useAuth();
   // const [theme, setTheme] = useState("");
-  // console.log(user?.email);
+  console.log("user from Navbar ", user?.email);
   const navigate = useNavigate();
 
   const handleLogOut = () => {

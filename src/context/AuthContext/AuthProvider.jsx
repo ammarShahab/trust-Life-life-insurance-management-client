@@ -53,7 +53,7 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  const userInfo = {
+  const authInfo = {
     createUser,
     user,
     setUser,
@@ -67,7 +67,7 @@ const AuthProvider = ({ children }) => {
     theme,
     setTheme,
   };
-  return <AuthContext value={userInfo}>{children}</AuthContext>;
+  return <AuthContext value={authInfo}>{children}</AuthContext>;
 };
 
 export default AuthProvider;
