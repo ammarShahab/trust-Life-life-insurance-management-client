@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "tailwindcss";
+@plugin "flowbite/plugin";
+@import "flowbite/src/themes/default";
+@source "../node_modules/flowbite";
+
+.font-bitter {
+  font-family: "Bitter", serif;
+  font-style: normal;
+}
+
+nav a.active {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: inset;
+}
