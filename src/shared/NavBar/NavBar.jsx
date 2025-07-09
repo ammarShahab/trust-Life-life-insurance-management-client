@@ -7,10 +7,11 @@ import useAuth from "../../hooks/useAuth/useAuth";
 import LogoutButton from "../LogoutButton/LogoutButton";
 
 const NavBar = () => {
-  const { user, logOut, setUser, theme, setTheme } = useAuth();
-  // const [theme, setTheme] = useState("");
-  console.log("user from Navbar ", user?.email);
+  const { user, logOut, setUser } = useAuth();
   const navigate = useNavigate();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleLogOut = () => {
     logOut()
@@ -19,13 +20,8 @@ const NavBar = () => {
         toast.success("Successfully Logged Out");
         navigate("/");
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.error(error));
   };
-
-  const [isOpen, setIsOpen] = useState(false);
-  // assuming it returns { user: {...} }
 
   const publicLinks = [
     { name: "Home", path: "/" },
@@ -47,46 +43,8 @@ const NavBar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <NavLink to="/" className="flex items-center gap-2">
-            <TrustLife></TrustLife>
+            <TrustLife />
           </NavLink>
-
-          {/* Mobile menu toggle */}
-          <div className="md:hidden">
-            <button
-              onClick={toggleMenu}
-              className="text-gray-700 dark:text-white focus:outline-none"
-            >
-              {isOpen ? (
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              )}
-            </button>
-          </div>
 
           {/* Desktop nav links */}
           <ul className="hidden md:flex items-center gap-6">
@@ -124,40 +82,126 @@ const NavBar = () => {
                   </NavLink>
                 </li>
               ))}
+          </ul>
 
-            {!user ? (
-              <>
-                <li>
+          <div className="flex justify-center items-center gap-2">
+            {/* Auth Buttons / Profile */}
+            <div className="md:flex items-center gap-4">
+              {!user ? (
+                <>
                   <NavLink
                     to="/auth/login"
-                    className="text-white bg-[#baa53a] hover:bg-[#fcd547] font-medium rounded-lg 
-                               text-sm px-5 py-2.5 transition"
+                    className="text-white hidden md:block bg-[#baa53a] hover:bg-[#fcd547] font-medium rounded-lg 
+                    text-sm px-5 py-2.5 transition"
                   >
                     Login
                   </NavLink>
-                </li>
-                <li>
                   <NavLink
                     to="/auth/register"
-                    className="text-white bg-[#1f2936] hover:bg-[#374151] font-medium rounded-lg 
-                               text-sm px-5 py-2.5 transition"
+                    className="text-white hidden md:block bg-[#1f2936] hover:bg-[#374151] font-medium rounded-lg 
+                    text-sm px-5 py-2.5 transition"
                   >
                     Register
                   </NavLink>
-                </li>
-              </>
-            ) : (
-              <li>
-                <button
-                  onClick={handleLogOut}
-                  className="text-white bg-[#1f2936] hover:bg-[#374151] font-medium rounded-lg 
-                             text-sm px-5 py-2.5 transition"
-                >
-                  Logout
-                </button>
-              </li>
-            )}
-          </ul>
+                </>
+              ) : (
+                <div className="relative">
+                  <button
+                    onClick={() => setShowDropdown(!showDropdown)}
+                    className="flex items-center gap-2 focus:outline-none"
+                  >
+                    <img
+                      src={
+                        user.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"
+                      }
+                      alt="User"
+                      className="h-9 w-9 rounded-full object-cover border-2 border-gray-300 dark:border-gray-600"
+                    />
+                  </button>
+
+                  {showDropdown && (
+                    <div className="absolute right-0 mt-2 w-52 bg-white dark:bg-gray-800 rounded-md shadow-lg z-50 transition">
+                      <div className="px-4 py-3 text-sm text-gray-900 dark:text-white border-b dark:border-gray-700">
+                        <div className="font-medium truncate">
+                          {user.displayName || "Unnamed User"}
+                        </div>
+                        <div className="text-xs text-gray-500 truncate">
+                          {user.email}
+                        </div>
+                      </div>
+                      <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
+                        <li>
+                          <NavLink
+                            to="/profile"
+                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          >
+                            Profile
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink
+                            to="/dashboard"
+                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          >
+                            Dashboard
+                          </NavLink>
+                        </li>
+                      </ul>
+                      <div className="py-1 border-t dark:border-gray-700">
+                        <button
+                          onClick={() => {
+                            handleLogOut();
+                            setShowDropdown(false);
+                          }}
+                          className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Mobile menu toggle */}
+            <div className="md:hidden">
+              <button
+                onClick={toggleMenu}
+                className="text-gray-700 dark:text-white focus:outline-none"
+              >
+                {isOpen ? (
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                )}
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Mobile menu */}
@@ -185,7 +229,7 @@ const NavBar = () => {
                 <NavLink
                   to="/auth/login"
                   className="block w-full text-center py-2 px-4 text-white bg-[#baa53a] hover:bg-[#fcd547] 
-                             rounded-lg transition"
+                    rounded-lg transition"
                   onClick={() => setIsOpen(false)}
                 >
                   Login
@@ -193,7 +237,7 @@ const NavBar = () => {
                 <NavLink
                   to="/auth/register"
                   className="block w-full text-center py-2 px-4 text-white bg-[#1f2936] hover:bg-[#374151] 
-                             rounded-lg transition"
+                    rounded-lg transition"
                   onClick={() => setIsOpen(false)}
                 >
                   Register
@@ -206,7 +250,7 @@ const NavBar = () => {
                   setIsOpen(false);
                 }}
                 className="block w-full text-center py-2 px-4 text-white bg-[#1f2936] hover:bg-[#374151] 
-                           rounded-lg transition"
+                  rounded-lg transition"
               >
                 Logout
               </button>
