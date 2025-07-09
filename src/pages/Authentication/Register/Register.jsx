@@ -1,8 +1,13 @@
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import useAuth from "../../../hooks/useAuth/useAuth";
+import GoogleLoginButton from "../../../shared/GoogleLoginButton/GoogleLoginButton";
 
 const Register = () => {
+  const { createUser } = useAuth();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -10,12 +15,16 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    const password = data.password;
+  const handleImageUpload = (e) => {
+    e.preventDefault();
+    const image = e.target.files[0];
+    console.log(image);
+  };
 
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const isLongEnough = password.length >= 6;
+  const onSubmit = (data) => {
+    const hasUpperCase = /[A-Z]/.test(data.password);
+    const hasLowerCase = /[a-z]/.test(data.password);
+    const isLongEnough = data.password.length >= 6;
 
     if (!isLongEnough) {
       toast.error("Password must be at least 6 characters long");
@@ -32,8 +41,19 @@ const Register = () => {
       return;
     }
 
+    createUser(data.email, data.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+      })
+      .catch((err) => {
+        const errorCode = err.code;
+        const errorMessage = err.message;
+        console.log(errorCode, errorMessage);
+      });
+
     console.log("Form data:", data);
     toast.success("Registration successful!");
+    navigate("/");
     reset();
   };
 
@@ -101,6 +121,7 @@ const Register = () => {
               Upload Photo
             </label>
             <input
+              onChange={handleImageUpload}
               type="file"
               id="photo"
               accept="image/*"
@@ -158,6 +179,7 @@ const Register = () => {
             </Link>
           </p>
         </form>
+        <GoogleLoginButton></GoogleLoginButton>
       </div>
     </div>
   );

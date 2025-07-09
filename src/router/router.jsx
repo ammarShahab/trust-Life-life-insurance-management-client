@@ -6,7 +6,6 @@ import LogIn from "../pages/Authentication/LogIn/LogIn";
 import Register from "../pages/Authentication/Register/Register";
 import AuthLayout from "../layouts/AuthLayout";
 import Error404 from "../pages/Error404/Error404";
-
 import Loading from "../components/Loading/Loading";
 import PrivacyPolicy from "../components/PrivacyPolicy";
 import AllPackages from "../components/packages/AllPackages";

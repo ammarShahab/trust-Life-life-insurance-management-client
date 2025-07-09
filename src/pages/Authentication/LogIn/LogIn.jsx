@@ -1,112 +1,119 @@
-import React, { use, useState } from "react";
-
+import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
-import toast from "react-hot-toast";
-import GoogleLoginButton from "../../../shared/GoogleLoginButton/GoogleLoginButton";
 import useAuth from "../../../hooks/useAuth/useAuth";
+import GoogleLoginButton from "../../../shared/GoogleLoginButton/GoogleLoginButton";
 
-const LogIn = () => {
-  const [errorMessage, setErrorMessage] = useState("");
+const Login = () => {
   const { userLogin, setUser, provider, googleSignIn, setIsLoading, theme } =
     useAuth();
-  // console.log(user);
 
   const navigate = useNavigate();
 
-  const handleLogIn = (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    // console.log(email, password);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-    // console.log(googleSignIn);
+  const onSubmit = (data) => {
+    if (!email || !password) {
+      toast.error("All fields are required");
+      return;
+    }
 
-    userLogin(email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        setIsLoading(true);
-        // console.log(user);
-        setUser(user);
-        setErrorMessage("");
+    userLogin(data.email, data.password)
+      .then((res) => {
+        console.log(res.user);
 
-        toast.success("Logged In Successfully");
+        toast.success("Login successful!");
         navigate("/");
       })
-      .catch((error) => {
-        // const errorCode = error.code;
-        const errorMessage = error.message;
-        // console.log(errorMessage);
-        setErrorMessage(errorMessage);
+      .catch((err) => {
+        console.log(err);
+        toast.error("Invalid email or password");
       });
   };
 
   return (
-    <div
-      className={`min-h-screen flex items-center justify-center bg-[#f4e7e1af] py-7  ${
-        theme ? "dark" : ""
-      } dark:bg-zinc-300`}
-    >
-      <div className="w-full max-w-md p-8 space-y-6 rounded-2xl shadow-lg mt-10  bg-[#F2EDEA] dark:bg-zinc-400">
-        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white">
-          Please Log In
+    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 sm:p-8 mb-10 mt-20">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">
+          Log In
         </h2>
-        <form onSubmit={handleLogIn} className="space-y-4 dark:text-white">
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-white">
-              Email
+            <label
+              htmlFor="email"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Email address
             </label>
             <input
-              name="email"
               type="email"
-              //   ref={emailRef}
-              className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
+              id="email"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                       focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+                       dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              placeholder="you@example.com"
+              {...register("email", { required: true })}
             />
+            {errors.email && (
+              <p className="text-red-500 text-xs">Email is required</p>
+            )}
           </div>
+
+          {/* Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-white">
+            <label
+              htmlFor="password"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
               Password
             </label>
             <input
               type="password"
-              name="password"
-              className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
-              required
+              id="password"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                       focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+                       dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              placeholder="Enter your password"
+              {...register("password", { required: true })}
             />
+            {errors.password && (
+              <p className="text-red-500 text-xs">Password is required</p>
+            )}
           </div>
+
+          {/* Submit Button */}
           <button
             type="submit"
-            className="w-full px-4 py-2 text-white bg-[#fe8d02] rounded-lg hover:bg-[#fe5602]"
+            className="w-full text-white bg-[#baa53a] hover:bg-[#fcd547] focus:ring-4 
+                     focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 
+                     text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-700"
           >
             Login
           </button>
-          <p className=" text-xs text-red-400">{errorMessage}</p>
+
+          {/* Google Sign In Button */}
+
+          {/* Redirect to Register */}
+          <p className="text-sm text-center text-gray-600 dark:text-gray-400">
+            Don’t have an account?{" "}
+            <Link
+              to="/auth/register"
+              className="text-blue-600 hover:underline dark:text-blue-400"
+            >
+              Register
+            </Link>
+          </p>
         </form>
-        <div className="flex items-center justify-between text-sm">
-          <Link
-            // onClick={handlePassword}
-            className="text-blue-500 hover:underline dark:text-white"
-          >
-            Forgot Password?
-          </Link>
-        </div>
-
-        {/* <div className="flex items-center justify-center gap-4"> */}
         <GoogleLoginButton></GoogleLoginButton>
-        {/* </div> */}
-
-        <p className="text-sm text-center text-gray-600 dark:text-white">
-          Don't have an account?
-          <Link
-            to="/auth/register"
-            className="text-blue-500 hover:underline dark:text-white pl-0.5"
-          >
-            Register
-          </Link>
-        </p>
       </div>
     </div>
   );
 };
 
-export default LogIn;
+export default Login;
