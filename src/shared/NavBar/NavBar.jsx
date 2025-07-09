@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import { LuMoon, LuSun } from "react-icons/lu";
@@ -20,187 +20,199 @@ const NavBar = () => {
         navigate("/");
       })
       .catch((error) => {
-        // console.log(error);
+        console.log(error);
       });
   };
 
-  const links = (
-    <>
-      <li>
-        <NavLink className="text-md py-3 px-2 rounded-lg font-bold" to="/">
-          Home
-        </NavLink>
-      </li>
+  const [isOpen, setIsOpen] = useState(false);
+  // assuming it returns { user: {...} }
 
-      <li>
-        <NavLink
-          className="text-md py-3 px-2 rounded-lg font-bold"
-          to="/all-policies"
-        >
-          All Policies
-        </NavLink>
-      </li>
+  const publicLinks = [
+    { name: "Home", path: "/" },
+    { name: "All Policies", path: "/all-policies" },
+    { name: "Agents", path: "/agents" },
+    { name: "FAQs", path: "/faq" },
+  ];
 
-      {user && (
-        <li>
-          <NavLink
-            className="text-md py-3 px-2 rounded-lg font-bold"
-            to="/my-bookings"
-          >
-            My Bookings
-          </NavLink>
-        </li>
-      )}
+  const privateLinks = [
+    { name: "My Bookings", path: "/my-bookings" },
+    { name: "Dashboard", path: "/dashboard" },
+  ];
 
-      <li>
-        <NavLink
-          className="text-md py-3 px-2 rounded-lg font-bold"
-          to="/agents"
-        >
-          Agents
-        </NavLink>
-      </li>
-      <li>
-        <NavLink className="text-md py-3 px-2 rounded-lg font-bold" to="/faq">
-          FAQs
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className="text-md py-3 px-2 rounded-lg font-bold"
-          to="/dashboard"
-        >
-          Dashboard
-        </NavLink>
-      </li>
-    </>
-  );
+  const toggleMenu = () => setIsOpen((prev) => !prev);
+
   return (
-    <nav className="w-full z-30 bg-white/10 backdrop-blur-md backdrop-saturate-150 border-b border-white/20 shadow-md dark:bg-gray-900 md:fixed md:top-0">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <TrustLife></TrustLife>
+    <nav className="bg-white dark:bg-gray-900 shadow sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <NavLink to="/" className="flex items-center gap-2">
+            <TrustLife></TrustLife>
+          </NavLink>
 
-        <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          {user ? (
-            <>
-              <button
-                type="button"
-                className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                id="user-menu-button"
-                aria-expanded="false"
-                data-dropdown-toggle="user-dropdown"
-                data-dropdown-placement="bottom"
-              >
-                <span className="sr-only">Open user menu</span>
-                <img
-                  className="w-8 h-8 rounded-full"
-                  src="/docs/images/people/profile-picture-3.jpg"
-                  alt="user photo"
-                />
-              </button>
-              {/* <!-- Dropdown menu --> */}
-              <div
-                className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600"
-                id="user-dropdown"
-              >
-                <div className="px-4 py-3">
-                  <span className="block text-sm text-gray-900 dark:text-white">
-                    Bonnie Green
-                  </span>
-                  <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                    name@flowbite.com
-                  </span>
-                </div>
-                <ul className="py-2" aria-labelledby="user-menu-button">
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                      Dashboard
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                      Settings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                      Earnings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                      Sign out
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <button
-                data-collapse-toggle="navbar-user"
-                type="button"
-                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                aria-controls="navbar-user"
-                aria-expanded="false"
-              >
-                <span className="sr-only">Open main menu</span>
+          {/* Mobile menu toggle */}
+          <div className="md:hidden">
+            <button
+              onClick={toggleMenu}
+              className="text-gray-700 dark:text-white focus:outline-none"
+            >
+              {isOpen ? (
                 <svg
-                  className="w-5 h-5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6"
                   fill="none"
-                  viewBox="0 0 17 14"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
                   <path
-                    stroke="currentColor"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M1 1h15M1 7h15M1 13h15"
+                    d="M6 18L18 6M6 6l12 12"
                   />
                 </svg>
-              </button>
-
-              <LogoutButton></LogoutButton>
-            </>
-          ) : (
-            <>
-              <Link to="/auth/login">
-                <button
-                  className="w-full sm:w-auto px-5 py-2 text-sm sm:text-base font-medium text-white 
-                 bg-[#baa53a] hover:bg-[#fcd547] rounded-lg transition"
+              ) : (
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  Login
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              )}
+            </button>
+          </div>
+
+          {/* Desktop nav links */}
+          <ul className="hidden md:flex items-center gap-6">
+            {publicLinks.map((link) => (
+              <li key={link.name}>
+                <NavLink
+                  to={link.path}
+                  className={({ isActive }) =>
+                    `text-sm font-medium ${
+                      isActive
+                        ? "text-blue-600 dark:text-blue-400"
+                        : "text-gray-700 dark:text-gray-200"
+                    } hover:text-blue-600 dark:hover:text-blue-400 transition`
+                  }
+                >
+                  {link.name}
+                </NavLink>
+              </li>
+            ))}
+
+            {user &&
+              privateLinks.map((link) => (
+                <li key={link.name}>
+                  <NavLink
+                    to={link.path}
+                    className={({ isActive }) =>
+                      `text-sm font-medium ${
+                        isActive
+                          ? "text-blue-600 dark:text-blue-400"
+                          : "text-gray-700 dark:text-gray-200"
+                      } hover:text-blue-600 dark:hover:text-blue-400 transition`
+                    }
+                  >
+                    {link.name}
+                  </NavLink>
+                </li>
+              ))}
+
+            {!user ? (
+              <>
+                <li>
+                  <NavLink
+                    to="/auth/login"
+                    className="text-white bg-[#baa53a] hover:bg-[#fcd547] font-medium rounded-lg 
+                               text-sm px-5 py-2.5 transition"
+                  >
+                    Login
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/auth/register"
+                    className="text-white bg-[#1f2936] hover:bg-[#374151] font-medium rounded-lg 
+                               text-sm px-5 py-2.5 transition"
+                  >
+                    Register
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <li>
+                <button
+                  onClick={handleLogOut}
+                  className="text-white bg-[#1f2936] hover:bg-[#374151] font-medium rounded-lg 
+                             text-sm px-5 py-2.5 transition"
+                >
+                  Logout
                 </button>
-              </Link>
-              <Link
-                to="/auth/register"
-                className="block text-center w-full sm:w-auto px-5 py-2 text-sm sm:text-base font-medium text-white 
-                 bg-[#1f2936] hover:bg-[#374151] rounded-lg transition"
-              >
-                Register
-              </Link>
-            </>
-          )}
-        </div>
-        <div
-          className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
-          id="navbar-user"
-        >
-          <ul className="flex flex-col gap-3 font-medium p-4 md:p-0 mt-4 border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:gap-2  md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            {links}
+              </li>
+            )}
           </ul>
         </div>
+
+        {/* Mobile menu */}
+        {isOpen && (
+          <div className="md:hidden mt-3 space-y-2">
+            {[...publicLinks, ...(user ? privateLinks : [])].map((link) => (
+              <NavLink
+                key={link.name}
+                to={link.path}
+                className={({ isActive }) =>
+                  `block py-2 px-4 rounded-md text-sm font-medium ${
+                    isActive
+                      ? "text-blue-600 dark:text-blue-400"
+                      : "text-gray-700 dark:text-gray-200"
+                  } hover:bg-gray-100 dark:hover:bg-gray-800 transition`
+                }
+                onClick={() => setIsOpen(false)}
+              >
+                {link.name}
+              </NavLink>
+            ))}
+
+            {!user ? (
+              <>
+                <NavLink
+                  to="/auth/login"
+                  className="block w-full text-center py-2 px-4 text-white bg-[#baa53a] hover:bg-[#fcd547] 
+                             rounded-lg transition"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Login
+                </NavLink>
+                <NavLink
+                  to="/auth/register"
+                  className="block w-full text-center py-2 px-4 text-white bg-[#1f2936] hover:bg-[#374151] 
+                             rounded-lg transition"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Register
+                </NavLink>
+              </>
+            ) : (
+              <button
+                onClick={() => {
+                  handleLogOut();
+                  setIsOpen(false);
+                }}
+                className="block w-full text-center py-2 px-4 text-white bg-[#1f2936] hover:bg-[#374151] 
+                           rounded-lg transition"
+              >
+                Logout
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </nav>
   );
