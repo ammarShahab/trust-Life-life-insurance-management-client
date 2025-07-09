@@ -4,11 +4,11 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 
 const GoogleLoginButton = () => {
-  const { googleSignIn, setIsLoading } = useAuth();
+  const { googleSignIn, setIsLoading, provider } = useAuth();
   const navigate = useNavigate();
 
   const handleGoogleLogin = () => {
-    googleSignIn()
+    googleSignIn(provider)
       .then((result) => {
         const user = result.user;
         setIsLoading(true);
