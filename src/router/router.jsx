@@ -17,6 +17,7 @@ import MyBookings from "../components/bookings/MyBookings";
 import AboutUs from "../components/AboutUs";
 import Home from "../pages/Home/Home/Home";
 import PrivateRouter from "../routes/PrivateRouter";
+import GetFreeQuote from "../pages/Home/GetFreeQuote/GetFreeQuote";
 
 const router = createBrowserRouter([
   {
@@ -25,10 +26,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home></Home> },
       {
-        path: "/allPackages",
-        /* loader: () => fetch("http://localhost:3000/packages"), */
-        Component: AllPackages,
-        // hydrateFallbackElement: <Loading></Loading>,
+        path: "/get-free-quote",
+        Component: GetFreeQuote,
       },
       { path: "/add-package", element: <AddPackage></AddPackage> },
       {

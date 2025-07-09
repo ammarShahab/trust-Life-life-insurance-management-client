@@ -3,6 +3,7 @@ import { Carousel } from "react-responsive-carousel";
 import slider_1 from "../../../assets/images/slider_1.jpg";
 import slider_2 from "../../../assets/images/slider_2.jpg";
 import slider_3 from "../../../assets/images/slider_3.jpg";
+import { Link } from "react-router";
 
 const HeroSlider = () => {
   const slides = [
@@ -44,9 +45,11 @@ const HeroSlider = () => {
                 <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-[#baa53a] via-[#fcd547] to-[#baa53a] text-transparent bg-clip-text drop-shadow-lg">
                   {slide.quote}
                 </h2>
-                <button className="mt-6 bg-[#baa53a] hover:bg-[#fcd547] text-white font-semibold py-2 px-6 rounded-lg transition">
-                  Get a Free Quote
-                </button>
+                <Link to="/get-free-quote">
+                  <button className="mt-6 bg-[#baa53a] hover:bg-[#fcd547] text-white font-semibold py-2 px-6 rounded-lg transition">
+                    Get a Free Quote
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
