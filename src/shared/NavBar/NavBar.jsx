@@ -42,9 +42,9 @@ const NavBar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <NavLink to="/" className="flex items-center gap-2">
-            <TrustLife />
-          </NavLink>
+          {/* <NavLink to="/" className="flex items-center gap-2"> */}
+          <TrustLife />
+          {/* </NavLink> */}
 
           {/* Desktop nav links */}
           <ul className="hidden md:flex items-center gap-6">

@@ -1,10 +1,11 @@
-import Banner from "../Banner/Banner";
+import Banner from "../HeroSlider/HeroSlider";
 import { Suspense, use } from "react";
 import FeaturedPackages from "../FeaturedPackages/FeaturedPackages";
 import AuthContext from "../../../context/AuthContext/AuthContext";
 import GalleryCarousel from "../GalleryCarousel/GalleryCarousel";
 import Loading from "../../../components/Loading/Loading";
 import WhyChooseUs from "../WhyChooseUs/WhyChooseUs";
+import HeroSlider from "../HeroSlider/HeroSlider";
 
 const featuredPackagesPromise = fetch(
   "https://b11a11-server-side-ashahab007.vercel.app/featured-packages"
@@ -15,14 +16,14 @@ const Home = () => {
   const { isLoading } = use(AuthContext);
   return (
     <>
-      <Banner></Banner>
+      <HeroSlider></HeroSlider>
       <Suspense fallback={<Loading></Loading>}>
         <FeaturedPackages
           featuredPackagesPromise={featuredPackagesPromise}
         ></FeaturedPackages>
       </Suspense>
       <GalleryCarousel></GalleryCarousel>
-      <WhyChooseUs></WhyChooseUs>
+      {/* <WhyChooseUs></WhyChooseUs> */}
     </>
   );
 };
