@@ -60,7 +60,7 @@ const Benefits = () => {
           className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-transparent bg-clip-text"
           style={{
             backgroundImage:
-              "linear-gradient(#74b5f1, #c6a84e,#70d778,  #c6a84e, #74b5f1)",
+              "linear-gradient(90deg,rgba(112, 215, 120, 1) 0%, rgba(198, 168, 78, 1) 82%, rgba(116, 181, 241, 1) 100%)",
           }}
         >
           Benefits of Trust Life
