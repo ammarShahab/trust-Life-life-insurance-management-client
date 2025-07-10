@@ -6,6 +6,7 @@ import GalleryCarousel from "../GalleryCarousel/GalleryCarousel";
 import Loading from "../../../components/Loading/Loading";
 import WhyChooseUs from "../WhyChooseUs/WhyChooseUs";
 import HeroSlider from "../HeroSlider/HeroSlider";
+import Benefits from "../Benefits/Benefits";
 
 const featuredPackagesPromise = fetch(
   "https://b11a11-server-side-ashahab007.vercel.app/featured-packages"
@@ -18,9 +19,7 @@ const Home = () => {
     <>
       <HeroSlider></HeroSlider>
       <Suspense fallback={<Loading></Loading>}>
-        <FeaturedPackages
-          featuredPackagesPromise={featuredPackagesPromise}
-        ></FeaturedPackages>
+        <Benefits></Benefits>
       </Suspense>
       <GalleryCarousel></GalleryCarousel>
       {/* <WhyChooseUs></WhyChooseUs> */}
