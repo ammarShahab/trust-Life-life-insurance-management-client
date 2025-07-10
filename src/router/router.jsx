@@ -18,6 +18,13 @@ import AboutUs from "../components/AboutUs";
 import Home from "../pages/Home/Home/Home";
 import PrivateRouter from "../routes/PrivateRouter";
 import GetFreeQuote from "../pages/Home/GetFreeQuote/GetFreeQuote";
+import DashBoardLayout from "../layouts/DashBoardLayout";
+import DashBoardHome from "../pages/DashBoard/DashBoardHome/DashBoardHome";
+import ManageApplications from "../pages/DashBoard/ManageApplications/ManageApplications";
+import ManagePolicies from "../pages/DashBoard/ManagePolicies/ManagePolicies";
+import ManageAgents from "../pages/DashBoard/ManageAgents/ManageAgents";
+import ManageUsers from "../pages/DashBoard/ManageUsers/ManageUsers";
+import ManageTransactions from "../pages/DashBoard/ManageTransactions/ManageTransactions";
 
 const router = createBrowserRouter([
   {
@@ -100,6 +107,22 @@ const router = createBrowserRouter([
 
       { path: "/privacy-policy", Component: PrivacyPolicy },
       { path: "/about-us", Component: AboutUs },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRouter>
+        <DashBoardLayout></DashBoardLayout>
+      </PrivateRouter>
+    ),
+    children: [
+      { index: true, Component: DashBoardHome },
+      { path: "manage-applications", Component: ManageApplications },
+      { path: "manage-users", Component: ManageUsers },
+      { path: "manage-policies", Component: ManagePolicies },
+      { path: "manage-transactions", Component: ManageTransactions },
+      { path: "manage-agents", Component: ManageAgents },
     ],
   },
   {
