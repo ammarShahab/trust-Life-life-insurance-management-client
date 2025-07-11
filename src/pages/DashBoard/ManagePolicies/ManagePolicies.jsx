@@ -25,13 +25,27 @@ const ManagePolicies = () => {
   });
 
   const updatePolicy = useMutation({
-    mutationFn: async (data) =>
-      await axiosSecure.patch(`/policies/${editingPolicy._id}`, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["policies"]);
-      refetch();
-      setShowModal(false);
-      Swal.fire("Success", "Policy updated successfully", "success");
+    mutationFn: async (data) => {
+      const res = await axiosSecure.patch(
+        `/policies/${editingPolicy._id}`,
+        data
+      );
+      return res.data; // Make sure this includes `modifiedCount`
+    },
+    onSuccess: (result) => {
+      console.log(result);
+      // queryClient.invalidateQueries({ queryKey: ["policies"] });
+      if (result.modifiedCount > 0) {
+        refetch();
+        setShowModal(false);
+        Swal.fire("Success", "Policy updated successfully", "success");
+        reset();
+      } else {
+        Swal.fire("No Change", "No fields were modified.", "info");
+      }
+    },
+    onError: () => {
+      Swal.fire("Error", "Something went wrong while updating.", "error");
     },
   });
 
@@ -65,7 +79,17 @@ const ManagePolicies = () => {
 
   const openAddModal = () => {
     setEditingPolicy(null);
-    reset();
+    reset({
+      title: "",
+      category: "",
+      description: "",
+      minAge: "",
+      maxAge: "",
+      coverage: "",
+      duration: "",
+      premium: "",
+      image: "",
+    });
     setShowModal(true);
   };
 
@@ -95,6 +119,7 @@ const ManagePolicies = () => {
         console.log(res.data);
         if (res.data.insertedId) {
           refetch();
+          reset();
           setShowModal(false);
           Swal.fire("Success", "New policy added successfully", "success");
         }
@@ -106,6 +131,7 @@ const ManagePolicies = () => {
   };
 
   const onSubmit = (data) => {
+    // console.log("Updating policy with ID:", editingPolicy._id, data);
     editingPolicy ? updatePolicy.mutate(data) : handleAddPolicy(data);
   };
 
@@ -272,7 +298,10 @@ const ManagePolicies = () => {
               <div className="flex justify-end gap-2">
                 <button
                   type="button"
-                  onClick={() => setShowModal(false)}
+                  onClick={() => {
+                    setShowModal(false);
+                    reset();
+                  }}
                   className="px-5 py-2 rounded-md font-medium text-white bg-[#1f2936] hover:bg-[#374151] transition duration-200"
                 >
                   Cancel
