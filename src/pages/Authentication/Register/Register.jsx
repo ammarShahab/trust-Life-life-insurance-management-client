@@ -3,10 +3,13 @@ import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth/useAuth";
 import GoogleLoginButton from "../../../shared/GoogleLoginButton/GoogleLoginButton";
+import { useState } from "react";
+import axios from "axios";
 
 const Register = () => {
-  const { createUser } = useAuth();
+  const { createUser, updateUser } = useAuth();
   const navigate = useNavigate();
+  const [profilePic, setProfilePic] = useState("");
 
   const {
     register,
@@ -15,13 +18,22 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     e.preventDefault();
     const image = e.target.files[0];
     console.log(image);
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const imageUploadURL = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMAGE_UPLOAD_KEY
+    }`;
+    const res = await axios.post(imageUploadURL, formData);
+    console.log("Uploaded image url", res.data.data.url);
+    setProfilePic(res.data.data.url);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const hasUpperCase = /[A-Z]/.test(data.password);
     const hasLowerCase = /[a-z]/.test(data.password);
     const isLongEnough = data.password.length >= 6;
@@ -42,8 +54,22 @@ const Register = () => {
     }
 
     createUser(data.email, data.password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         const user = userCredential.user;
+
+        const profileInfo = {
+          displayName: data.name,
+          photoURL: profilePic,
+        };
+        console.log(profileInfo);
+
+        updateUser(profileInfo)
+          .then(() => {
+            console.log("name and pic updated successfully");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         const errorCode = err.code;
@@ -128,11 +154,11 @@ const Register = () => {
               className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg 
                          cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none 
                          dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-              {...register("photo", { required: true })}
+              // {...register("photo", { required: true })}
             />
-            {errors.photo?.type === "required" && (
+            {/* {errors.photo?.type === "required" && (
               <p className="text-red-500 text-xs">Upload your photo</p>
-            )}
+            )} */}
           </div>
 
           {/* Password */}
