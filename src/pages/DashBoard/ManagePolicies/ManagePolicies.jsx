@@ -50,6 +50,8 @@ const ManagePolicies = () => {
   });
 
   const handleDelete = (id, title) => {
+    console.log(id);
+
     Swal.fire({
       title: "Are you sure?",
       text: `Are you sure you want to delete "${title}"? This action cannot be undone.`,
@@ -63,6 +65,8 @@ const ManagePolicies = () => {
         axiosSecure
           .delete(`/policies/${id}`)
           .then((res) => {
+            console.log(res.data);
+
             if (res.data.deletedCount > 0) {
               Swal.fire("Deleted!", "Policy has been deleted.", "success");
               refetch();
