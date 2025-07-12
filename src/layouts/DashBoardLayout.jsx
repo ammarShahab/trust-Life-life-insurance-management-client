@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router";
 
 import useAuth from "../hooks/useAuth/useAuth";
+import useCustomerRole from "../hooks/useCustomerRole";
 
 const DashBoardLayout = () => {
   const { user } = useAuth();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const { role, isLoading } = useCustomerRole();
+
+  console.log("role from DashBoard layout", role);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const closeSidebar = () => setIsSidebarOpen(false);
@@ -41,7 +46,7 @@ const DashBoardLayout = () => {
                 Back To Home
               </NavLink>
             </li>
-
+            {/* Admin links */}
             <li>
               <NavLink
                 to="/dashboard/manage-applications"
