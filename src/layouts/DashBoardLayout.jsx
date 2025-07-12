@@ -3,7 +3,6 @@ import { NavLink, Outlet } from "react-router";
 
 import {
   FaUsersCog,
-  FaUserFriends,
   FaFileAlt,
   FaExchangeAlt,
   FaUserTie,
@@ -11,6 +10,8 @@ import {
   FaMoneyCheckAlt,
   FaCreditCard,
   FaRegHandshake,
+  FaUsers,
+  FaBlog,
 } from "react-icons/fa";
 
 import useCustomerRole from "../hooks/useCustomerRole";
@@ -213,6 +214,61 @@ const DashBoardLayout = () => {
                   >
                     <FaRegHandshake className="text-lg" />
                     Claim Request Page
+                  </NavLink>
+                </li>
+              </>
+            )}
+            {/* Agent Link */}
+            {role === "agent" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/assigned-customers"
+                    onClick={closeSidebar}
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 px-4 py-2 rounded text-gray-700 transition ${
+                        isActive
+                          ? "bg-gray-200 font-semibold"
+                          : "hover:bg-gray-100"
+                      }`
+                    }
+                  >
+                    <FaUsers className="text-lg" />
+                    Assigned Customers
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to="/dashboard/manage-blogs"
+                    onClick={closeSidebar}
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 px-4 py-2 rounded text-gray-700 transition ${
+                        isActive
+                          ? "bg-gray-200 font-semibold"
+                          : "hover:bg-gray-100"
+                      }`
+                    }
+                  >
+                    <FaBlog className="text-lg" />
+                    Manage Blogs
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to="/dashboard/policy-clearance"
+                    onClick={closeSidebar}
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 px-4 py-2 rounded text-gray-700 transition ${
+                        isActive
+                          ? "bg-gray-200 font-semibold"
+                          : "hover:bg-gray-100"
+                      }`
+                    }
+                  >
+                    <FaFileAlt className="text-lg" />
+                    Policy Clearance
                   </NavLink>
                 </li>
               </>

@@ -29,6 +29,9 @@ import MyPolicies from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/MyPol
 import PaymentPage from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/PaymentPage/PaymentPage";
 import PaymentStatus from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/PaymentStatus/PaymentStatus";
 import ClaimRequestPage from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/ClaimRequestPage/ClaimRequestPage";
+import AssignedCustomers from "../pages/DashBoard/DashBoardHome/AgentDashboard/AssignedCustomers/AssignedCustomers";
+import ManageBlogs from "../pages/DashBoard/DashBoardHome/AgentDashboard/ManageBlogs/ManageBlogs";
+import PolicyClearance from "../pages/DashBoard/DashBoardHome/AgentDashboard/PolicyClearance/PolicyClearance";
 
 const router = createBrowserRouter([
   {
@@ -130,6 +133,9 @@ const router = createBrowserRouter([
       { path: "payment", Component: PaymentPage },
       { path: "payment-status", Component: PaymentStatus },
       { path: "claim-request", Component: ClaimRequestPage },
+      { path: "assigned-customers", Component: AssignedCustomers },
+      { path: "manage-blogs", Component: ManageBlogs },
+      { path: "policy-clearance", Component: PolicyClearance },
     ],
   },
   {
