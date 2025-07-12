@@ -25,6 +25,10 @@ import ManageUsers from "../pages/DashBoard/DashBoardHome/AdminDashBoard/ManageU
 import ManageApplications from "../pages/DashBoard/DashBoardHome/AdminDashBoard/ManageApplications/ManageApplications";
 import ManageTransactions from "../pages/DashBoard/DashBoardHome/AdminDashBoard/ManageTransactions/ManageTransactions";
 import ManagePolicies from "../pages/DashBoard/DashBoardHome/AdminDashBoard/ManagePolicies/ManagePolicies";
+import MyPolicies from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/MyPolicies/MyPolicies";
+import PaymentPage from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/PaymentPage/PaymentPage";
+import PaymentStatus from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/PaymentStatus/PaymentStatus";
+import ClaimRequestPage from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/ClaimRequestPage/ClaimRequestPage";
 
 const router = createBrowserRouter([
   {
@@ -122,11 +126,10 @@ const router = createBrowserRouter([
       { path: "manage-users", Component: ManageUsers },
       { path: "manage-policies", Component: ManagePolicies },
       { path: "manage-transactions", Component: ManageTransactions },
-      /* { path: "manage-agents", Component: ManageAgents },
-      { path: "manage-agents", Component: ManageAgents },
-      { path: "manage-agents", Component: ManageAgents },
-      { path: "manage-agents", Component: ManageAgents },
-      { path: "manage-agents", Component: ManageAgents }, */
+      { path: "my-policies", Component: MyPolicies },
+      { path: "payment", Component: PaymentPage },
+      { path: "payment-status", Component: PaymentStatus },
+      { path: "claim-request", Component: ClaimRequestPage },
     ],
   },
   {
