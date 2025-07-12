@@ -2,18 +2,36 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth/useAuth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import useAxios from "../../hooks/useAxios";
 
 const GoogleLoginButton = () => {
   const { googleSignIn, setIsLoading, provider } = useAuth();
   const navigate = useNavigate();
+  const axiosInstance = useAxios();
 
   const handleGoogleLogin = () => {
     googleSignIn(provider)
-      .then((result) => {
+      .then(async (result) => {
         const user = result.user;
         setIsLoading(true);
         // setUser(user);
-        // console.log(user);
+        console.log("from google sign in", user);
+
+        const customerInfo = {
+          customerName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          role: "customer",
+          // last_log_in: new Date().toISOString(),
+          lastSignInTime: user.metadata.lastSignInTime,
+        };
+        console.log("customer Info from googleSignIn", customerInfo);
+
+        const customerRes = await axiosInstance.post(
+          "/customers",
+          customerInfo
+        );
+        console.log(customerRes.data);
 
         toast.success("Logged In Successfully");
         navigate("/");

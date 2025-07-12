@@ -5,11 +5,13 @@ import useAuth from "../../../hooks/useAuth/useAuth";
 import GoogleLoginButton from "../../../shared/GoogleLoginButton/GoogleLoginButton";
 import { useState } from "react";
 import axios from "axios";
+import useAxios from "../../../hooks/useAxios";
 
 const Register = () => {
   const { createUser, updateUser } = useAuth();
   const navigate = useNavigate();
   const [profilePic, setProfilePic] = useState("");
+  const axiosInstance = useAxios();
 
   const {
     register,
@@ -55,7 +57,9 @@ const Register = () => {
 
     createUser(data.email, data.password)
       .then(async (userCredential) => {
-        const user = userCredential.user;
+        const currentUser = userCredential.user;
+        console.log(currentUser);
+        console.log(currentUser.metadata.lastSignInTime);
 
         const profileInfo = {
           displayName: data.name,
@@ -70,6 +74,22 @@ const Register = () => {
           .catch((err) => {
             console.log(err);
           });
+
+        const customerInfo = {
+          customerName: data.name,
+          email: data.email,
+          photoURL: profilePic,
+          role: "customer",
+          // last_log_in: new Date().toISOString(),
+          lastSignInTime: currentUser.metadata.lastSignInTime,
+        };
+        console.log("customer Info from Registration", customerInfo);
+
+        const customerRes = await axiosInstance.post(
+          "/customers",
+          customerInfo
+        );
+        console.log(customerRes.data);
       })
       .catch((err) => {
         const errorCode = err.code;
