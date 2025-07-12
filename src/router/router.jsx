@@ -20,11 +20,11 @@ import PrivateRouter from "../routes/PrivateRouter";
 import GetFreeQuote from "../pages/Home/GetFreeQuote/GetFreeQuote";
 import DashBoardLayout from "../layouts/DashBoardLayout";
 import DashBoardHome from "../pages/DashBoard/DashBoardHome/DashBoardHome";
-import ManageApplications from "../pages/DashBoard/ManageApplications/ManageApplications";
-import ManagePolicies from "../pages/DashBoard/ManagePolicies/ManagePolicies";
-import ManageAgents from "../pages/DashBoard/ManageAgents/ManageAgents";
-import ManageUsers from "../pages/DashBoard/ManageUsers/ManageUsers";
-import ManageTransactions from "../pages/DashBoard/ManageTransactions/ManageTransactions";
+
+import ManageUsers from "../pages/DashBoard/DashBoardHome/AdminDashBoard/ManageUsers/ManageUsers";
+import ManageApplications from "../pages/DashBoard/DashBoardHome/AdminDashBoard/ManageApplications/ManageApplications";
+import ManageTransactions from "../pages/DashBoard/DashBoardHome/AdminDashBoard/ManageTransactions/ManageTransactions";
+import ManagePolicies from "../pages/DashBoard/DashBoardHome/AdminDashBoard/ManagePolicies/ManagePolicies";
 
 const router = createBrowserRouter([
   {
@@ -122,7 +122,11 @@ const router = createBrowserRouter([
       { path: "manage-users", Component: ManageUsers },
       { path: "manage-policies", Component: ManagePolicies },
       { path: "manage-transactions", Component: ManageTransactions },
+      /* { path: "manage-agents", Component: ManageAgents },
       { path: "manage-agents", Component: ManageAgents },
+      { path: "manage-agents", Component: ManageAgents },
+      { path: "manage-agents", Component: ManageAgents },
+      { path: "manage-agents", Component: ManageAgents }, */
     ],
   },
   {

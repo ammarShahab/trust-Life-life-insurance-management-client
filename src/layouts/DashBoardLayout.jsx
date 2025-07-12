@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router";
 
-import useAuth from "../hooks/useAuth/useAuth";
+import {
+  FaUsersCog,
+  FaUserFriends,
+  FaFileAlt,
+  FaExchangeAlt,
+  FaUserTie,
+  FaHome,
+  FaMoneyCheckAlt,
+  FaCreditCard,
+  FaRegHandshake,
+} from "react-icons/fa";
+
 import useCustomerRole from "../hooks/useCustomerRole";
+import Loading from "../components/Loading/Loading";
 
 const DashBoardLayout = () => {
-  const { user } = useAuth();
-
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const { role, isLoading } = useCustomerRole();
@@ -15,6 +25,10 @@ const DashBoardLayout = () => {
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const closeSidebar = () => setIsSidebarOpen(false);
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+
   return (
     <div className="bg-gray-100 min-h-full flex flex-col lg:flex-row">
       {/* Mobile Navbar */}
@@ -41,77 +55,168 @@ const DashBoardLayout = () => {
               <NavLink
                 to="/"
                 onClick={closeSidebar}
-                className="block px-4 py-2 rounded hover:bg-gray-100 text-gray-700 "
+                className={({ isActive }) =>
+                  `flex items-center gap-2 px-4 py-2 rounded-md text-gray-700 transition-colors duration-200 ${
+                    isActive ? "bg-gray-200 font-semibold" : "hover:bg-gray-100"
+                  }`
+                }
               >
+                <FaHome className="text-lg" />
                 Back To Home
               </NavLink>
             </li>
             {/* Admin links */}
-            <li>
-              <NavLink
-                to="/dashboard/manage-applications"
-                onClick={closeSidebar}
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded text-gray-700 ${
-                    isActive ? "bg-gray-200 font-semibold" : "hover:bg-gray-100"
-                  }`
-                }
-              >
-                Manage Application
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/manage-users"
-                onClick={closeSidebar}
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded text-gray-700 ${
-                    isActive ? "bg-gray-200 font-semibold" : "hover:bg-gray-100"
-                  }`
-                }
-              >
-                Manage Users
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/manage-policies"
-                onClick={closeSidebar}
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded text-gray-700 ${
-                    isActive ? "bg-gray-200 font-semibold" : "hover:bg-gray-100"
-                  }`
-                }
-              >
-                Manage Policies
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/manage-transactions"
-                onClick={closeSidebar}
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded text-gray-700 ${
-                    isActive ? "bg-gray-200 font-semibold" : "hover:bg-gray-100"
-                  }`
-                }
-              >
-                Manage Transactions
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/manage-agents"
-                onClick={closeSidebar}
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded text-gray-700 ${
-                    isActive ? "bg-gray-200 font-semibold" : "hover:bg-gray-100"
-                  }`
-                }
-              >
-                Manage Agents
-              </NavLink>
-            </li>
+            {role === "admin" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/manage-applications"
+                    onClick={closeSidebar}
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 px-4 py-2 rounded text-gray-700 ${
+                        isActive
+                          ? "bg-gray-200 font-semibold"
+                          : "hover:bg-gray-100"
+                      }`
+                    }
+                  >
+                    <FaFileAlt /> Manage Applications
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/manage-users"
+                    onClick={closeSidebar}
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 px-4 py-2 rounded text-gray-700 ${
+                        isActive
+                          ? "bg-gray-200 font-semibold"
+                          : "hover:bg-gray-100"
+                      }`
+                    }
+                  >
+                    <FaUsersCog /> Manage Users
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/manage-policies"
+                    onClick={closeSidebar}
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 px-4 py-2 rounded text-gray-700 ${
+                        isActive
+                          ? "bg-gray-200 font-semibold"
+                          : "hover:bg-gray-100"
+                      }`
+                    }
+                  >
+                    <FaFileAlt /> Manage Policies
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/manage-transactions"
+                    onClick={closeSidebar}
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 px-4 py-2 rounded text-gray-700 ${
+                        isActive
+                          ? "bg-gray-200 font-semibold"
+                          : "hover:bg-gray-100"
+                      }`
+                    }
+                  >
+                    <FaExchangeAlt /> Manage Transactions
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/manage-agents"
+                    onClick={closeSidebar}
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 px-4 py-2 rounded text-gray-700 ${
+                        isActive
+                          ? "bg-gray-200 font-semibold"
+                          : "hover:bg-gray-100"
+                      }`
+                    }
+                  >
+                    <FaUserTie /> Manage Agents
+                  </NavLink>
+                </li>
+              </>
+            )}
+            {/* Customer links */}
+            {role === "customer" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/my-policies"
+                    onClick={closeSidebar}
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 px-4 py-2 rounded text-gray-700 transition ${
+                        isActive
+                          ? "bg-gray-200 font-semibold"
+                          : "hover:bg-gray-100"
+                      }`
+                    }
+                  >
+                    <FaFileAlt className="text-lg" />
+                    My Policies
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to="/dashboard/payment-status"
+                    onClick={closeSidebar}
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 px-4 py-2 rounded text-gray-700 transition ${
+                        isActive
+                          ? "bg-gray-200 font-semibold"
+                          : "hover:bg-gray-100"
+                      }`
+                    }
+                  >
+                    <FaMoneyCheckAlt className="text-lg" />
+                    Payment Status
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to="/dashboard/payment"
+                    onClick={closeSidebar}
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 px-4 py-2 rounded text-gray-700 transition ${
+                        isActive
+                          ? "bg-gray-200 font-semibold"
+                          : "hover:bg-gray-100"
+                      }`
+                    }
+                  >
+                    <FaCreditCard className="text-lg" />
+                    Payment Page
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    to="/dashboard/claim-request"
+                    onClick={closeSidebar}
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 px-4 py-2 rounded text-gray-700 transition ${
+                        isActive
+                          ? "bg-gray-200 font-semibold"
+                          : "hover:bg-gray-100"
+                      }`
+                    }
+                  >
+                    <FaRegHandshake className="text-lg" />
+                    Claim Request Page
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
