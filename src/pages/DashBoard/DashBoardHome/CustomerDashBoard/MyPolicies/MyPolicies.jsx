@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../../../../hooks/useAuth/useAuth";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import Loading from "../../../../../components/Loading/Loading";
+import Swal from "sweetalert2";
 
 const MyPolicies = () => {
   const { user } = useAuth();
@@ -33,9 +34,17 @@ const MyPolicies = () => {
     };
     console.log("Submitted review:", reviewData);
 
-    // TODO: Send review to backend if needed
-    setIsReviewModalOpen(false);
-    reset();
+    try {
+      const res = await axiosSecure.post("/reviews", reviewData);
+      if (res.data.insertedId) {
+        Swal.fire("Success", "Review submitted successfully!", "success");
+        setIsReviewModalOpen(false);
+        reset();
+      }
+    } catch (err) {
+      console.error("Failed to submit review:", err);
+      Swal.fire("Error", "Something went wrong.", "error");
+    }
   };
 
   const getBadgeColor = (status) => {
@@ -50,7 +59,7 @@ const MyPolicies = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-2 py-8">
       <h2 className="text-2xl font-bold mb-6 text-center">
         My Applied Policies
       </h2>
@@ -97,7 +106,7 @@ const MyPolicies = () => {
                         setSelectedPolicy(app);
                         setIsReviewModalOpen(true);
                       }}
-                      className="flex items-center gap-1 bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm"
+                      className="flex items-center gap-1 bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-[10px]"
                     >
                       <FaStar /> Review
                     </button>
@@ -106,11 +115,11 @@ const MyPolicies = () => {
                         setSelectedPolicy(app);
                         setIsDetailModalOpen(true);
                       }}
-                      className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm"
+                      className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-[10px]"
                     >
                       <FaEye /> View Details
                     </button>
-                    <button className="flex items-center gap-1 bg-gray-700 hover:bg-gray-800 text-white px-3 py-1 rounded text-sm">
+                    <button className="flex items-center gap-1 bg-gray-700 hover:bg-gray-800 text-white px-3 py-1 rounded text-[10px]">
                       <FaFileDownload /> Download
                     </button>
                   </td>
