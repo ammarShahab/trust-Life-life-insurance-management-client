@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-
-import { FaDownload, FaRegStar } from "react-icons/fa";
+import { FaFileDownload, FaStar, FaEye } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../../../hooks/useAuth/useAuth";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
@@ -11,16 +10,12 @@ const MyPolicies = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [selectedPolicy, setSelectedPolicy] = useState(null);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const { register, handleSubmit, reset } = useForm();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
-
-  const { data: policies = [], isLoading } = useQuery({
-    queryKey: ["myApplications", user?.email],
+  const { data: applications = [], isLoading } = useQuery({
+    queryKey: ["my-applications", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(`/my-applications?email=${user.email}`);
@@ -28,87 +23,95 @@ const MyPolicies = () => {
     },
   });
 
-  const openReviewModal = (policy) => {
-    setSelectedPolicy(policy);
-    document.getElementById("review_modal").showModal();
-  };
-
-  const onSubmitReview = async (data) => {
-    const review = {
-      userName: user.displayName,
-      userEmail: user.email,
+  const onReviewSubmit = async (data) => {
+    const reviewData = {
+      ...data,
       policyId: selectedPolicy.policyId,
       policyTitle: selectedPolicy.policyTitle,
-      rating: parseInt(data.rating),
-      feedback: data.feedback,
+      email: user.email,
       date: new Date().toISOString(),
     };
+    console.log("Submitted review:", reviewData);
 
-    console.log("Review Submitted:", review);
-
-    // TODO: Post this to your review collection
-    // await axiosSecure.post("/reviews", review);
-
+    // TODO: Send review to backend if needed
+    setIsReviewModalOpen(false);
     reset();
-    document.getElementById("review_modal").close();
+  };
+
+  const getBadgeColor = (status) => {
+    switch (status.toLowerCase()) {
+      case "approved":
+        return "bg-green-100 text-green-800";
+      case "rejected":
+        return "bg-red-100 text-red-800";
+      default:
+        return "bg-yellow-100 text-yellow-800";
+    }
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold text-center mb-6">
+    <div className="max-w-7xl mx-auto px-4 py-8">
+      <h2 className="text-2xl font-bold mb-6 text-center">
         My Applied Policies
       </h2>
 
       {isLoading ? (
         <Loading />
-      ) : policies.length === 0 ? (
-        <p className="text-center text-gray-500">No policies applied yet.</p>
       ) : (
-        <div className="overflow-x-auto bg-white rounded shadow">
-          <table className="table table-zebra w-full text-sm">
-            <thead className="bg-gray-100 text-gray-800">
+        <div className="overflow-x-auto">
+          <table className="min-w-full table-auto border border-gray-200">
+            <thead className="bg-gray-100 text-gray-700">
               <tr>
-                <th>#</th>
-                <th>Policy Title</th>
-                <th>Policy ID</th>
-                <th>Coverage</th>
-                <th>Duration</th>
-                <th>Monthly Premium</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th className="p-3 text-left">Policy</th>
+                <th className="p-3 text-left">Coverage</th>
+                <th className="p-3 text-left">Duration</th>
+                <th className="p-3 text-left">Premium</th>
+                <th className="p-3 text-left">Status</th>
+                <th className="p-3 text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {policies.map((p, index) => (
-                <tr key={p._id}>
-                  <td>{index + 1}</td>
-                  <td>{p.policyTitle}</td>
-                  <td>{p.policyId}</td>
-                  <td>{p.coverage || "N/A"}</td>
-                  <td>{p.duration || "N/A"}</td>
-                  <td>৳{p.estimatedPremiumMonthly}</td>
-                  <td>
+              {applications.map((app) => (
+                <tr key={app._id} className="border-t">
+                  <td className="p-3">
+                    <div className="font-semibold">{app.policyTitle}</div>
+                    <div className="text-xs text-gray-500">
+                      Policy Id: {app.policyId}
+                    </div>
+                  </td>
+                  <td className="p-3">{app.coverage || "N/A"}</td>
+                  <td className="p-3">{app.duration || "N/A"} Years</td>
+                  <td className="p-3">${app.estimatedPremiumMonthly} /mo</td>
+                  <td className="p-3">
                     <span
-                      className={`px-2 py-1 text-xs rounded ${
-                        p.status === "pending"
-                          ? "bg-yellow-100 text-yellow-700"
-                          : p.status === "approved"
-                          ? "bg-green-100 text-green-700"
-                          : "bg-red-100 text-red-700"
-                      }`}
+                      className={`text-xs font-semibold px-2.5 py-0.5 rounded ${getBadgeColor(
+                        app.status
+                      )}`}
                     >
-                      {p.status}
+                      {app.status}
                     </span>
                   </td>
-                  <td className="flex gap-2">
+                  <td className="p-3 flex flex-col sm:flex-row gap-2">
                     <button
-                      onClick={() => openReviewModal(p)}
-                      className="flex items-center gap-1 bg-blue-100 text-blue-700 px-3 py-1 rounded hover:bg-blue-200"
+                      onClick={() => {
+                        setSelectedPolicy(app);
+                        setIsReviewModalOpen(true);
+                      }}
+                      className="flex items-center gap-1 bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm"
                     >
-                      <FaRegStar /> Review
+                      <FaStar /> Review
                     </button>
-                    <button className="flex items-center gap-1 bg-gray-100 text-gray-700 px-3 py-1 rounded hover:bg-gray-200">
-                      <FaDownload /> Download
+                    <button
+                      onClick={() => {
+                        setSelectedPolicy(app);
+                        setIsDetailModalOpen(true);
+                      }}
+                      className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm"
+                    >
+                      <FaEye /> View Details
+                    </button>
+                    <button className="flex items-center gap-1 bg-gray-700 hover:bg-gray-800 text-white px-3 py-1 rounded text-sm">
+                      <FaFileDownload /> Download
                     </button>
                   </td>
                 </tr>
@@ -118,80 +121,95 @@ const MyPolicies = () => {
         </div>
       )}
 
-      {/* Review Modal with React Hook Form */}
-      <dialog id="review_modal" className="modal">
-        <div className="modal-box max-w-lg">
-          <h3 className="text-xl font-bold mb-4">Write a Review</h3>
-
-          {selectedPolicy && (
-            <form onSubmit={handleSubmit(onSubmitReview)} className="space-y-4">
+      {/* Review Modal */}
+      {isReviewModalOpen && selectedPolicy && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
+            <h3 className="text-lg font-bold mb-4">Write a Review</h3>
+            <form onSubmit={handleSubmit(onReviewSubmit)} className="space-y-4">
               <div>
-                <label className="block mb-1 font-medium text-gray-700">
-                  Policy
-                </label>
-                <input
-                  type="text"
-                  value={selectedPolicy.policyTitle}
-                  readOnly
-                  className="w-full border px-3 py-2 rounded bg-gray-100"
-                />
-              </div>
-
-              <div>
-                <label className="block mb-1 font-medium">Rating (1–5)</label>
+                <label className="block mb-1">Rating (1–5 Stars)</label>
                 <select
                   {...register("rating", { required: true })}
                   className="w-full border px-3 py-2 rounded"
                 >
-                  <option value="">Select Rating</option>
                   {[1, 2, 3, 4, 5].map((r) => (
                     <option key={r} value={r}>
                       {r}
                     </option>
                   ))}
                 </select>
-                {errors.rating && (
-                  <p className="text-red-500 text-sm mt-1">
-                    Rating is required
-                  </p>
-                )}
               </div>
 
               <div>
-                <label className="block mb-1 font-medium">Your Feedback</label>
+                <label className="block mb-1">Feedback</label>
                 <textarea
                   {...register("feedback", { required: true })}
-                  rows="4"
                   className="w-full border px-3 py-2 rounded"
-                  placeholder="Write your review..."
-                ></textarea>
-                {errors.feedback && (
-                  <p className="text-red-500 text-sm mt-1">
-                    Feedback is required
-                  </p>
-                )}
+                  rows={4}
+                  placeholder="Share your thoughts..."
+                />
               </div>
 
               <div className="flex justify-end gap-3">
-                <form method="dialog">
-                  <button
-                    type="reset"
-                    className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 text-gray-700"
-                  >
-                    Cancel
-                  </button>
-                </form>
+                <button
+                  type="button"
+                  onClick={() => setIsReviewModalOpen(false)}
+                  className="px-4 py-2 bg-gray-300 rounded"
+                >
+                  Cancel
+                </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded bg-[#baa53a] hover:bg-[#fcd547] text-white font-semibold"
+                  className="px-4 py-2 bg-[#baa53a] text-white rounded hover:bg-[#fcd547]"
                 >
                   Submit Review
                 </button>
               </div>
             </form>
-          )}
+          </div>
         </div>
-      </dialog>
+      )}
+
+      {/* View Details Modal */}
+      {isDetailModalOpen && selectedPolicy && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
+            <h3 className="text-xl font-semibold mb-4">Policy Details</h3>
+            <ul className="space-y-2 text-sm text-gray-700">
+              <li>
+                <strong>Policy Title:</strong> {selectedPolicy.policyTitle}
+              </li>
+              <li>
+                <strong>Policy ID:</strong> {selectedPolicy.policyId}
+              </li>
+              <li>
+                <strong>Coverage:</strong> {selectedPolicy.coverage || "N/A"}
+              </li>
+              <li>
+                <strong>Duration:</strong> {selectedPolicy.duration || "N/A"}{" "}
+                years
+              </li>
+              <li>
+                <strong>Monthly Premium:</strong> $
+                {selectedPolicy.estimatedPremiumMonthly}
+              </li>
+              <li>
+                <strong>Yearly Premium:</strong> $
+                {selectedPolicy.estimatedPremiumYearly}
+              </li>
+            </ul>
+            <div className="flex justify-end mt-6">
+              <button
+                onClick={() => setIsDetailModalOpen(false)}
+                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
