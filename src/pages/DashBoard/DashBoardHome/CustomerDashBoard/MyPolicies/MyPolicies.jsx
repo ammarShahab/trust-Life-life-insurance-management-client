@@ -59,7 +59,7 @@ const MyPolicies = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-2 py-8">
+    <div className="px-2 py-8">
       <h2 className="text-2xl font-bold mb-6 text-center">
         My Applied Policies
       </h2>
@@ -100,7 +100,7 @@ const MyPolicies = () => {
                       {app.status}
                     </span>
                   </td>
-                  <td className="p-3 flex flex-col sm:flex-row gap-2">
+                  <td className="p-3 flex flex-col sm:flex-row sm:mt-3  gap-2">
                     <button
                       onClick={() => {
                         setSelectedPolicy(app);

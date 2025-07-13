@@ -287,8 +287,8 @@ const DashBoardLayout = () => {
       )}
 
       {/* Main content */}
-      <div className="mt-4 lg:mt-0">
-        <h1 className="max-w-7xl text-3xl font-bold text-center mb-4">
+      <div className="max-w-7xl lg:mx-auto mt-4 lg:mt-0">
+        <h1 className="text-3xl font-bold text-center mb-4">
           Welcome to Dashboard
         </h1>
         <Outlet />
