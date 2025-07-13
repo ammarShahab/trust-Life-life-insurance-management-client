@@ -35,6 +35,8 @@ import PolicyClearance from "../pages/DashBoard/DashBoardHome/AgentDashboard/Pol
 import ManageAgents from "../pages/DashBoard/DashBoardHome/AdminDashBoard/ManageAgents/ManageAgents";
 import AllPolicies from "../pages/AllPolicies/AllPolicies";
 import PolicyDetails from "../pages/PolicyDetails/PolicyDetails";
+import PolicyQuotePage from "../pages/PolicyQuotePage/PolicyQuotePage";
+import PolicyApplyForm from "../pages/PolicyApplyForm/PolicyApplyForm";
 
 const router = createBrowserRouter([
   {
@@ -52,18 +54,21 @@ const router = createBrowserRouter([
         Component: PolicyDetails,
       },
       {
-        path: "/manage-myPackages/:email",
-        loader: ({ params }) =>
-          fetch(
-            `https://b11a11-server-side-ashahab007.vercel.app/manage-myPackages/${params.email}`
-          ),
-        // fetch(`http://localhost:3000/manage-myPackages/${params.email}`),
+        path: "/get-quote/:policyId",
         element: (
           <PrivateRouter>
-            <MyPackages></MyPackages>
+            <PolicyQuotePage></PolicyQuotePage>
           </PrivateRouter>
         ),
-        hydrateFallbackElement: <Loading></Loading>,
+      },
+
+      {
+        path: "/apply-policy/:policyId",
+        element: (
+          <PrivateRouter>
+            <PolicyApplyForm></PolicyApplyForm>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/update-myPackages/:id",

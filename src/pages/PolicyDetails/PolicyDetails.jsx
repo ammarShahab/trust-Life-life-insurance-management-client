@@ -5,13 +5,13 @@ import { useNavigate, useParams } from "react-router";
 
 const PolicyDetails = () => {
   const { id } = useParams();
-  const axios = useAxios();
+  const axiosInstance = useAxios();
   const navigate = useNavigate();
 
   const { data: policy, isLoading } = useQuery({
     queryKey: ["policy", id],
     queryFn: async () => {
-      const res = await axios.get(`/policies/${id}`);
+      const res = await axiosInstance.get(`/policies/${id}`);
       return res.data;
     },
     enabled: !!id,
