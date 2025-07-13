@@ -26,6 +26,7 @@ const DashBoardLayout = () => {
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const closeSidebar = () => setIsSidebarOpen(false);
+
   if (isLoading) {
     return <Loading></Loading>;
   }

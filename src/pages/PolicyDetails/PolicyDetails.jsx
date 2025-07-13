@@ -1,0 +1,94 @@
+import { useQuery } from "@tanstack/react-query";
+import useAxios from "../../hooks/useAxios";
+import Loading from "../../components/Loading/Loading";
+import { useNavigate, useParams } from "react-router";
+
+const PolicyDetails = () => {
+  const { id } = useParams();
+  const axios = useAxios();
+  const navigate = useNavigate();
+
+  const { data: policy, isLoading } = useQuery({
+    queryKey: ["policy", id],
+    queryFn: async () => {
+      const res = await axios.get(`/policies/${id}`);
+      return res.data;
+    },
+    enabled: !!id,
+  });
+
+  if (isLoading) return <Loading />;
+
+  if (!policy) {
+    return <p className="text-center text-red-500 mt-10">Policy not found.</p>;
+  }
+
+  return (
+    <div className="max-w-7xl mx-auto px-4 py-10">
+      <div className="grid md:grid-cols-2 gap-8 items-stretch">
+        {/* Image Section */}
+        <div className="h-full">
+          <img
+            src={policy.image}
+            alt={policy.title}
+            className="w-full h-full object-cover rounded-lg shadow-md"
+          />
+        </div>
+
+        {/* Text Info */}
+        <div className="flex flex-col justify-between">
+          <div>
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">
+              {policy.title}
+            </h2>
+
+            <p className="text-md mb-2">
+              <span className="font-semibold">Category:</span>{" "}
+              <span className="text-[#baa53a] font-medium">
+                {policy.category}
+              </span>
+            </p>
+
+            <p className="text-md mb-2">
+              <span className="font-semibold">Eligibility:</span> Age{" "}
+              {policy.minAge} - {policy.maxAge} years
+            </p>
+
+            <p className="text-md mb-2">
+              <span className="font-semibold">Coverage Amount:</span>{" "}
+              {policy.coverage}
+            </p>
+
+            <p className="text-md mb-2">
+              <span className="font-semibold">Duration Options:</span>{" "}
+              {policy.duration}
+            </p>
+
+            <p className="text-md mb-2">
+              <span className="font-semibold">Premium Calculation Logic:</span>{" "}
+              Premiums are calculated based on age, gender, coverage, amount,
+              policy duration, and smoker status.
+            </p>
+
+            <p className="text-md mb-2">
+              <span className="font-semibold">Premium:</span> {policy.premium}
+            </p>
+
+            <p className="text-gray-600 my-4 leading-relaxed">
+              {policy.description}
+            </p>
+          </div>
+
+          <button
+            onClick={() => navigate(`/get-quote/${policy._id}`)}
+            className="mt-4 bg-[#baa53a] hover:bg-[#fcd547] text-white font-medium px-6 py-2 rounded-md transition w-fit"
+          >
+            Get Quote
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PolicyDetails;
