@@ -38,7 +38,7 @@ const PolicyQuotePage = () => {
     const monthly = ((coverage / 10000) * rate).toFixed(2);
     const yearly = (monthly * 12).toFixed(2);
 
-    setResult({ monthly, yearly });
+    setResult({ monthly, yearly, coverage, duration });
   };
 
   const handleApplyClick = () => {
@@ -48,6 +48,8 @@ const PolicyQuotePage = () => {
       state: {
         estimatedPremiumMonthly: result.monthly,
         estimatedPremiumYearly: result.yearly,
+        coverage: result.coverage,
+        duration: result.duration,
         title: policy.title || "Unknown",
         category: policy.category || "Unknown",
       },

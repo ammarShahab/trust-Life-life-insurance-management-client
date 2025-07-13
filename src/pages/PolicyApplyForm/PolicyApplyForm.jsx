@@ -31,10 +31,10 @@ const PolicyApplyForm = () => {
       policyId,
       policyTitle: state?.title || "Unknown",
       policyCategory: state?.category || "Unknown",
-      //   estimatedPremium: state?.estimatedPremium || "N/A",
       estimatedPremiumMonthly: state?.estimatedPremiumMonthly || "N/A",
       estimatedPremiumYearly: state?.estimatedPremiumYearly || "N/A",
-
+      coverage: state?.coverage,
+      duration: state?.duration,
       appliedDate: new Date().toISOString(),
       status: "pending",
     };
