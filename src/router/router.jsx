@@ -20,7 +20,6 @@ import PrivateRouter from "../routes/PrivateRouter";
 import GetFreeQuote from "../pages/Home/GetFreeQuote/GetFreeQuote";
 import DashBoardLayout from "../layouts/DashBoardLayout";
 import DashBoardHome from "../pages/DashBoard/DashBoardHome/DashBoardHome";
-
 import ManageUsers from "../pages/DashBoard/DashBoardHome/AdminDashBoard/ManageUsers/ManageUsers";
 import ManageApplications from "../pages/DashBoard/DashBoardHome/AdminDashBoard/ManageApplications/ManageApplications";
 import ManageTransactions from "../pages/DashBoard/DashBoardHome/AdminDashBoard/ManageTransactions/ManageTransactions";
