@@ -36,6 +36,7 @@ import AllPolicies from "../pages/AllPolicies/AllPolicies";
 import PolicyDetails from "../pages/PolicyDetails/PolicyDetails";
 import PolicyQuotePage from "../pages/PolicyQuotePage/PolicyQuotePage";
 import PolicyApplyForm from "../pages/PolicyApplyForm/PolicyApplyForm";
+import PaymentForm from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/PaymentForm/PaymentForm";
 
 const router = createBrowserRouter([
   {
@@ -130,6 +131,7 @@ const router = createBrowserRouter([
       { path: "my-policies", Component: MyPolicies },
       { path: "payment", Component: PaymentPage },
       { path: "payment-status", Component: PaymentStatus },
+      { path: "payment-form/:applicationId", Component: PaymentForm },
       { path: "claim-request", Component: ClaimRequestPage },
       { path: "assigned-customers", Component: AssignedCustomers },
       { path: "manage-blogs", Component: ManageBlogs },

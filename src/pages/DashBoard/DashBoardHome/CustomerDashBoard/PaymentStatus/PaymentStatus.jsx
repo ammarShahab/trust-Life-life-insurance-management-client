@@ -44,7 +44,7 @@ const PaymentStatus = () => {
 
     setDisabledRows((prev) => ({ ...prev, [id]: true }));
 
-    navigate(`/dashboard/payment`, {
+    navigate(`/dashboard/payment-form/${id}`, {
       state: {
         applicationId: id,
         policyTitle: app.policyTitle,
