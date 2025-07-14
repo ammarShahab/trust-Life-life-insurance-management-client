@@ -37,6 +37,7 @@ import PolicyDetails from "../pages/PolicyDetails/PolicyDetails";
 import PolicyQuotePage from "../pages/PolicyQuotePage/PolicyQuotePage";
 import PolicyApplyForm from "../pages/PolicyApplyForm/PolicyApplyForm";
 import PaymentForm from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/PaymentForm/PaymentForm";
+import MyPayments from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/MyPayments/MyPayments";
 
 const router = createBrowserRouter([
   {
@@ -129,9 +130,9 @@ const router = createBrowserRouter([
       { path: "manage-transactions", Component: ManageTransactions },
       { path: "manage-agents", Component: ManageAgents },
       { path: "my-policies", Component: MyPolicies },
-      { path: "payment", Component: PaymentPage },
+      { path: "my-payment", Component: MyPayments },
       { path: "payment-status", Component: PaymentStatus },
-      { path: "payment-form/:applicationId", Component: PaymentForm },
+      { path: "payment-form/:applicationId", Component: PaymentPage },
       { path: "claim-request", Component: ClaimRequestPage },
       { path: "assigned-customers", Component: AssignedCustomers },
       { path: "manage-blogs", Component: ManageBlogs },

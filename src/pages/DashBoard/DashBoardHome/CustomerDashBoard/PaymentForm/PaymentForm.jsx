@@ -1,18 +1,35 @@
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React from "react";
 import { useLocation } from "react-router";
 
 const PaymentForm = () => {
   const { state } = useLocation();
   console.log("state from payment form", state);
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!stripe || !elements) return;
+    const card = elements.getElement(CardElement);
+    if (!card) {
+      return;
+    }
+
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card,
+    });
+  };
 
   return (
-    <div className="max-w-xl mx-auto px-4 py-10">
+    <div className="max-w-4xl lg:w-xl mx-auto px-4 py-10">
       <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
         Complete Your Payment
       </h2>
 
       <form
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         className="bg-white rounded-lg shadow p-6 space-y-6"
       >
         <div className="space-y-2">
@@ -34,7 +51,7 @@ const PaymentForm = () => {
             </label>
             <input
               type="text"
-              value={`$${state?.premium}`}
+              value={`${state?.premium}`}
               readOnly
               className="w-full px-4 py-2 border rounded bg-gray-100 text-gray-700"
             />
@@ -46,7 +63,7 @@ const PaymentForm = () => {
             Card Details
           </label>
           <div className="p-3 border rounded">
-            <CardElement options={{ style: { base: { fontSize: "16px" } } }} />
+            <CardElement className="p-2 border space-x-4 rounded-2xl w-full" />
           </div>
         </div>
 

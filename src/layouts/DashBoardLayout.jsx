@@ -186,7 +186,7 @@ const DashBoardLayout = () => {
 
                 <li>
                   <NavLink
-                    to="/dashboard/payment"
+                    to="/dashboard/my-payment"
                     onClick={closeSidebar}
                     className={({ isActive }) =>
                       `flex items-center gap-2 px-4 py-2 rounded text-gray-700 transition ${
@@ -197,7 +197,7 @@ const DashBoardLayout = () => {
                     }
                   >
                     <FaCreditCard className="text-lg" />
-                    Payment Page
+                    My Payments
                   </NavLink>
                 </li>
 
