@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../../../components/Loading/Loading";
 import useAuth from "../../../../../hooks/useAuth/useAuth";
+import Swal from "sweetalert2";
 
 const PaymentForm = () => {
   const { state } = useLocation();
@@ -96,6 +97,31 @@ const PaymentForm = () => {
           // setSucceeded(true);
           console.log("Payment succeeded:", result.paymentIntent);
           console.log(result);
+
+          const transactionId = result.paymentIntent.id;
+
+          const paymentData = {
+            applicationId,
+            email: user.email,
+            amount,
+            transactionId: transactionId,
+            paymentMethod: result.paymentIntent.payment_method_types,
+            paymentDuration,
+          };
+
+          console.log("payment data", paymentData);
+
+          const paymentRes = await axiosSecure.post("/payments", paymentData);
+          if (paymentRes.data.insertedId) {
+            console.log("Successfully Paid for the parcel");
+            Swal.fire({
+              title: "✅ Payment Successful!",
+              html: `Your transaction ID is:<br><strong>${transactionId}</strong>`,
+              icon: "success",
+              confirmButtonText: "OK",
+            });
+            // navigate("/dashboard/myParcel");
+          }
         }
       }
     }
