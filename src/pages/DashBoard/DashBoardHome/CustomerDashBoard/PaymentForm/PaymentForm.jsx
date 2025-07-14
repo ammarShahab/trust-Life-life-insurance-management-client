@@ -1,17 +1,56 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React from "react";
-import { useLocation } from "react-router";
+import React, { useState } from "react";
+import { useLocation, useParams } from "react-router";
+import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../../../../components/Loading/Loading";
+import useAuth from "../../../../../hooks/useAuth/useAuth";
 
 const PaymentForm = () => {
   const { state } = useLocation();
   console.log("state from payment form", state);
   const stripe = useStripe();
   const elements = useElements();
+  const axiosSecure = useAxiosSecure();
+  const { applicationId } = useParams();
+  const [error, setError] = useState("");
+  const { user } = useAuth();
+
+  const { isLoading, data: applicationInfo = {} } = useQuery({
+    queryKey: ["applications", applicationId],
+    enabled: !!applicationId,
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/policy-applications/${applicationId}`
+      );
+      return res.data;
+    },
+  });
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+
+  console.log("Application info", applicationInfo);
+
+  // console.log("application id", applicationId);
+  const amount = parseFloat(state?.premium);
+  const paymentDuration = state?.paymentType;
+
+  console.log(amount);
+  console.log(paymentDuration);
+
+  applicationInfo.premiumAmount = amount;
+  applicationInfo.paymentTerm = paymentDuration;
+
+  console.log(applicationInfo);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!stripe || !elements) return;
+
     const card = elements.getElement(CardElement);
+
     if (!card) {
       return;
     }
@@ -20,6 +59,46 @@ const PaymentForm = () => {
       type: "card",
       card,
     });
+
+    if (error) {
+      console.log("error", error);
+      setError(error.message);
+    } else {
+      console.log("Payment Method", paymentMethod);
+      setError("");
+      const res = await axiosSecure.post("/create-payment-intent", {
+        amount,
+        applicationId,
+        paymentDuration,
+      });
+      console.log("res from intent", res);
+
+      const clientSecret = res.data.clientSecret;
+      const result = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+          billing_details: {
+            name: user.displayName,
+            email: user.email,
+          },
+        },
+      });
+      if (result.error) {
+        // Show error to your customer
+
+        setError(result.error.message);
+        //   setSucceeded(false);
+      } else {
+        setError("");
+        if (result.paymentIntent.status === "succeeded") {
+          // The payment has been processed!
+          // setError(null);
+          // setSucceeded(true);
+          console.log("Payment succeeded:", result.paymentIntent);
+          console.log(result);
+        }
+      }
+    }
   };
 
   return (
@@ -75,6 +154,7 @@ const PaymentForm = () => {
           Pay
         </button>
       </form>
+      {error && <p className="text-red-500">{error}</p>}
     </div>
   );
 };
