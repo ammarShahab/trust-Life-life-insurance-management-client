@@ -31,11 +31,12 @@ const PolicyQuotePage = () => {
     let rate = 0.05;
 
     if (isSmoker) rate += 0.03;
-    if (age > 50) rate += 0.02;
-    if (gender === "female") rate -= 0.01;
+    if (age > 40) rate += 0.005;
+    if (age > 60) rate += 0.01;
     if (duration > 20) rate += 0.01;
+    if (gender === "female") rate -= 0.01;
 
-    const monthly = ((coverage / 10000) * rate).toFixed(2);
+    const monthly = ((coverage / 10000) * rate).toFixed(2) * 100;
     const yearly = (monthly * 12).toFixed(2);
 
     setResult({ monthly, yearly, coverage, duration });

@@ -13,20 +13,20 @@ const GetFreeQuote = () => {
     const gender = data.gender;
 
     // Base rate factors
-    let rate = 0.01;
+    let rate = 0.05;
 
+    if (isSmoker) rate += 0.03;
     if (age > 40) rate += 0.005;
     if (age > 60) rate += 0.01;
-    if (duration > 20) rate += 0.005;
-    if (isSmoker) rate += 0.02;
-    if (gender === "male") rate += 0.002;
+    if (duration > 20) rate += 0.01;
+    if (gender === "female") rate -= 0.01;
 
-    const annualPremium = coverage * rate;
-    const monthlyPremium = annualPremium / 12;
+    const monthlyPremium = ((coverage / 10000) * rate).toFixed(2) * 100;
+    const annualPremium = (monthlyPremium * 12).toFixed(2);
 
     setPremium({
-      monthly: monthlyPremium.toFixed(2),
-      annual: annualPremium.toFixed(2),
+      monthly: monthlyPremium,
+      annual: annualPremium,
     });
   };
 

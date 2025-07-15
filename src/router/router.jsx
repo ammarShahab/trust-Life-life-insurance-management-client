@@ -130,7 +130,7 @@ const router = createBrowserRouter([
       { path: "manage-transactions", Component: ManageTransactions },
       { path: "manage-agents", Component: ManageAgents },
       { path: "my-policies", Component: MyPolicies },
-      { path: "my-payment", Component: MyPayments },
+      // { path: "my-payment", Component: MyPayments },
       { path: "payment-status", Component: PaymentStatus },
       { path: "payment-form/:applicationId", Component: PaymentPage },
       { path: "claim-request", Component: ClaimRequestPage },

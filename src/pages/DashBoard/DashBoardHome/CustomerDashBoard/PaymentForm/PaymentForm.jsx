@@ -124,7 +124,7 @@ const PaymentForm = () => {
               icon: "success",
               confirmButtonText: "OK",
             });
-            navigate("/dashboard/my-payment");
+            navigate("/dashboard/payment-status");
           }
         }
       }

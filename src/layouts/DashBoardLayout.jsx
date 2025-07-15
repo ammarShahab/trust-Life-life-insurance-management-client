@@ -184,7 +184,7 @@ const DashBoardLayout = () => {
                   </NavLink>
                 </li>
 
-                <li>
+                {/*  <li>
                   <NavLink
                     to="/dashboard/my-payment"
                     onClick={closeSidebar}
@@ -199,7 +199,7 @@ const DashBoardLayout = () => {
                     <FaCreditCard className="text-lg" />
                     My Payments
                   </NavLink>
-                </li>
+                </li> */}
 
                 <li>
                   <NavLink
