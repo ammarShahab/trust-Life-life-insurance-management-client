@@ -114,6 +114,7 @@ const ManagePolicies = () => {
       duration: data.duration,
       premium: data.premium,
       image: data.image,
+      purchasedCount: parseInt(0),
     };
     console.log(newPolicy);
     console.log(data);

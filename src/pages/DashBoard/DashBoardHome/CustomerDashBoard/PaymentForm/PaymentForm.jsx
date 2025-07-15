@@ -104,6 +104,7 @@ const PaymentForm = () => {
 
           const paymentData = {
             policyTitle: applicationInfo.policyTitle,
+            policyId: state?.policyId,
             applicationId,
             email: user.email,
             amount,
