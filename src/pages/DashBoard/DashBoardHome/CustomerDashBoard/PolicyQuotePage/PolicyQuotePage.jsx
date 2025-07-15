@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import useAxios from "../../hooks/useAxios";
-import Loading from "../../components/Loading/Loading";
+import useAxios from "../../../../../hooks/useAxios";
+import Loading from "../../../../../components/Loading/Loading";
 
 const PolicyQuotePage = () => {
   const { register, handleSubmit } = useForm();

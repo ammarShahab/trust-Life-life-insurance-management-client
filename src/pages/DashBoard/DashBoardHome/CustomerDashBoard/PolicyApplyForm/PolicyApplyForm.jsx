@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { useLocation, useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
 
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import useAuth from "../../hooks/useAuth/useAuth";
+import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
+import useAuth from "../../../../../hooks/useAuth/useAuth";
 
 const PolicyApplyForm = () => {
   const { user } = useAuth();

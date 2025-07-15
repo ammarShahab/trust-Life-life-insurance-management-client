@@ -34,8 +34,8 @@ import PolicyClearance from "../pages/DashBoard/DashBoardHome/AgentDashboard/Pol
 import ManageAgents from "../pages/DashBoard/DashBoardHome/AdminDashBoard/ManageAgents/ManageAgents";
 import AllPolicies from "../pages/AllPolicies/AllPolicies";
 import PolicyDetails from "../pages/PolicyDetails/PolicyDetails";
-import PolicyQuotePage from "../pages/PolicyQuotePage/PolicyQuotePage";
-import PolicyApplyForm from "../pages/PolicyApplyForm/PolicyApplyForm";
+import PolicyQuotePage from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/PolicyQuotePage/PolicyQuotePage";
+import PolicyApplyForm from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/PolicyApplyForm/PolicyApplyForm";
 import PaymentForm from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/PaymentForm/PaymentForm";
 import MyPayments from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/MyPayments/MyPayments";
 
