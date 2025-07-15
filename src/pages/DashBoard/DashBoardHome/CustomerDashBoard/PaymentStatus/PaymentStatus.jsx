@@ -10,7 +10,6 @@ const PaymentStatus = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const [paymentModes, setPaymentModes] = useState({});
-  const [disabledRows, setDisabledRows] = useState({});
 
   const { data: applications = [], isLoading } = useQuery({
     queryKey: ["payment-status", user?.email],
@@ -41,8 +40,6 @@ const PaymentStatus = () => {
       mode === "yearly"
         ? app.estimatedPremiumYearly
         : app.estimatedPremiumMonthly;
-
-    setDisabledRows((prev) => ({ ...prev, [id]: true }));
 
     navigate(`/dashboard/payment-form/${id}`, {
       state: {
@@ -83,7 +80,6 @@ const PaymentStatus = () => {
                   mode === "yearly"
                     ? app.estimatedPremiumYearly
                     : app.estimatedPremiumMonthly;
-                const isDisabled = disabledRows[id];
 
                 return (
                   <tr key={id} className="border-t hover:bg-gray-50">
@@ -98,7 +94,12 @@ const PaymentStatus = () => {
                     <td className="p-3 text-gray-700">{app.policyCategory}</td>
                     <td className="p-3 w-32">
                       <select
-                        className="border rounded py-1 text-[12px] w-full sm:w-auto"
+                        disabled={app.status !== "pending"}
+                        className={`border rounded py-1 text-[12px] w-full sm:w-auto transition-colors${
+                          app.status !== "pending"
+                            ? "bg-gray-100 text-gray-500 cursor-not-allowed"
+                            : ""
+                        }`}
                         value={mode}
                         onChange={(e) =>
                           setPaymentModes({
@@ -106,12 +107,12 @@ const PaymentStatus = () => {
                             [id]: e.target.value,
                           })
                         }
-                        disabled={isDisabled}
                       >
                         <option value="monthly">Monthly</option>
                         <option value="yearly">Yearly</option>
                       </select>
                     </td>
+
                     <td className="p-3 text-gray-800">${premium}</td>
                     <td className="p-3">
                       <span
@@ -125,8 +126,12 @@ const PaymentStatus = () => {
                     <td className="p-3 text-center">
                       <button
                         onClick={() => handlePayment(app)}
-                        disabled={isDisabled}
-                        className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded text-sm disabled:opacity-50"
+                        disabled={app.status !== "pending"}
+                        className={`px-4 py-2 rounded text-sm text-white transition ${
+                          app.status !== "pending"
+                            ? "bg-gray-400 cursor-not-allowed"
+                            : "bg-yellow-500 hover:bg-yellow-600"
+                        }`}
                       >
                         Make Payment
                       </button>
