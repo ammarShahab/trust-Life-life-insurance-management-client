@@ -1,6 +1,6 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useState } from "react";
-import { useLocation, useParams } from "react-router";
+import { Link, useLocation, useNavigate, useParams } from "react-router";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../../../components/Loading/Loading";
@@ -16,6 +16,7 @@ const PaymentForm = () => {
   const { applicationId } = useParams();
   const [error, setError] = useState("");
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const { isLoading, data: applicationInfo = {} } = useQuery({
     queryKey: ["applications", applicationId],
@@ -102,6 +103,7 @@ const PaymentForm = () => {
           const transactionId = result.paymentIntent.id;
 
           const paymentData = {
+            policyTitle: applicationInfo.policyTitle,
             applicationId,
             email: user.email,
             amount,
@@ -122,7 +124,7 @@ const PaymentForm = () => {
               icon: "success",
               confirmButtonText: "OK",
             });
-            // navigate("/dashboard/myParcel");
+            navigate("/dashboard/my-payment");
           }
         }
       }

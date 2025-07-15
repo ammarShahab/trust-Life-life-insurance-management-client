@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useLocation, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
 
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -11,6 +11,7 @@ const PolicyApplyForm = () => {
   const axiosSecure = useAxiosSecure();
   const { policyId } = useParams();
   const { state } = useLocation();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -49,6 +50,7 @@ const PolicyApplyForm = () => {
       if (res.data.insertedId) {
         Swal.fire("Success", "Application submitted successfully!", "success");
         reset();
+        navigate("/dashboard/payment-status");
       }
     } catch (err) {
       console.error(err);
