@@ -35,7 +35,7 @@ const PaymentStatus = () => {
     console.log(app);
 
     const id = app._id;
-    const mode = paymentModes[id] || "monthly";
+    const mode = paymentModes[id];
     const premium =
       mode === "yearly"
         ? app.estimatedPremiumYearly
