@@ -32,7 +32,6 @@ const MyPolicies = () => {
       email: user.email,
       date: new Date().toISOString(),
     };
-    console.log("Submitted review:", reviewData);
 
     try {
       const res = await axiosSecure.post("/reviews", reviewData);
@@ -42,7 +41,6 @@ const MyPolicies = () => {
         reset();
       }
     } catch (err) {
-      console.error("Failed to submit review:", err);
       Swal.fire("Error", "Something went wrong.", "error");
     }
   };
@@ -80,51 +78,59 @@ const MyPolicies = () => {
               </tr>
             </thead>
             <tbody>
-              {applications.map((app) => (
-                <tr key={app._id} className="border-t">
-                  <td className="p-3">
-                    <div className="font-semibold">{app.policyTitle}</div>
-                    <div className="text-xs text-gray-500">
-                      Policy Id: {app.policyId}
-                    </div>
-                  </td>
-                  <td className="p-3">{app.coverage || "N/A"}</td>
-                  <td className="p-3">{app.duration || "N/A"} Years</td>
-                  <td className="p-3">${app.estimatedPremiumMonthly} /mo</td>
-                  <td className="p-3">
-                    <span
-                      className={`text-xs font-semibold px-2.5 py-0.5 rounded ${getBadgeColor(
-                        app.status
-                      )}`}
-                    >
-                      {app.status}
-                    </span>
-                  </td>
-                  <td className="p-3 flex flex-col sm:flex-row sm:mt-3  gap-2">
-                    <button
-                      onClick={() => {
-                        setSelectedPolicy(app);
-                        setIsReviewModalOpen(true);
-                      }}
-                      className="flex items-center gap-1 bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-[10px]"
-                    >
-                      <FaStar /> Review
-                    </button>
-                    <button
-                      onClick={() => {
-                        setSelectedPolicy(app);
-                        setIsDetailModalOpen(true);
-                      }}
-                      className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-[10px]"
-                    >
-                      <FaEye /> View Details
-                    </button>
-                    <button className="flex items-center gap-1 bg-gray-700 hover:bg-gray-800 text-white px-3 py-1 rounded text-[10px]">
-                      <FaFileDownload /> Download
-                    </button>
+              {applications.length === 0 ? (
+                <tr>
+                  <td colSpan="6" className="text-center py-10 text-gray-500">
+                    🚫 No policies found.
                   </td>
                 </tr>
-              ))}
+              ) : (
+                applications.map((app) => (
+                  <tr key={app._id} className="border-t">
+                    <td className="p-3">
+                      <div className="font-semibold">{app.policyTitle}</div>
+                      <div className="text-xs text-gray-500">
+                        Policy Id: {app.policyId}
+                      </div>
+                    </td>
+                    <td className="p-3">{app.coverage || "N/A"}</td>
+                    <td className="p-3">{app.duration || "N/A"} Years</td>
+                    <td className="p-3">${app.estimatedPremiumMonthly} /mo</td>
+                    <td className="p-3">
+                      <span
+                        className={`text-xs font-semibold px-2.5 py-0.5 rounded ${getBadgeColor(
+                          app.status
+                        )}`}
+                      >
+                        {app.status}
+                      </span>
+                    </td>
+                    <td className="p-3 flex flex-col sm:flex-row sm:mt-3 gap-2">
+                      <button
+                        onClick={() => {
+                          setSelectedPolicy(app);
+                          setIsReviewModalOpen(true);
+                        }}
+                        className="flex items-center gap-1 bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-[10px]"
+                      >
+                        <FaStar /> Review
+                      </button>
+                      <button
+                        onClick={() => {
+                          setSelectedPolicy(app);
+                          setIsDetailModalOpen(true);
+                        }}
+                        className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-[10px]"
+                      >
+                        <FaEye /> View Details
+                      </button>
+                      <button className="flex items-center gap-1 bg-gray-700 hover:bg-gray-800 text-white px-3 py-1 rounded text-[10px]">
+                        <FaFileDownload /> Download
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>
