@@ -32,8 +32,6 @@ const PaymentStatus = () => {
   };
 
   const handlePayment = (app) => {
-    console.log(app);
-
     const id = app._id;
     const mode = paymentModes[id];
     const premium =
@@ -73,72 +71,81 @@ const PaymentStatus = () => {
               </tr>
             </thead>
             <tbody>
-              {applications.map((app) => {
-                const id = app._id;
-                const mode = paymentModes[id] || "monthly";
-                const premium =
-                  mode === "yearly"
-                    ? app.estimatedPremiumYearly
-                    : app.estimatedPremiumMonthly;
+              {applications.length === 0 ? (
+                <tr>
+                  <td colSpan="6" className="text-center py-10 text-gray-500">
+                    🚫 No Payment Status Found.
+                  </td>
+                </tr>
+              ) : (
+                applications.map((app) => {
+                  const id = app._id;
+                  const mode = paymentModes[id] || "monthly";
+                  const premium =
+                    mode === "yearly"
+                      ? app.estimatedPremiumYearly
+                      : app.estimatedPremiumMonthly;
 
-                return (
-                  <tr key={id} className="border-t hover:bg-gray-50">
-                    <td className="p-3">
-                      <div className="font-semibold text-gray-800">
-                        {app.policyTitle}
-                      </div>
-                      <div className="text-xs text-gray-500">
-                        ID: {app.policyId}
-                      </div>
-                    </td>
-                    <td className="p-3 text-gray-700">{app.policyCategory}</td>
-                    <td className="p-3 w-32">
-                      <select
-                        disabled={app.status !== "pending"}
-                        className={`border rounded py-1 text-[12px] w-full sm:w-auto transition-colors${
-                          app.status !== "pending"
-                            ? "bg-gray-100 text-gray-500 cursor-not-allowed"
-                            : ""
-                        }`}
-                        value={mode}
-                        onChange={(e) =>
-                          setPaymentModes({
-                            ...paymentModes,
-                            [id]: e.target.value,
-                          })
-                        }
-                      >
-                        <option value="monthly">Monthly</option>
-                        <option value="yearly">Yearly</option>
-                      </select>
-                    </td>
-
-                    <td className="p-3 text-gray-800">${premium}</td>
-                    <td className="p-3">
-                      <span
-                        className={`text-xs font-semibold px-2.5 py-0.5 rounded ${getBadgeColor(
-                          app.status === "pending" ? "due" : "paid"
-                        )}`}
-                      >
-                        {app.status === "pending" ? "Due" : "Paid"}
-                      </span>
-                    </td>
-                    <td className="p-3 text-center">
-                      <button
-                        onClick={() => handlePayment(app)}
-                        disabled={app.status !== "pending"}
-                        className={`px-4 py-2 rounded text-sm text-white transition ${
-                          app.status !== "pending"
-                            ? "bg-gray-400 cursor-not-allowed"
-                            : "bg-yellow-500 hover:bg-yellow-600"
-                        }`}
-                      >
-                        Make Payment
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
+                  return (
+                    <tr key={id} className="border-t hover:bg-gray-50">
+                      <td className="p-3">
+                        <div className="font-semibold text-gray-800">
+                          {app.policyTitle}
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          ID: {app.policyId}
+                        </div>
+                      </td>
+                      <td className="p-3 text-gray-700">
+                        {app.policyCategory}
+                      </td>
+                      <td className="p-3 w-32">
+                        <select
+                          disabled={app.status !== "pending"}
+                          className={`border rounded py-1 text-[12px] w-full sm:w-auto transition-colors ${
+                            app.status !== "pending"
+                              ? "bg-gray-100 text-gray-500 cursor-not-allowed"
+                              : ""
+                          }`}
+                          value={mode}
+                          onChange={(e) =>
+                            setPaymentModes({
+                              ...paymentModes,
+                              [id]: e.target.value,
+                            })
+                          }
+                        >
+                          <option value="monthly">Monthly</option>
+                          <option value="yearly">Yearly</option>
+                        </select>
+                      </td>
+                      <td className="p-3 text-gray-800">${premium}</td>
+                      <td className="p-3">
+                        <span
+                          className={`text-xs font-semibold px-2.5 py-0.5 rounded ${getBadgeColor(
+                            app.status === "pending" ? "due" : "paid"
+                          )}`}
+                        >
+                          {app.status === "pending" ? "Due" : "Paid"}
+                        </span>
+                      </td>
+                      <td className="p-3 text-center">
+                        <button
+                          onClick={() => handlePayment(app)}
+                          disabled={app.status !== "pending"}
+                          className={`px-4 py-2 rounded text-sm text-white transition ${
+                            app.status !== "pending"
+                              ? "bg-gray-400 cursor-not-allowed"
+                              : "bg-yellow-500 hover:bg-yellow-600"
+                          }`}
+                        >
+                          Make Payment
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
             </tbody>
           </table>
         </div>

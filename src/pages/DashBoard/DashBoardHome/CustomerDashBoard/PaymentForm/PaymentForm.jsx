@@ -37,7 +37,7 @@ const PaymentForm = () => {
 
   // console.log("application id", applicationId);
   const amountInDecimal = parseFloat(state?.premium);
-  const amount = amountInDecimal * 100;
+  const amount = amountInDecimal;
   const paymentDuration = state?.paymentType;
 
   console.log(amount);

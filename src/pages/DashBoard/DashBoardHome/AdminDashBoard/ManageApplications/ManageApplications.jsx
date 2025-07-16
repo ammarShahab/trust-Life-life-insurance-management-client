@@ -76,91 +76,103 @@ const ManageApplications = () => {
             </tr>
           </thead>
           <tbody>
-            {applications.map((app) => (
-              <tr key={app._id} className="border-t">
-                <td className="p-3 font-medium">{app.policyTitle}</td>
-                <td className="p-3">{app.name}</td>
-                <td className="p-3">{app.email}</td>
-                <td className="p-3">
-                  {new Date(app.appliedDate).toLocaleDateString()}
-                </td>
-                <td className="p-3">
-                  <span
-                    className={`text-xs font-semibold px-2.5 py-0.5 rounded ${
-                      app.status === "approved"
-                        ? "bg-green-100 text-green-700"
-                        : app.status === "rejected"
-                        ? "bg-red-100 text-red-700"
-                        : "bg-yellow-100 text-yellow-700"
-                    }`}
-                  >
-                    {app.status === "paid" ? "Pending" : app.status}
-                  </span>
-                </td>
-                <td className="p-3">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                    <select
-                      onChange={(e) => {
-                        const [name, email] = e.target.value.split("|||");
-                        setSelectedAgent((prev) => ({
-                          ...prev,
-                          [app._id]: { agentName: name, agentEmail: email },
-                        }));
-                      }}
-                      className="border rounded px-2 py-1 text-sm"
-                      defaultValue=""
-                    >
-                      <option value="" disabled>
-                        Select Agent
-                      </option>
-                      {agents.map((agent) => (
-                        <option
-                          key={agent.email}
-                          value={`${agent.customerName}|||${agent.email}`}
-                        >
-                          {agent.customerName}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </td>
-                <td className="space-x-2">
-                  <button
-                    className="bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded text-xs "
-                    onClick={() =>
-                      assignAgent.mutate({
-                        appId: app._id,
-                        agent: selectedAgent[app._id],
-                      })
-                    }
-                    disabled={!selectedAgent[app._id]}
-                  >
-                    Assign Agent
-                  </button>
-
-                  <button
-                    className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs"
-                    onClick={() => rejectApp.mutate(app._id)}
-                  >
-                    Reject
-                  </button>
-
-                  <button
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded text-xs"
-                    onClick={() => {
-                      setSelectedApp(app);
-                      setIsDetailModalOpen(true);
-                    }}
-                  >
-                    View Details
-                  </button>
+            {applications.length === 0 ? (
+              <tr>
+                <td colSpan="7" className="text-center py-10 text-gray-500">
+                  🚫 No applications found.
                 </td>
               </tr>
-            ))}
+            ) : (
+              applications.map((app) => (
+                <tr key={app._id} className="border-t">
+                  <td className="p-3 font-medium">{app.policyTitle}</td>
+                  <td className="p-3">{app.name}</td>
+                  <td className="p-3">{app.email}</td>
+                  <td className="p-3">
+                    {new Date(app.appliedDate).toLocaleDateString()}
+                  </td>
+                  <td className="p-3">
+                    <span
+                      className={`text-xs font-semibold px-2.5 py-0.5 rounded ${
+                        app.status === "approved"
+                          ? "bg-green-100 text-green-700"
+                          : app.status === "rejected"
+                          ? "bg-red-100 text-red-700"
+                          : "bg-yellow-100 text-yellow-700"
+                      }`}
+                    >
+                      {app.status === "paid" ? "Pending" : app.status}
+                    </span>
+                  </td>
+                  <td className="p-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                      <select
+                        onChange={(e) => {
+                          const [name, email] = e.target.value.split("|||");
+                          setSelectedAgent((prev) => ({
+                            ...prev,
+                            [app._id]: {
+                              agentName: name,
+                              agentEmail: email,
+                            },
+                          }));
+                        }}
+                        className="border rounded py-1 text-sm"
+                        defaultValue=""
+                      >
+                        <option value="" disabled>
+                          Select Agent
+                        </option>
+                        {agents.map((agent) => (
+                          <option
+                            key={agent.email}
+                            value={`${agent.customerName}|||${agent.email}`}
+                          >
+                            {agent.customerName}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </td>
+                  <td className="flex flex-col sm:flex-row sm:mt-4 space-x-2 text-center">
+                    <button
+                      className="bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded text-xs"
+                      onClick={() =>
+                        assignAgent.mutate({
+                          appId: app._id,
+                          agent: selectedAgent[app._id],
+                        })
+                      }
+                      disabled={!selectedAgent[app._id]}
+                    >
+                      Assign Agent
+                    </button>
+
+                    <button
+                      className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs"
+                      onClick={() => rejectApp.mutate(app._id)}
+                    >
+                      Reject
+                    </button>
+
+                    <button
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded text-xs"
+                      onClick={() => {
+                        setSelectedApp(app);
+                        setIsDetailModalOpen(true);
+                      }}
+                    >
+                      View Details
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
 
+      {/* View Details Modal */}
       {isDetailModalOpen && selectedApp && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
