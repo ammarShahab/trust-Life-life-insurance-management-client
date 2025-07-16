@@ -31,7 +31,7 @@ import ClaimRequestPage from "../pages/DashBoard/DashBoardHome/CustomerDashBoard
 import AssignedCustomers from "../pages/DashBoard/DashBoardHome/AgentDashboard/AssignedCustomers/AssignedCustomers";
 import ManageBlogs from "../pages/DashBoard/DashBoardHome/AgentDashboard/ManageBlogs/ManageBlogs";
 import PolicyClearance from "../pages/DashBoard/DashBoardHome/AgentDashboard/PolicyClearance/PolicyClearance";
-import ManageAgents from "../pages/DashBoard/DashBoardHome/AdminDashBoard/ManageAgents/ManageAgents";
+
 import AllPolicies from "../pages/AllPolicies/AllPolicies";
 import PolicyDetails from "../pages/PolicyDetails/PolicyDetails";
 import PolicyQuotePage from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/PolicyQuotePage/PolicyQuotePage";
@@ -128,7 +128,6 @@ const router = createBrowserRouter([
       { path: "manage-users", Component: ManageUsers },
       { path: "manage-policies", Component: ManagePolicies },
       { path: "manage-transactions", Component: ManageTransactions },
-      { path: "manage-agents", Component: ManageAgents },
       { path: "my-policies", Component: MyPolicies },
       // { path: "my-payment", Component: MyPayments },
       { path: "payment-status", Component: PaymentStatus },
