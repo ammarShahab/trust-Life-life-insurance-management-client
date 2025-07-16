@@ -17,6 +17,21 @@ const GoogleLoginButton = () => {
         // setUser(user);
         console.log("from google sign in", user);
 
+        const gmtDate = new Date(user.metadata.creationTime);
+
+        const options = {
+          timeZone: "Asia/Dhaka", // Bangladesh Timezone
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false, // 24-hour format
+        };
+
+        const bdTime = gmtDate.toLocaleString("en-US", options);
+
         const customerInfo = {
           customerName: user.displayName,
           email: user.email,
@@ -24,6 +39,7 @@ const GoogleLoginButton = () => {
           role: "customer",
           // last_log_in: new Date().toISOString(),
           lastSignInTime: user.metadata.lastSignInTime,
+          registrationDate: bdTime,
         };
         console.log("customer Info from googleSignIn", customerInfo);
 

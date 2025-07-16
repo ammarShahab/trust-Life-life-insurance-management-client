@@ -75,6 +75,21 @@ const Register = () => {
             console.log(err);
           });
 
+        const gmtDate = new Date(currentUser.metadata.creationTime);
+
+        const options = {
+          timeZone: "Asia/Dhaka", // Bangladesh Timezone
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false, // 24-hour format
+        };
+
+        const bdTime = gmtDate.toLocaleString("en-US", options);
+
         const customerInfo = {
           customerName: data.name,
           email: data.email,
@@ -82,6 +97,7 @@ const Register = () => {
           role: "customer",
           // last_log_in: new Date().toISOString(),
           lastSignInTime: currentUser.metadata.lastSignInTime,
+          registrationDate: bdTime,
         };
         console.log("customer Info from Registration", customerInfo);
 
