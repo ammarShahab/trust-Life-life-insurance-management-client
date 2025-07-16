@@ -17,7 +17,7 @@ const Home = () => {
   const { isLoading } = use(AuthContext);
   return (
     <>
-      <HeroSlider></HeroSlider>
+      {/* <HeroSlider></HeroSlider> */}
       <Suspense fallback={<Loading></Loading>}>
         <Benefits></Benefits>
       </Suspense>
