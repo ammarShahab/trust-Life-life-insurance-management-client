@@ -55,51 +55,77 @@ const ManageTransactions = () => {
       </div>
 
       {/* Transactions Table */}
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full border border-gray-200">
-          <thead className="bg-gray-100">
+      <div className="overflow-x-auto rounded-lg shadow-sm border border-gray-200">
+        <table className="w-full text-sm text-left text-gray-600">
+          <thead className="text-xs uppercase bg-gray-100 text-gray-700">
             <tr>
-              <th className="px-4 py-2 border">Transaction ID</th>
-              <th className="px-4 py-2 border">Customer Email</th>
-              <th className="px-4 py-2 border">Policy Name</th>
-              <th className="px-4 py-2 border">Amount</th>
-              <th className="px-4 py-2 border">Date</th>
-              <th className="px-4 py-2 border">Status</th>
+              <th scope="col" className="px-6 py-3">
+                Policy Name
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Customer Email
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Transaction ID
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Amount
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Date
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Status
+              </th>
             </tr>
           </thead>
           <tbody>
-            {payments.map((payment) => (
-              <tr key={payment._id}>
-                <td className="px-4 py-2 border">{payment.transactionId}</td>
-                <td className="px-4 py-2 border">{payment.email}</td>
-                <td className="px-4 py-2 border">{payment.policyTitle}</td>
-                <td className="px-4 py-2 border">${payment.amount}</td>
-                <td className="px-4 py-2 border">
-                  {new Date(payment.paymentTime).toLocaleString("en-BD", {
-                    timeZone: "Asia/Dhaka",
-                  })}
-                </td>
-                <td className="px-4 py-2 border">
-                  <span
-                    className={`px-2 py-1 rounded-md text-sm font-medium ${
-                      payment.status === "paid"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-red-100 text-red-700"
-                    }`}
-                  >
-                    {payment.status === "paid" ? "Success" : "Failed"}
-                  </span>
+            {payments.length > 0 ? (
+              payments.map((payment, index) => (
+                <tr
+                  key={payment._id}
+                  className={`${
+                    index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                  } hover:bg-blue-50 transition duration-200`}
+                >
+                  <td className="px-6 py-4">{payment.policyTitle}</td>
+                  <td className="px-6 py-4">{payment.email}</td>
+                  <td className="px-6 py-4 font-mono">
+                    {payment.transactionId}
+                  </td>
+                  <td className="px-6 py-4 font-semibold text-green-600">
+                    ${payment.amount}
+                  </td>
+                  <td className="px-6 py-4">
+                    {new Date(payment.paymentTime).toLocaleString("en-BD", {
+                      timeZone: "Asia/Dhaka",
+                    })}
+                  </td>
+                  <td className="px-6 py-4">
+                    <span
+                      className={`inline-block px-2 py-1 rounded text-xs font-medium ${
+                        payment.status === "paid"
+                          ? "bg-green-100 text-green-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                    >
+                      {payment.status === "paid" ? "Success" : "Failed"}
+                    </span>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan="6"
+                  className="text-center py-6 text-gray-500 italic bg-white"
+                >
+                  No transactions found.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
-
-        {payments.length === 0 && (
-          <p className="text-center text-gray-500 mt-4">
-            No transactions found.
-          </p>
-        )}
       </div>
     </div>
   );
