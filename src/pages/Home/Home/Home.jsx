@@ -1,11 +1,10 @@
 import Banner from "../HeroSlider/HeroSlider";
 import { Suspense, use } from "react";
-import FeaturedPackages from "../FeaturedPackages/FeaturedPackages";
+
 import AuthContext from "../../../context/AuthContext/AuthContext";
 import GalleryCarousel from "../GalleryCarousel/GalleryCarousel";
 import Loading from "../../../components/Loading/Loading";
-import WhyChooseUs from "../WhyChooseUs/WhyChooseUs";
-import HeroSlider from "../HeroSlider/HeroSlider";
+
 import Benefits from "../Benefits/Benefits";
 
 const featuredPackagesPromise = fetch(

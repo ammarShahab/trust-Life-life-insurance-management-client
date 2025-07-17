@@ -28,7 +28,7 @@ const NavBar = () => {
   const publicLinks = [
     { name: "Home", path: "/" },
     { name: "All Policies", path: "/all-policies" },
-    { name: "Agents", path: "/agents" },
+    { name: "Blogs", path: "/blogs" },
     { name: "FAQs", path: "/faq" },
   ];
 
