@@ -1,22 +1,15 @@
-import Banner from "../HeroSlider/HeroSlider";
 import { Suspense, use } from "react";
-
 import AuthContext from "../../../context/AuthContext/AuthContext";
 import GalleryCarousel from "../GalleryCarousel/GalleryCarousel";
+import HeroSlider from "../HeroSlider/HeroSlider";
 import Loading from "../../../components/Loading/Loading";
-
 import Benefits from "../Benefits/Benefits";
-
-const featuredPackagesPromise = fetch(
-  "https://b11a11-server-side-ashahab007.vercel.app/featured-packages"
-  // "http://localhost:3000/featured-packages"
-).then((res) => res.json());
 
 const Home = () => {
   const { isLoading } = use(AuthContext);
   return (
     <>
-      {/* <HeroSlider></HeroSlider> */}
+      <HeroSlider></HeroSlider>
       <Suspense fallback={<Loading></Loading>}>
         <Benefits></Benefits>
       </Suspense>
