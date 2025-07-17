@@ -29,13 +29,9 @@ const NavBar = () => {
     { name: "Home", path: "/" },
     { name: "All Policies", path: "/all-policies" },
     { name: "Blogs", path: "/blogs" },
-    { name: "FAQs", path: "/faq" },
   ];
 
-  const privateLinks = [
-    { name: "My Bookings", path: "/my-bookings" },
-    { name: "Dashboard", path: "/dashboard" },
-  ];
+  const privateLinks = [{ name: "Dashboard", path: "/dashboard" }];
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
