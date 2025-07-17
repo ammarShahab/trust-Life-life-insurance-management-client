@@ -11,13 +11,13 @@ const ManageUsers = () => {
   const { data: users = [], isLoading } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/users");
+      const res = await axiosSecure.get("/customers");
       return res.data;
     },
   });
 
   const promoteMutation = useMutation({
-    mutationFn: (id) => axiosSecure.patch(`/users/${id}/promote`),
+    mutationFn: (id) => axiosSecure.patch(`/customers/${id}/promote`),
     onSuccess: () => {
       queryClient.invalidateQueries(["users"]);
       Swal.fire("Success", "User promoted to agent", "success");
@@ -25,7 +25,7 @@ const ManageUsers = () => {
   });
 
   const demoteMutation = useMutation({
-    mutationFn: (id) => axiosSecure.patch(`/users/${id}/demote`),
+    mutationFn: (id) => axiosSecure.patch(`/customers/${id}/demote`),
     onSuccess: () => {
       queryClient.invalidateQueries(["users"]);
       Swal.fire("Success", "User demoted to customer", "success");
@@ -33,7 +33,7 @@ const ManageUsers = () => {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => axiosSecure.delete(`/users/${id}`),
+    mutationFn: (id) => axiosSecure.delete(`/customers/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries(["users"]);
       Swal.fire("Deleted", "User has been deleted", "success");
