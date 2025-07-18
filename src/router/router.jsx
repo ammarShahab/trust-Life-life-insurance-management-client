@@ -31,6 +31,7 @@ import PolicyApplyForm from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/
 import PaymentForm from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/PaymentForm/PaymentForm";
 import MyPayments from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/MyPayments/MyPayments";
 import Blogs from "../pages/Blogs/Blogs";
+import BlogDetailsPage from "../pages/Blogs/BlogDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "/blogs",
         Component: Blogs,
+      },
+      {
+        path: "/blogs/:id",
+        Component: BlogDetailsPage,
       },
 
       { path: "/privacy-policy", Component: PrivacyPolicy },
