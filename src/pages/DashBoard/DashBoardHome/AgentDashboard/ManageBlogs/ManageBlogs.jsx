@@ -2,16 +2,17 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../../hooks/useAuth/useAuth";
 import Loading from "../../../../../components/Loading/Loading";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import useCustomerRole from "../../../../../hooks/useCustomerRole";
 
 const ManageBlogs = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
+  const { role } = useCustomerRole();
 
   const [showModal, setShowModal] = useState(false);
   const [editBlogId, setEditBlogId] = useState(null);
@@ -42,6 +43,7 @@ const ManageBlogs = () => {
         author: user.displayName,
         authorEmail: user.email,
         authorImage: user.photoURL,
+        authorRole: role,
       };
       const res = await axiosSecure.post("/blogs", blogData);
       return res.data;

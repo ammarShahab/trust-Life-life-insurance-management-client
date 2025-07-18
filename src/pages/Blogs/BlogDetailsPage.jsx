@@ -1,14 +1,18 @@
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { FaEye } from "react-icons/fa";
-
 import useAxios from "../../hooks/useAxios";
 
 const BlogDetailsPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const axiosInstance = useAxios();
 
-  // Fetch single blog data
+  const handleGoBack = () => {
+    navigate("/blogs");
+  };
+
+  // Fetch blog data
   const { data: blog = {} } = useQuery({
     queryKey: ["singleBlog", id],
     queryFn: async () => {
@@ -23,7 +27,7 @@ const BlogDetailsPage = () => {
         <img
           src={blog.imageUrl}
           alt={blog.title}
-          className="w-full h-full object-cover"
+          className="w-full h-[70vh] object-cover"
         />
 
         <div className="p-6 space-y-4">
@@ -39,9 +43,11 @@ const BlogDetailsPage = () => {
               <div>
                 <p className="font-semibold text-gray-700 flex items-center gap-2">
                   {blog.author}
-                  <span className="badge badge-info text-white text-xs">
-                    Customer
-                  </span>
+                  {blog.authorRole && (
+                    <span className="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">
+                      {blog.authorRole}
+                    </span>
+                  )}
                 </p>
                 <p className="text-sm text-gray-500">
                   Published on:{" "}
@@ -52,12 +58,23 @@ const BlogDetailsPage = () => {
 
             <div className="flex items-center gap-2 text-gray-500 text-sm">
               <FaEye className="text-blue-600" />
-              <span>{blog.totalVisit ? blog.totalVisit : 0} views</span>
+              <span>{blog.totalVisit || 0} views</span>
             </div>
           </div>
 
           <div className="text-gray-700 text-justify leading-relaxed text-base whitespace-pre-line">
             {blog.content}
+          </div>
+          {/* Full-width Go Back Button */}
+          <div className="mt-6">
+            <button
+              onClick={handleGoBack}
+              color="gray"
+              type="button"
+              className="text-white bg-[#1f2936] hover:bg-[#374151]  focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 w-full transition"
+            >
+              Go To Blogs
+            </button>
           </div>
         </div>
       </div>

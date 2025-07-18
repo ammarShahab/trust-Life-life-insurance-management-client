@@ -7,7 +7,6 @@ import Loading from "../../components/Loading/Loading";
 import useAuth from "../../hooks/useAuth/useAuth";
 
 const Blogs = () => {
-  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const { role } = useCustomerRole();
@@ -81,7 +80,7 @@ const Blogs = () => {
           {/* Read More Button */}
           <button
             onClick={() => handleReadMore(blog)}
-            className="w-full px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded"
+            className="w-full px-4 py-2 bg-[#baa53a] hover:bg-[#fcd547] text-white font-semibold transition rounded"
           >
             Read more
           </button>

@@ -17,7 +17,7 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    if (!email || !password) {
+    if (!data.email || !data.password) {
       toast.error("All fields are required");
       return;
     }
