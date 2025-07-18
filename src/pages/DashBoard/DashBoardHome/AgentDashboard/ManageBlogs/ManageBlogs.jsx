@@ -41,6 +41,7 @@ const ManageBlogs = () => {
         publishDate: new Date().toISOString(),
         author: user.displayName,
         authorEmail: user.email,
+        authorImage: user.photoURL,
       };
       const res = await axiosSecure.post("/blogs", blogData);
       return res.data;
@@ -60,6 +61,7 @@ const ManageBlogs = () => {
         ...data,
         author: user.displayName,
         authorEmail: user.email,
+        authorImage: user.photoURL,
       });
       return res.data;
     },

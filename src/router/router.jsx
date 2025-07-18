@@ -1,14 +1,12 @@
 import React from "react";
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../layouts/RootLayout";
-
 import LogIn from "../pages/Authentication/LogIn/LogIn";
 import Register from "../pages/Authentication/Register/Register";
 import AuthLayout from "../layouts/AuthLayout";
 import Error404 from "../pages/Error404/Error404";
 import Loading from "../components/Loading/Loading";
 import PrivacyPolicy from "../components/PrivacyPolicy";
-
 import AboutUs from "../components/AboutUs";
 import Home from "../pages/Home/Home/Home";
 import PrivateRouter from "../routes/PrivateRouter";
