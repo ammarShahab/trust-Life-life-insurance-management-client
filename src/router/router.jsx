@@ -32,6 +32,7 @@ import PaymentForm from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/Paym
 import MyPayments from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/MyPayments/MyPayments";
 import Blogs from "../pages/Blogs/Blogs";
 import BlogDetailsPage from "../pages/Blogs/BlogDetailsPage";
+import ClaimFormPage from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/ClaimFormPage/ClaimFormPage";
 
 const router = createBrowserRouter([
   {
@@ -92,10 +93,13 @@ const router = createBrowserRouter([
       { path: "manage-policies", Component: ManagePolicies },
       { path: "manage-transactions", Component: ManageTransactions },
       { path: "my-policies", Component: MyPolicies },
-      // { path: "my-payment", Component: MyPayments },
       { path: "payment-status", Component: PaymentStatus },
       { path: "payment-form/:applicationId", Component: PaymentPage },
       { path: "claim-request", Component: ClaimRequestPage },
+      {
+        path: "/dashboard/claim/:applicationId",
+        Component: ClaimFormPage,
+      },
       { path: "assigned-customers", Component: AssignedCustomers },
       { path: "manage-blogs", Component: ManageBlogs },
       { path: "policy-clearance", Component: PolicyClearance },
