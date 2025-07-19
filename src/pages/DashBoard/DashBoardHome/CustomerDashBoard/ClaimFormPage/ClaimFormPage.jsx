@@ -92,7 +92,7 @@ const ClaimFormPage = () => {
 
     console.log(data.claim_reason, uploadedDoc);
 
-    /*  const claimRes = await axiosSecure.patch(
+    const claimRes = await axiosSecure.patch(
       `/claim-request/${applicationId}`,
       {
         claim_reason: data.claim_reason,
@@ -106,9 +106,9 @@ const ClaimFormPage = () => {
       "Claim Submitted!",
       "Your claim request has been submitted.",
       "success"
-    ); */
+    );
 
-    // reset();
+    reset();
     navigate("/dashboard/claim-request");
   };
 
