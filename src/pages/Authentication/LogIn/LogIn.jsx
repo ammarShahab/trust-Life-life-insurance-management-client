@@ -3,10 +3,13 @@ import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth/useAuth";
 import GoogleLoginButton from "../../../shared/GoogleLoginButton/GoogleLoginButton";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Login = () => {
   const { userLogin, setUser, provider, googleSignIn, setIsLoading, theme } =
     useAuth();
+
+  const axiosSecure = useAxiosSecure();
 
   const navigate = useNavigate();
 
@@ -23,9 +26,16 @@ const Login = () => {
     }
 
     userLogin(data.email, data.password)
-      .then((res) => {
+      .then(async (res) => {
         console.log(res.user);
+        const user = res.user;
+        const email = user.email;
+        const lastSignInTime = user.metadata.lastSignInTime;
 
+        await axiosSecure.put("/customer/update-last-login", {
+          email,
+          lastSignInTime,
+        });
         toast.success("Login successful!");
         navigate("/");
       })

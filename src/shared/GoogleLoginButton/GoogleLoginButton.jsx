@@ -2,60 +2,59 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth/useAuth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
-import useAxios from "../../hooks/useAxios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const GoogleLoginButton = () => {
   const { googleSignIn, setIsLoading, provider } = useAuth();
   const navigate = useNavigate();
-  const axiosInstance = useAxios();
+  const axiosSecure = useAxiosSecure();
 
-  const handleGoogleLogin = () => {
-    googleSignIn(provider)
-      .then(async (result) => {
-        const user = result.user;
-        setIsLoading(true);
-        // setUser(user);
-        console.log("from google sign in", user);
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await googleSignIn(provider);
+      const user = result.user;
+      setIsLoading(true);
 
-        const gmtDate = new Date(user.metadata.creationTime);
-
-        const options = {
-          timeZone: "Asia/Dhaka", // Bangladesh Timezone
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: false, // 24-hour format
-        };
-
-        const bdTime = gmtDate.toLocaleString("en-US", options);
-
-        const customerInfo = {
-          customerName: user.displayName,
-          email: user.email,
-          photoURL: user.photoURL,
-          role: "customer",
-          // last_log_in: new Date().toISOString(),
-          lastSignInTime: user.metadata.lastSignInTime,
-          registrationDate: bdTime,
-        };
-        console.log("customer Info from googleSignIn", customerInfo);
-
-        const customerRes = await axiosInstance.post(
-          "/customers",
-          customerInfo
-        );
-        console.log(customerRes.data);
-
-        toast.success("Logged In Successfully");
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error.message);
+      const creationDate = new Date(user.metadata.creationTime);
+      const bdFormattedDate = creationDate.toLocaleString("en-US", {
+        timeZone: "Asia/Dhaka",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
       });
+
+      // Create or upsert customer
+      const customerInfo = {
+        customerName: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        role: "customer",
+        lastSignInTime: user.metadata.lastSignInTime,
+        registrationDate: bdFormattedDate,
+      };
+
+      await axiosSecure.post("/customers", customerInfo);
+
+      // ✅ Update last login time
+      await axiosSecure.put("/customer/update-last-login", {
+        email: user.email,
+        lastSignInTime: user.metadata.lastSignInTime,
+      });
+
+      toast.success("Logged In Successfully");
+      navigate("/");
+    } catch (error) {
+      console.error("Google Login Error:", error);
+      toast.error("Login failed. Try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   return (
     <div className="space-y-4">
       {/* Divider with "or" */}
