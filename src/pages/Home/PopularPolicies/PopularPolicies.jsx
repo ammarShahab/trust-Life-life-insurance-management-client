@@ -24,7 +24,7 @@ const PopularPolicies = () => {
             backgroundImage:
               "linear-gradient(90deg, rgba(45, 140, 85, 1) 0%, rgba(82, 122, 66, 1) 60%, rgba(140, 150, 130, 1) 100%)",
           }}
-          className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mt-10 bg-clip-text text-transparent"
+          className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mt-10 bg-clip-text text-transparent py-2"
         >
           🌟 Most Popular Policies
         </h2>

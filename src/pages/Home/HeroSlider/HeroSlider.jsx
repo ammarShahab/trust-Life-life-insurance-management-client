@@ -42,7 +42,7 @@ const HeroSlider = () => {
             />
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
               <div className="text-center px-4">
-                <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-[#baa53a] via-[#fcd547] to-[#baa53a] text-transparent bg-clip-text drop-shadow-lg">
+                <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-[#baa53a] via-[#fcd547] to-[#baa53a] text-transparent bg-clip-text drop-shadow-lg py-2">
                   {slide.quote}
                 </h2>
                 <Link to="/get-free-quote">
