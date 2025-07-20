@@ -10,7 +10,7 @@ const TextAnimationGallery = () => {
         transition: { duration: 5, repeat: Infinity },
       }}
     >
-      Moments in Motion
+      Our Customers Speak For Us
     </motion.h2>
   );
 };

@@ -30,6 +30,8 @@ const MyPolicies = () => {
       policyId: selectedPolicy.policyId,
       policyTitle: selectedPolicy.policyTitle,
       email: user.email,
+      userName: user.displayName,
+      userImage: user.photoURL,
       date: new Date().toISOString(),
     };
 
