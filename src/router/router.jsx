@@ -33,6 +33,7 @@ import MyPayments from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/MyPay
 import Blogs from "../pages/Blogs/Blogs";
 import BlogDetailsPage from "../pages/Blogs/BlogDetailsPage";
 import ClaimFormPage from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/ClaimFormPage/ClaimFormPage";
+import PopularPolicies from "../pages/Home/PopularPolicies/PopularPolicies";
 
 const router = createBrowserRouter([
   {
@@ -46,9 +47,14 @@ const router = createBrowserRouter([
       },
       { path: "/all-policies", Component: AllPolicies },
       {
+        path: "popular-policies",
+        Component: PopularPolicies,
+      },
+      {
         path: "/policy/:id",
         Component: PolicyDetails,
       },
+
       {
         path: "/get-quote/:policyId",
         element: (
