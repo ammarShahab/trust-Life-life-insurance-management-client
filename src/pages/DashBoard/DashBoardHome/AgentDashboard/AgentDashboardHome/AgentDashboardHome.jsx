@@ -1,7 +1,12 @@
 import React from "react";
+import ProfilePage from "../../../../../shared/ProfilePage/ProfilePage";
 
 const AgentDashboardHome = () => {
-  return <div>I am agent Dash Dash</div>;
+  return (
+    <div>
+      <ProfilePage></ProfilePage>
+    </div>
+  );
 };
 
 export default AgentDashboardHome;

@@ -1,7 +1,12 @@
 import React from "react";
+import ProfilePage from "../../../../../shared/ProfilePage/ProfilePage";
 
 const CustomerDashBoardHome = () => {
-  return <div>I am customer dash dashboard</div>;
+  return (
+    <div>
+      <ProfilePage></ProfilePage>
+    </div>
+  );
 };
 
 export default CustomerDashBoardHome;
