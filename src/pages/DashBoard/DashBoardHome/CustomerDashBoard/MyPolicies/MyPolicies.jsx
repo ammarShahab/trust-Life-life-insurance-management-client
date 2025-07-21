@@ -6,6 +6,7 @@ import useAuth from "../../../../../hooks/useAuth/useAuth";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import Loading from "../../../../../components/Loading/Loading";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const MyPolicies = () => {
   const { user } = useAuth();
@@ -60,6 +61,9 @@ const MyPolicies = () => {
 
   return (
     <div className="px-2 py-8">
+      <Helmet>
+        <title>Trust Life | Dashboard My Policies</title>
+      </Helmet>
       <h2 className="text-2xl font-bold mb-6 text-center">
         My Applied Policies
       </h2>

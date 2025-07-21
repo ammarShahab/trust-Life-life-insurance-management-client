@@ -4,6 +4,7 @@ import { FaEdit, FaTrashAlt, FaPlus } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const ManagePolicies = () => {
   const axiosSecure = useAxiosSecure();
@@ -142,6 +143,9 @@ const ManagePolicies = () => {
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
+      <Helmet>
+        <title>Trust Life | Dashboard Manage Policies</title>
+      </Helmet>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
           Manage Policies

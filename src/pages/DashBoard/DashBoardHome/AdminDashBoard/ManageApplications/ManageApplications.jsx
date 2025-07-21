@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import Loading from "../../../../../components/Loading/Loading";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const ManageApplications = () => {
   const axiosSecure = useAxiosSecure();
@@ -59,6 +60,9 @@ const ManageApplications = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
+      <Helmet>
+        <title>Trust Life | Dashboard Manage Application</title>
+      </Helmet>
       <h2 className="text-2xl font-bold mb-6 text-center">
         Manage Applications
       </h2>

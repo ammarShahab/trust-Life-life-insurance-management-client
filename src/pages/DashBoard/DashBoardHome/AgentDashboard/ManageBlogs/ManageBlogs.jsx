@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
@@ -7,13 +7,13 @@ import useAuth from "../../../../../hooks/useAuth/useAuth";
 import Loading from "../../../../../components/Loading/Loading";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import useCustomerRole from "../../../../../hooks/useCustomerRole";
+import { Helmet } from "react-helmet-async";
 
 const ManageBlogs = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
   const { role } = useCustomerRole();
-
   const [showModal, setShowModal] = useState(false);
   const [editBlogId, setEditBlogId] = useState(null);
 
@@ -132,6 +132,9 @@ const ManageBlogs = () => {
 
   return (
     <div className="px-4 md:px-8 py-6 space-y-6">
+      <Helmet>
+        <title>Trust Life | Dashboard Manage Blogs</title>
+      </Helmet>
       <div className="flex justify-between items-center flex-wrap gap-3">
         <h2 className="text-2xl font-bold">Manage Blogs</h2>
         <button

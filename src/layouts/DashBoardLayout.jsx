@@ -16,6 +16,7 @@ import {
 
 import useCustomerRole from "../hooks/useCustomerRole";
 import Loading from "../components/Loading/Loading";
+import { Helmet } from "react-helmet-async";
 
 const DashBoardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -33,6 +34,9 @@ const DashBoardLayout = () => {
 
   return (
     <div className="bg-gray-100 min-h-full flex flex-col lg:flex-row">
+      <Helmet>
+        <title>Trust Life | Dashboard</title>
+      </Helmet>
       {/* Mobile Navbar */}
       <div className="lg:hidden flex items-center justify-between bg-[#584b45] p-4 shadow-md z-40">
         <h1 className="text-xl text-white font-bold">Dashboard</h1>
@@ -184,23 +188,6 @@ const DashBoardLayout = () => {
                     Payment Status
                   </NavLink>
                 </li>
-
-                {/*  <li>
-                  <NavLink
-                    to="/dashboard/my-payment"
-                    onClick={closeSidebar}
-                    className={({ isActive }) =>
-                      `flex items-center gap-2 px-4 py-2 rounded text-gray-700 transition ${
-                        isActive
-                          ? "bg-gray-200 font-semibold"
-                          : "hover:bg-gray-100"
-                      }`
-                    }
-                  >
-                    <FaCreditCard className="text-lg" />
-                    My Payments
-                  </NavLink>
-                </li> */}
 
                 <li>
                   <NavLink

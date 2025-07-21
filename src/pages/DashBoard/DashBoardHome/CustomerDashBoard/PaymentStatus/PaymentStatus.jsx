@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import useAuth from "../../../../../hooks/useAuth/useAuth";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import Loading from "../../../../../components/Loading/Loading";
+import { Helmet } from "react-helmet-async";
 
 const PaymentStatus = () => {
   const { user } = useAuth();
@@ -53,6 +54,9 @@ const PaymentStatus = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
+      <Helmet>
+        <title>Trust Life | Dashboard Payment Status</title>
+      </Helmet>
       <h2 className="text-2xl font-bold mb-6 text-center">Payment Status</h2>
 
       {isLoading ? (

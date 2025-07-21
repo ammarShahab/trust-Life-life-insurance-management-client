@@ -3,13 +3,10 @@ import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth/useAuth";
 import GoogleLoginButton from "../../../shared/GoogleLoginButton/GoogleLoginButton";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
-  const { userLogin, setUser, provider, googleSignIn, setIsLoading, theme } =
-    useAuth();
-
-  const axiosSecure = useAxiosSecure();
+  const { userLogin, theme } = useAuth();
 
   const navigate = useNavigate();
 
@@ -29,8 +26,9 @@ const Login = () => {
       .then(async (res) => {
         console.log(res.user);
         const user = res.user;
-        const email = user.email;
-        const lastSignInTime = user.metadata.lastSignInTime;
+
+        // const email = user.email;
+        // const lastSignInTime = user.metadata.lastSignInTime;
 
         /*  await axiosSecure.put("/customer/update-last-login", {
           email,
@@ -47,6 +45,9 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 bg-gray-50 dark:bg-gray-900 transition-colors">
+      <Helmet>
+        <title>Trust Life | Log In</title>
+      </Helmet>
       <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 sm:p-8 mb-10 mt-20">
         <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">
           Log In

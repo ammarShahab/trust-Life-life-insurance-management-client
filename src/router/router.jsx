@@ -6,8 +6,6 @@ import Register from "../pages/Authentication/Register/Register";
 import AuthLayout from "../layouts/AuthLayout";
 import Error404 from "../pages/Error404/Error404";
 import Loading from "../components/Loading/Loading";
-import PrivacyPolicy from "../components/PrivacyPolicy";
-import AboutUs from "../components/AboutUs";
 import Home from "../pages/Home/Home/Home";
 import PrivateRouter from "../routes/PrivateRouter";
 import GetFreeQuote from "../pages/Home/GetFreeQuote/GetFreeQuote";
@@ -29,7 +27,6 @@ import PolicyDetails from "../pages/PolicyDetails/PolicyDetails";
 import PolicyQuotePage from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/PolicyQuotePage/PolicyQuotePage";
 import PolicyApplyForm from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/PolicyApplyForm/PolicyApplyForm";
 import PaymentForm from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/PaymentForm/PaymentForm";
-import MyPayments from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/MyPayments/MyPayments";
 import Blogs from "../pages/Blogs/Blogs";
 import BlogDetailsPage from "../pages/Blogs/BlogDetailsPage";
 import ClaimFormPage from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/ClaimFormPage/ClaimFormPage";
@@ -80,9 +77,6 @@ const router = createBrowserRouter([
         path: "/blogs/:id",
         Component: BlogDetailsPage,
       },
-
-      { path: "/privacy-policy", Component: PrivacyPolicy },
-      { path: "/about-us", Component: AboutUs },
     ],
   },
   {

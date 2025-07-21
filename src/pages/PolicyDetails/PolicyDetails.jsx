@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../hooks/useAxios";
 import Loading from "../../components/Loading/Loading";
 import { useNavigate, useParams } from "react-router";
+import { Helmet } from "react-helmet-async";
 
 const PolicyDetails = () => {
   const { id } = useParams();
@@ -25,6 +26,9 @@ const PolicyDetails = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
+      <Helmet>
+        <title>Trust Life | Policy | {id}</title>
+      </Helmet>
       <div className="grid md:grid-cols-2 gap-8 items-stretch">
         {/* Image Section */}
         <div className="h-full">

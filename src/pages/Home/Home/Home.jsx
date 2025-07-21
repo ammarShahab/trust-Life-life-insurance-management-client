@@ -9,11 +9,15 @@ import ReviewCard from "../ReviewCard/ReviewCard";
 import LatestBlogs from "../LatestBlogs/LatestBlogs";
 import NewsletterSubscription from "../NewsletterSubscription/NewsletterSubscription";
 import MeetOurAgent from "../MeetOurAgent/MeetOutAgent";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const { isLoading } = use(AuthContext);
   return (
     <>
+      <Helmet>
+        <title>Trust Life | Home</title>
+      </Helmet>
       <HeroSlider></HeroSlider>
       <Suspense fallback={<Loading></Loading>}>
         <Benefits></Benefits>

@@ -5,6 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCustomerRole from "../../hooks/useCustomerRole";
 import Loading from "../../components/Loading/Loading";
 import useAuth from "../../hooks/useAuth/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const Blogs = () => {
   const axiosSecure = useAxiosSecure();
@@ -36,6 +37,9 @@ const Blogs = () => {
 
   return (
     <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+      <Helmet>
+        <title>Trust Life | Blogs</title>
+      </Helmet>
       {blogs.map((blog) => (
         <div
           key={blog._id}

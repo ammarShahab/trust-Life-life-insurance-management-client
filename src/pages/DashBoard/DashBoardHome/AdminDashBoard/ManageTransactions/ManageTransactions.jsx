@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import Loading from "../../../../../components/Loading/Loading";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const ManageTransactions = () => {
   const axiosSecure = useAxiosSecure();
@@ -25,6 +26,9 @@ const ManageTransactions = () => {
 
   return (
     <div className="px-4 md:px-8 py-6 space-y-6">
+      <Helmet>
+        <title>Trust Life | Dashboard Manage Transaction</title>
+      </Helmet>
       {/* Title */}
       <h2 className="text-2xl font-bold">Manage Transactions</h2>
 

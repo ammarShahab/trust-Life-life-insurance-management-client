@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../hooks/useAxios";
 import Loading from "../../components/Loading/Loading";
 import { Link } from "react-router";
+import { Helmet } from "react-helmet-async";
 
 const AllPolicies = () => {
   const axiosInstance = useAxios();
@@ -30,6 +31,9 @@ const AllPolicies = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
+      <Helmet>
+        <title>Trust Life | All Policies</title>
+      </Helmet>
       <h2 className="text-2xl font-bold mb-4 text-center">All Policies</h2>
 
       {/* Category Filter */}

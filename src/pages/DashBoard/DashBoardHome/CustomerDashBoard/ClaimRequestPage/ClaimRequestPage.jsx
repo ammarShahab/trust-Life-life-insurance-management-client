@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../../hooks/useAuth/useAuth";
 import Loading from "../../../../../components/Loading/Loading";
+import { Helmet } from "react-helmet-async";
 
 const ClaimRequestPage = () => {
   const { user } = useAuth();
@@ -22,6 +23,9 @@ const ClaimRequestPage = () => {
 
   return (
     <div className="p-4 sm:p-8">
+      <Helmet>
+        <title>Trust Life | Dashboard Claim Request</title>
+      </Helmet>
       <h2 className="text-2xl font-bold mb-6">Claim Request</h2>
       {applications.length === 0 ? (
         <p className="text-gray-500">No applications available for claim.</p>

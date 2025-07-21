@@ -6,6 +6,7 @@ import GoogleLoginButton from "../../../shared/GoogleLoginButton/GoogleLoginButt
 import { useState } from "react";
 import axios from "axios";
 import useAxios from "../../../hooks/useAxios";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const { createUser, updateUser } = useAuth();
@@ -121,6 +122,9 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 bg-gray-50 dark:bg-gray-900 transition-colors ">
+      <Helmet>
+        <title>Trust Life | Register</title>
+      </Helmet>
       {/* <Toaster position="top-center" /> */}
 
       <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 sm:p-8 mb-10 mt-20">

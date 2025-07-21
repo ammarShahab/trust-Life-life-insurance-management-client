@@ -4,6 +4,7 @@ import { Dialog } from "@headlessui/react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../../hooks/useAuth/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const PolicyClearance = () => {
   const axiosSecure = useAxiosSecure();
@@ -62,6 +63,9 @@ const PolicyClearance = () => {
 
   return (
     <div className="p-4">
+      <Helmet>
+        <title>Trust Life | Dashboard Policy Clearance</title>
+      </Helmet>
       <h2 className="text-2xl font-bold mb-6 text-center text-green-800">
         Claim Requests
       </h2>

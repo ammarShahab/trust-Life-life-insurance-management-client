@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { FaEye } from "react-icons/fa";
 import useAxios from "../../hooks/useAxios";
+import { Helmet } from "react-helmet-async";
 
 const BlogDetailsPage = () => {
   const { id } = useParams();
@@ -23,6 +24,9 @@ const BlogDetailsPage = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
+      <Helmet>
+        <title>Trust Life | Blogs | {id}</title>
+      </Helmet>
       <div className="bg-white shadow-lg rounded-xl overflow-hidden">
         <img
           src={blog.imageUrl}

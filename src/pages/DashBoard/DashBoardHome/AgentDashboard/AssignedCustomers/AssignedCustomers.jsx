@@ -4,6 +4,7 @@ import useAuth from "../../../../../hooks/useAuth/useAuth";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import Loading from "../../../../../components/Loading/Loading";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const AssignedCustomers = () => {
   const { user } = useAuth();
@@ -52,6 +53,9 @@ const AssignedCustomers = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
+      <Helmet>
+        <title>Trust Life | Dashboard Assigned Customers</title>
+      </Helmet>
       <h2 className="text-2xl font-bold mb-6 text-center">
         Assigned Applications
       </h2>
