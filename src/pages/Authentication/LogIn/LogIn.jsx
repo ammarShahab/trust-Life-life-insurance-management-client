@@ -32,10 +32,10 @@ const Login = () => {
         const email = user.email;
         const lastSignInTime = user.metadata.lastSignInTime;
 
-        await axiosSecure.put("/customer/update-last-login", {
+        /*  await axiosSecure.put("/customer/update-last-login", {
           email,
           lastSignInTime,
-        });
+        }); */
         toast.success("Login successful!");
         navigate("/");
       })

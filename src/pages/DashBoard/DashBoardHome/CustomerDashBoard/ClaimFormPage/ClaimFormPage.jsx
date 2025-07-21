@@ -53,6 +53,7 @@ const ClaimFormPage = () => {
       {
         claim_reason: data.claim_reason,
         claim_document: uploadedDoc,
+        claim_status: "claimed",
       }
     );
 

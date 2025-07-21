@@ -24,7 +24,9 @@ const PolicyClearance = () => {
 
   const approveClaimMutation = useMutation({
     mutationFn: async (id) => {
-      const res = await axiosSecure.patch(`/approve-claim/${id}`);
+      const res = await axiosSecure.patch(`/claim-request/${id}`, {
+        claim_status: "approved",
+      });
       return res.data;
     },
     onSuccess: () => {

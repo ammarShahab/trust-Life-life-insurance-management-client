@@ -8,6 +8,7 @@ import PopularPolicies from "../PopularPolicies/PopularPolicies";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import LatestBlogs from "../LatestBlogs/LatestBlogs";
 import NewsletterSubscription from "../NewsletterSubscription/NewsletterSubscription";
+import MeetOurAgent from "../MeetOurAgent/MeetOutAgent";
 
 const Home = () => {
   const { isLoading } = use(AuthContext);
@@ -21,6 +22,7 @@ const Home = () => {
       <LatestBlogs></LatestBlogs>
       <ReviewCard></ReviewCard>
       <NewsletterSubscription></NewsletterSubscription>
+      <MeetOurAgent></MeetOurAgent>
     </>
   );
 };

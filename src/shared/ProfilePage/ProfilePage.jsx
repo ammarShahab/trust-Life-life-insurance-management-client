@@ -86,7 +86,7 @@ const ProfilePage = () => {
           <span className="font-semibold text-gray-700 dark:text-gray-200">
             Last Login:
           </span>{" "}
-          {customerData?.lastSignInTime || "N/A"}
+          {user?.metadata?.lastSignInTime || "N/A"}
         </p>
       </div>
 

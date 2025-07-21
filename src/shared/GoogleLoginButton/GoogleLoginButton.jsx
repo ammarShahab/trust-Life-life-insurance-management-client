@@ -40,10 +40,10 @@ const GoogleLoginButton = () => {
       await axiosSecure.post("/customers", customerInfo);
 
       // ✅ Update last login time
-      await axiosSecure.put("/customer/update-last-login", {
+      /* await axiosSecure.put("/customer/update-last-login", {
         email: user.email,
         lastSignInTime: user.metadata.lastSignInTime,
-      });
+      }); */
 
       toast.success("Logged In Successfully");
       navigate("/");
