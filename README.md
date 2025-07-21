@@ -86,12 +86,6 @@ Trust Life is designed to offer a reliable, intuitive, and responsive insurance 
 
 ---
 
-## 📸 Screenshots
-
-> Add screenshots here for homepage, policy list, payment page, and admin dashboard.
-
----
-
 ## 🧑‍💻 Author
 
 Developed by **Ammar Shahab**  
