@@ -5,6 +5,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 import { Link } from "react-router";
 import AuthContext from "../../context/AuthContext/AuthContext";
+import TrustLife from "../TrustLife/TrustLife";
 
 const Footer = () => {
   const { theme, setTheme } = useContext(AuthContext);
@@ -13,27 +14,22 @@ const Footer = () => {
       <div
         className={`${
           theme ? "dark" : ""
-        }  dark:bg-zinc-600 bg-[#147073] max-h-screen`}
+        }  dark:bg-zinc-600 bg-gradient-to-l from-[#114b5f] via-[#1a936f] to-[#88d498] max-h-screen`}
       >
         <div
-          className={`flex flex-col justify-between py-10 px-2 mx-auto space-y-8 lg:flex-row lg:space-y-0 text-gray-800 ${
+          className={`max-w-7xl flex flex-col justify-between py-10 px-2 mx-auto space-y-8 lg:flex-row lg:space-y-0 text-gray-800 ${
             theme ? "dark" : ""
-          }  dark:bg-zinc-600 bg-[#147073]`}
+          }  dark:bg-zinc-600 `}
         >
           <div className="lg:w-1/3 flex items-center">
             <a
               rel="noopener noreferrer"
               className="flex justify-center space-x-3 lg:justify-start"
             >
-              <div className="flex items-center justify-center w-12 h-12 rounded-full dark:bg-default-600">
-                {/* <img src={logo} alt="logo" /> */}
-              </div>
-              <span className="text-2xl font-bold md:text-3xl text-white dark:text-white self-center">
-                Trip <span className="text-[#fe8d02]">Nest</span>
-              </span>
+              <TrustLife></TrustLife>
             </a>
           </div>
-          <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
+          <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-3">
             <div className="space-y-3">
               <h3 className="tracking-wide uppercase text-white dark:text-white">
                 Contact
@@ -57,22 +53,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="space-y-3">
-              <h3 className="tracking-wide uppercase text-white dark:text-white">
-                Company
-              </h3>
-              <ul className="space-y-1">
-                <li>
-                  <Link
-                    className="text-white hover:underline dark:text-white"
-                    rel="noopener noreferrer"
-                    to="/privacy-policy"
-                  >
-                    Privacy Policy
-                  </Link>
-                </li>
-              </ul>
-            </div>
+
             <div className="space-y-3">
               <h3 className="uppercase text-white dark:text-white">Address</h3>
               <ul className="space-y-1">
@@ -87,10 +68,10 @@ const Footer = () => {
               </ul>
             </div>
             <div className="space-y-3">
-              <div className="uppercase text-white dark:text-white">
+              <div className="uppercase text-white dark:text-white sm:text-right">
                 Social media
               </div>
-              <div className="flex justify-start space-x-3">
+              <div className="flex sm:justify-end space-x-3">
                 <div className="flex justify-center gap-5">
                   <a
                     href="https://facebook.com"
@@ -130,7 +111,7 @@ const Footer = () => {
           </div>
         </div>
         <p className="text-sm text-white mt-4 text-center">
-          © {new Date().getFullYear()} Trip Nest. All rights reserved.
+          © {new Date().getFullYear()} Trust Life. All rights reserved.
         </p>
       </div>
     </>
