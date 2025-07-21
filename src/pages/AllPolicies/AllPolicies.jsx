@@ -2,20 +2,27 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../hooks/useAxios";
 import Loading from "../../components/Loading/Loading";
-import { Link } from "react-router";
+import { Link } from "react-router"; // ✅ corrected import
 import { Helmet } from "react-helmet-async";
 
 const AllPolicies = () => {
   const axiosInstance = useAxios();
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchText, setSearchText] = useState("");
 
   const { data: policies = [], isLoading } = useQuery({
-    queryKey: ["policies", selectedCategory],
+    queryKey: ["policies", selectedCategory, searchText],
     queryFn: async () => {
-      const url =
-        selectedCategory === "all"
-          ? "/all-policies"
-          : `/all-policies?category=${selectedCategory}`;
+      let url = `/all-policies?`;
+
+      if (selectedCategory !== "all") {
+        url += `category=${selectedCategory}&`;
+      }
+
+      if (searchText.trim() !== "") {
+        url += `search=${encodeURIComponent(searchText.trim())}`;
+      }
+
       const res = await axiosInstance.get(url);
       return res.data;
     },
@@ -34,28 +41,44 @@ const AllPolicies = () => {
       <Helmet>
         <title>Trust Life | All Policies</title>
       </Helmet>
+
       <h2 className="text-2xl font-bold mb-4 text-center">All Policies</h2>
 
-      {/* Category Filter */}
-      <div className="flex flex-wrap justify-center gap-3 mb-6">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setSelectedCategory(cat)}
-            className={`px-4 py-2 border rounded-full text-sm font-medium transition ${
-              selectedCategory === cat
-                ? "bg-[#baa53a] text-white"
-                : "bg-white text-gray-700 hover:bg-gray-100"
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
+      <div className="flex justify-between items-center">
+        <div className="flex flex-wrap justify-center gap-3 mb-4">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-4 py-2 border rounded-full text-sm font-medium transition ${
+                selectedCategory === cat
+                  ? "bg-[#baa53a] text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-100"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Search Input */}
+        <div className="flex justify-center mb-6">
+          <input
+            type="text"
+            placeholder="Search policies..."
+            className="border px-4 py-2 rounded-md w-full max-w-md shadow-sm focus:outline-none focus:ring focus:border-[#baa53a]"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+        </div>
       </div>
+      {/* Category Filter */}
 
       {/* Policies Grid */}
       {isLoading ? (
         <Loading />
+      ) : policies.length === 0 ? (
+        <p className="text-center text-gray-500">No policies found.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {policies.map((policy) => (
