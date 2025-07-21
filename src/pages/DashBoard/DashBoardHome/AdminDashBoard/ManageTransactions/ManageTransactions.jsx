@@ -60,25 +60,25 @@ const ManageTransactions = () => {
 
       {/* Transactions Table */}
       <div className="overflow-x-auto rounded-lg shadow-sm border border-gray-200">
-        <table className="w-full text-sm text-left text-gray-600">
+        <table className="min-w-full text-sm text-left text-gray-600">
           <thead className="text-xs uppercase bg-gray-100 text-gray-700">
             <tr>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-2 py-3">
                 Policy Name
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-2 py-3">
                 Customer Email
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-2 py-3">
                 Transaction ID
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-2 py-3">
                 Amount
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-2 py-3">
                 Date
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-2 py-3">
                 Status
               </th>
             </tr>
@@ -92,20 +92,20 @@ const ManageTransactions = () => {
                     index % 2 === 0 ? "bg-white" : "bg-gray-50"
                   } hover:bg-blue-50 transition duration-200`}
                 >
-                  <td className="px-6 py-4">{payment.policyTitle}</td>
-                  <td className="px-6 py-4">{payment.email}</td>
-                  <td className="px-6 py-4 font-mono">
+                  <td className="px-2 py-4">{payment.policyTitle}</td>
+                  <td className="px-2 py-4">{payment.email}</td>
+                  <td className="px-2 py-4 font-mono">
                     {payment.transactionId}
                   </td>
-                  <td className="px-6 py-4 font-semibold text-green-600">
+                  <td className="px-2 py-4 font-semibold text-green-600">
                     ${payment.amount}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-2 py-4">
                     {new Date(payment.paymentTime).toLocaleString("en-BD", {
                       timeZone: "Asia/Dhaka",
                     })}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-2 py-4">
                     <span
                       className={`inline-block px-2 py-1 rounded text-xs font-medium ${
                         payment.status === "paid"

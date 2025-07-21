@@ -59,9 +59,6 @@ const ReviewCard = () => {
 
   return (
     <section
-      /* className={`py-10 md:py-16 lg:py-20 text-white font-bitter ${
-        theme ? "dark" : ""
-      } bg-[radial-gradient(ellipse_at_top_left,_#f9f8eb,_#76b39d,_#05004e)]`} */
       className={`py-10 md:py-16 lg:py-20 text-white font-bitter ${
         theme ? "dark" : ""
       } bg-[radial-gradient(ellipse_at_top_left,_#ebf0f6,_#98ccd3,_#364e68)]`}

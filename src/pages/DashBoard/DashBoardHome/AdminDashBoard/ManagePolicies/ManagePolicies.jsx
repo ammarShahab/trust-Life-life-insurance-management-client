@@ -265,7 +265,7 @@ const ManagePolicies = () => {
               <div>
                 <label className="block mb-1 font-medium">Coverage Range</label>
                 <input
-                  placeholder="e.g. $10,000 - $100,000"
+                  placeholder="e.g. ৳10,000 - ৳100,000"
                   {...register("coverage")}
                   required
                   className="w-full border border-gray-300 rounded-md px-3 py-2"
@@ -287,7 +287,7 @@ const ManagePolicies = () => {
                   Base Premium Rate
                 </label>
                 <input
-                  placeholder="e.g. $20/month"
+                  placeholder="e.g. ৳400/month"
                   {...register("premium")}
                   required
                   className="w-full border border-gray-300 rounded-md px-3 py-2"

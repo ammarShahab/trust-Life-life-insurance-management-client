@@ -67,16 +67,16 @@ const ManageApplications = () => {
         Manage Applications
       </h2>
       <div className="overflow-x-auto">
-        <table className="min-w-full table-auto border border-gray-200">
+        <table className="min-w-full table-auto border border-gray-300 text-sm">
           <thead className="bg-gray-100">
             <tr>
-              <th className="p-3 text-left">Policy</th>
-              <th className="p-3 text-left">Applicant</th>
-              <th className="p-3 text-left">Email</th>
-              <th className="p-3 text-left">Applied Date</th>
-              <th className="p-3 text-left">Status</th>
-              <th className="p-3 text-left">Select Agent</th>
-              <th className="p-3 text-center">Actions</th>
+              <th className="px-1 py-3 text-left">Policy</th>
+              <th className="px-1 py-3 text-left">Applicant</th>
+              <th className="px-1 py-3 text-left">Email</th>
+              <th className="px-1 py-3 text-left">Applied Date</th>
+              <th className="px-1 py-3 text-left">Status</th>
+              <th className="px-1 py-3 text-left">Select Agent</th>
+              <th className="px-1 py-3 text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -89,15 +89,15 @@ const ManageApplications = () => {
             ) : (
               applications.map((app) => (
                 <tr key={app._id} className="border-t">
-                  <td className="p-3 font-medium">{app.policyTitle}</td>
-                  <td className="p-3">{app.name}</td>
-                  <td className="p-3">{app.email}</td>
-                  <td className="p-3">
+                  <td className="px-1 py-3 font-medium">{app.policyTitle}</td>
+                  <td className="px-1 py-3">{app.name}</td>
+                  <td className="px-1 py-3">{app.email}</td>
+                  <td className="px-1 py-3">
                     {new Date(app.appliedDate).toLocaleDateString()}
                   </td>
-                  <td className="p-3">
+                  <td className="px-1 py-3">
                     <span
-                      className={`text-xs font-semibold px-2.5 py-0.5 rounded ${
+                      className={`text-xs font-semibold px-1.5 py-0.5 rounded ${
                         app.status === "approved"
                           ? "bg-green-100 text-green-700"
                           : app.status === "rejected"
@@ -108,7 +108,7 @@ const ManageApplications = () => {
                       {app.status === "paid" ? "Pending" : app.status}
                     </span>
                   </td>
-                  <td className="p-3">
+                  <td className="px-1 py-3">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                       <select
                         onChange={(e) => {
@@ -140,7 +140,7 @@ const ManageApplications = () => {
                   </td>
                   <td className="flex flex-col sm:flex-row sm:mt-4 space-x-2 text-center">
                     <button
-                      className="bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded text-xs"
+                      className="bg-green-600 hover:bg-green-700 text-white px-1 py-1 rounded text-xs"
                       onClick={() =>
                         assignAgent.mutate({
                           appId: app._id,
@@ -153,14 +153,14 @@ const ManageApplications = () => {
                     </button>
 
                     <button
-                      className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs"
+                      className="bg-red-500 hover:bg-red-600 text-white px-1 py-1 rounded text-xs"
                       onClick={() => rejectApp.mutate(app._id)}
                     >
                       Reject
                     </button>
 
                     <button
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded text-xs"
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-1 py-1 rounded text-xs"
                       onClick={() => {
                         setSelectedApp(app);
                         setIsDetailModalOpen(true);

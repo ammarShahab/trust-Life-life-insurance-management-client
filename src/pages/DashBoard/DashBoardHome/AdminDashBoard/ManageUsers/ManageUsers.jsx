@@ -33,13 +33,13 @@ const ManageUsers = () => {
     },
   });
 
-  const deleteMutation = useMutation({
+  /*   const deleteMutation = useMutation({
     mutationFn: (id) => axiosSecure.delete(`/customers/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries(["users"]);
       Swal.fire("Deleted", "User has been deleted", "success");
     },
-  });
+  }); */
 
   const handleDelete = (id) => {
     Swal.fire({
