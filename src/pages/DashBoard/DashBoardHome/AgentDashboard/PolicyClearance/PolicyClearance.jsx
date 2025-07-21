@@ -62,34 +62,45 @@ const PolicyClearance = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Claim Requests</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center text-green-800">
+        Claim Requests
+      </h2>
       {isLoading ? (
         <p>Loading...</p>
       ) : claims.length === 0 ? (
-        <p>No claim requests available.</p>
+        <p className="text-center text-gray-600">
+          No claim requests available.
+        </p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="table table-zebra w-full">
-            <thead>
+          <table className="min-w-full text-sm bg-white rounded-lg shadow-md border border-gray-200">
+            <thead className="bg-gray-100 text-gray-700">
               <tr>
-                <th>Customer Name</th>
-                <th>Policy Title</th>
-                <th>Amount</th>
-                <th>Reason</th>
-                <th>Document</th>
-                <th>Actions</th>
+                <th className="py-3 px-4 text-left">Customer Name</th>
+                <th className="py-3 px-4 text-left">Policy Title</th>
+                <th className="py-3 px-4 text-left">Amount</th>
+                <th className="py-3 px-4 text-left">Reason</th>
+                <th className="py-3 px-4 text-left">Document</th>
+                <th className="py-3 px-4 text-left">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {claims.map((app) => (
-                <tr key={app._id}>
-                  <td>{app.name}</td>
-                  <td>{app.policyTitle}</td>
-                  <td>${app.amount || "N/A"}</td>
-                  <td className="max-w-[200px] truncate">{app.claim_reason}</td>
-                  <td>
+              {claims.map((app, idx) => (
+                <tr
+                  key={app._id}
+                  className={`border-t ${
+                    idx % 2 === 0 ? "bg-gray-50" : "bg-white"
+                  } hover:bg-gray-100 transition`}
+                >
+                  <td className="py-3 px-4">{app.name}</td>
+                  <td className="py-3 px-4">{app.policyTitle}</td>
+                  <td className="py-3 px-4">${app.amount || "N/A"}</td>
+                  <td className="py-3 px-4 max-w-xs truncate">
+                    {app.claim_reason}
+                  </td>
+                  <td className="py-3 px-4">
                     <a
-                      className="text-blue-500 underline"
+                      className="text-blue-600 underline hover:text-blue-800"
                       href={app.claim_document}
                       target="_blank"
                       rel="noreferrer"
@@ -97,16 +108,16 @@ const PolicyClearance = () => {
                       View
                     </a>
                   </td>
-                  <td className="space-x-2">
+                  <td className="py-3 px-4 space-x-2">
                     <button
                       onClick={() => openModal(app.policyInfo)}
-                      className="btn btn-sm btn-info"
+                      className="px-3 py-1 rounded bg-blue-500 text-white text-xs hover:bg-blue-600 transition"
                     >
                       View Details
                     </button>
                     <button
                       onClick={() => handleApprove(app._id)}
-                      className="btn btn-sm btn-success"
+                      className="px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700 transition"
                     >
                       Approve
                     </button>
@@ -118,23 +129,25 @@ const PolicyClearance = () => {
         </div>
       )}
 
-      {/* Modal */}
+      {/* Modal remains unchanged */}
       <Dialog open={isOpen} onClose={closeModal} className="relative z-50">
         <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
         <div className="fixed inset-0 flex items-center justify-center p-4">
           <Dialog.Panel className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-            <Dialog.Title className="text-lg font-bold mb-2">
+            <Dialog.Title className="text-lg font-bold mb-2 text-green-700">
               Policy Details
             </Dialog.Title>
             {selectedPolicy ? (
-              <div className="space-y-2">
+              <div className="space-y-2 text-sm text-gray-700">
                 <img
                   src={selectedPolicy.image}
                   alt={selectedPolicy.title}
-                  className="rounded"
+                  className="rounded-lg w-full h-40 object-cover"
                 />
-                <h3 className="font-semibold">{selectedPolicy.title}</h3>
-                <p className="text-sm">{selectedPolicy.description}</p>
+                <h3 className="font-semibold text-lg">
+                  {selectedPolicy.title}
+                </h3>
+                <p>{selectedPolicy.description}</p>
                 <p>
                   <strong>Coverage:</strong> {selectedPolicy.coverage}
                 </p>
@@ -149,7 +162,10 @@ const PolicyClearance = () => {
               <p>No policy data found.</p>
             )}
             <div className="mt-4 text-right">
-              <button onClick={closeModal} className="btn btn-sm">
+              <button
+                onClick={closeModal}
+                className="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded text-sm"
+              >
                 Close
               </button>
             </div>
