@@ -31,6 +31,7 @@ import Blogs from "../pages/Blogs/Blogs";
 import BlogDetailsPage from "../pages/Blogs/BlogDetailsPage";
 import ClaimFormPage from "../pages/DashBoard/DashBoardHome/CustomerDashBoard/ClaimFormPage/ClaimFormPage";
 import PopularPolicies from "../pages/Home/PopularPolicies/PopularPolicies";
+import ForbiddenPage from "../pages/ForbiddenPage/ForbiddenPage";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
       {
         path: "/blogs/:id",
         Component: BlogDetailsPage,
+      },
+      {
+        path: "/forbidden",
+        Component: ForbiddenPage,
       },
     ],
   },
