@@ -4,10 +4,11 @@ import { FaEye } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCustomerRole from "../../hooks/useCustomerRole";
 import Loading from "../../components/Loading/Loading";
-import useAuth from "../../hooks/useAuth/useAuth";
 import { Helmet } from "react-helmet-async";
+import useAxios from "../../hooks/useAxios";
 
 const Blogs = () => {
+  const axiosInstance = useAxios();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const { role } = useCustomerRole();
@@ -15,7 +16,7 @@ const Blogs = () => {
   const { data: blogs = [], isLoading } = useQuery({
     queryKey: ["blogs"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/all-blogs");
+      const res = await axiosInstance.get("/all-blogs");
       return res.data;
     },
   });
