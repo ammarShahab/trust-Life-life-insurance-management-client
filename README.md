@@ -1,35 +1,42 @@
-# ✈️ Trip Nest - Client Side
+# 🛡️ Trust Life – Client Side
 
-Trip Nest is a modern travel package booking platform built with the latest front-end technologies. It offers an interactive and smooth user experience for travelers to explore, view, and book travel packages with ease.
+**Trust Life** is a comprehensive life insurance management platform, built with modern web technologies. It empowers users to explore, compare, and purchase various insurance policies with secure transactions and seamless user experience.
+
+---
 
 ## 🌐 Live Site
 
-🔗 [Visit Trip Nest](https://a11-tripnest-client.web.app/)
+🔗 [Visit Trust Life](https://your-trust-life-client.web.app)
+
+---
+
+## 🔐 Admin Login Credentials
+
+Email: admin1@admin.com
+Password: Admin12345
 
 ---
 
 ## 🎯 Project Purpose
 
-The goal of Trip Nest is to provide a seamless travel booking experience where users can:
-
-- Browse curated travel packages
-- View package details with photos, itineraries, and pricing
-- Register or log in with Firebase authentication
-- Book travel packages
-- Manage personal bookings
-- Enjoy smooth navigation and animations
+Trust Life is designed to offer a reliable, intuitive, and responsive insurance booking solution. It ensures transparency and ease for both customers and administrators through well-integrated features and a sleek UI.
 
 ---
 
 ## ✨ Key Features
 
-- 🔐 **Firebase Authentication** (Email/Password & OAuth)
+- 🔐 **Secure Firebase Authentication** (Email/Password)
 - 🧭 **React Router v7** for smooth navigation
-- 💬 **SweetAlert2** and **React Hot Toast** for user feedback
-- 🎠 **Slick Carousel** and **React Multi Carousel** for image sliders
-- 📊 **Animated Counters** with **React CountUp**
-- 🌀 **GSAP** and **Framer Motion** for animations
-- 🎨 **Tailwind CSS** and **DaisyUI** for responsive styling
+- 📦 **React Query** for efficient data fetching and caching
+- 💳 **Stripe Payment Integration** for secure online transactions
+- 🔍 **Search, Filter, and Pagination** in policies listing
+- 🧑‍💼 **Agent Carousel** showcasing featured agents with animations
+- 🗂️ **Policy Management** with category-based browsing
+- 🎠 **Image Carousels** for user engagement
+- 📅 **Booking Management** with real-time updates
+- 🛡️ **Admin Panel** for managing users, policies, and bookings
+- 🚀 **Performance Optimized UI** with Tailwind CSS and Flowbite components
+- 🔥 **Toasts, Alerts & Animations** using SweetAlert2, React Hot Toast, GSAP & Framer Motion
 
 ---
 
@@ -39,34 +46,32 @@ The goal of Trip Nest is to provide a seamless travel booking experience where u
 
 - **React** ^19.1.0
 - **React Router** ^7.6.0
-- **Firebase** ^11.9.0
+- **Firebase** ^11.10.0
 - **Tailwind CSS** ^4.1.7
 - **Vite** ^6.3.5
-- **DaisyUI** ^5.0.35
+- **Flowbite + Preline** – UI libraries for consistent styling
 
 ### 📦 Key NPM Packages
 
 #### ✅ Dependencies
 
-- `axios` – API requests
-- `firebase` – Authentication and Firestore
-- `framer-motion` & `gsap` – Smooth animations
-- `motion` – Physics-based UI animations
-- `react-hot-toast` – Toast notifications
-- `react-icons` – Icon library
-- `react-multi-carousel` – Multi-item carousel
-- `react-slick` + `slick-carousel` – Image carousel
-- `sweetalert2` – Custom alerts
-- `preline` – UI plugin support
+- `axios` – Secure API handling
+- `@tanstack/react-query` – Advanced data fetching
+- `@stripe/react-stripe-js`, `stripe-js` – Online payment gateway
+- `framer-motion`, `gsap`, `motion` – UI animations
+- `react-hot-toast`, `sweetalert2` – Notifications & modals
+- `react-fast-marquee`, `react-slick`, `slick-carousel` – Sliders & marquees
+- `react-hook-form` – Form validation & control
+- `react-icons`, – Icons
+- `date-fns` – date utilities
+- `react-helmet-async` – Dynamic SEO tags
 
 #### 🧪 Dev Dependencies
 
-- `vite` – Frontend bundler
-- `@vitejs/plugin-react` – React plugin for Vite
-- `eslint` – Linting
-- `@eslint/js`, `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh` – ESLint plugins
-- `@types/react`, `@types/react-dom` – Type definitions
-- `globals` – ESLint global definitions
+- `vite`, `@vitejs/plugin-react` – High-performance bundling
+- `eslint`, `@eslint/js` – Linting support
+- `eslint-plugin-react-hooks`, `react-refresh` – Hook safety and fast refresh
+- `@types/react`, `@types/react-dom`, `globals` – TypeScript compatibility
 
 ---
 
@@ -81,10 +86,16 @@ The goal of Trip Nest is to provide a seamless travel booking experience where u
 
 ---
 
+## 📸 Screenshots
+
+> Add screenshots here for homepage, policy list, payment page, and admin dashboard.
+
+---
+
 ## 🧑‍💻 Author
 
 Developed by **Ammar Shahab**  
-📫 For collaboration or feedback: [ashahab007@gmail.com]
+📫 Email: [ashahab007@gmail.com]
 
 ---
 
