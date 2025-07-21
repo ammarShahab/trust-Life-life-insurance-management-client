@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router";
+import { data, useNavigate } from "react-router";
 import { FaEye } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCustomerRole from "../../hooks/useCustomerRole";
@@ -57,7 +57,16 @@ const Blogs = () => {
             />
             <div className="flex flex-col">
               <span className="text-sm font-semibold">{blog.author}</span>
-              <span className="text-xs text-gray-600">{blog.publishDate}</span>
+              <span className="text-xs text-gray-600">
+                {new Date(blog.publishDate).toLocaleString("en-BD", {
+                  timeZone: "Asia/Dhaka",
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </span>
             </div>
           </div>
 
