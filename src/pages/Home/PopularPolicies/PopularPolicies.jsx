@@ -51,10 +51,16 @@ const PopularPolicies = () => {
                   <p className="text-sm text-gray-500 mb-1">
                     <strong>Duration:</strong> {policy.duration}
                   </p>
-                  <p className="text-sm text-gray-500 mb-3">
+                  <p className="text-sm text-gray-500">
                     <strong>Popularity:</strong>{" "}
                     <span className="text-green-600 font-medium">
                       {policy.purchasedCount ?? 0} purchased
+                    </span>
+                  </p>
+                  <p className="text-sm text-gray-500 mb-3">
+                    <strong>Coverage Amount:</strong>{" "}
+                    <span className="text-green-600 font-medium">
+                      {policy.coverage}
                     </span>
                   </p>
                 </div>
