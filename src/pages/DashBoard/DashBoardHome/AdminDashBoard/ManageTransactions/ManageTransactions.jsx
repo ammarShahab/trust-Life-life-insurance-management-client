@@ -55,7 +55,7 @@ const ManageTransactions = () => {
       {/* Total Income Card */}
       <div className="bg-white shadow-md rounded-lg p-6 border border-gray-200 max-w-sm">
         <h4 className="text-lg font-semibold mb-1">Total Income</h4>
-        <p className="text-2xl font-bold text-green-600">${totalIncome}</p>
+        <p className="text-2xl font-bold text-green-600">৳{totalIncome}</p>
       </div>
 
       {/* Transactions Table */}
@@ -85,12 +85,10 @@ const ManageTransactions = () => {
           </thead>
           <tbody>
             {payments.length > 0 ? (
-              payments.map((payment, index) => (
+              payments.map((payment) => (
                 <tr
                   key={payment._id}
-                  className={`${
-                    index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                  } hover:bg-blue-50 transition duration-200`}
+                  className={`bg-white border-b hover:bg-gray-50`}
                 >
                   <td className="px-2 py-4">{payment.policyTitle}</td>
                   <td className="px-2 py-4">{payment.email}</td>
@@ -98,7 +96,7 @@ const ManageTransactions = () => {
                     {payment.transactionId}
                   </td>
                   <td className="px-2 py-4 font-semibold text-green-600">
-                    ${payment.amount}
+                    ৳{payment.amount}
                   </td>
                   <td className="px-2 py-4">
                     {new Date(payment.paymentTime).toLocaleString("en-BD", {

@@ -163,7 +163,7 @@ const ManageBlogs = () => {
               blogs.map((blog) => (
                 <tr
                   key={blog._id}
-                  className="border-t hover:bg-blue-50 transition duration-150"
+                  className="bg-white border-b hover:bg-gray-50 transition duration-150"
                 >
                   <td className="px-4 py-3">
                     <img

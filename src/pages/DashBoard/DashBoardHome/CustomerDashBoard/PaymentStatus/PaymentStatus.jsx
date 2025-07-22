@@ -91,7 +91,7 @@ const PaymentStatus = () => {
                       : app.estimatedPremiumMonthly;
 
                   return (
-                    <tr key={id} className="border-t hover:bg-gray-50">
+                    <tr key={id} className="bg-white border-b hover:bg-gray-50">
                       <td className="p-3">
                         <div className="font-semibold text-gray-800">
                           {app.policyTitle}
@@ -123,7 +123,7 @@ const PaymentStatus = () => {
                           <option value="yearly">Yearly</option>
                         </select>
                       </td>
-                      <td className="p-3 text-gray-800">${premium}</td>
+                      <td className="p-3 text-gray-800">৳{premium}</td>
                       <td className="p-3">
                         <span
                           className={`text-xs font-semibold px-2.5 py-0.5 rounded ${getBadgeColor(

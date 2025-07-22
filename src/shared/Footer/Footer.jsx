@@ -22,12 +22,12 @@ const Footer = () => {
           }  dark:bg-zinc-600 `}
         >
           <div className="lg:w-1/3 flex items-center">
-            <a
+            <span
               rel="noopener noreferrer"
               className="flex justify-center space-x-3 lg:justify-start"
             >
               <TrustLife></TrustLife>
-            </a>
+            </span>
           </div>
           <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-3">
             <div className="space-y-3">

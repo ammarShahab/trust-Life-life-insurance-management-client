@@ -178,7 +178,10 @@ const ManagePolicies = () => {
               </tr>
             ) : (
               policies.map((policy) => (
-                <tr key={policy._id} className="border-t hover:bg-gray-50">
+                <tr
+                  key={policy._id}
+                  className="bg-white border-b hover:bg-gray-50"
+                >
                   <td className="px-4 py-2 font-medium">{policy.title}</td>
                   <td className="px-4 py-2">{policy.category}</td>
                   <td className="px-4 py-2">

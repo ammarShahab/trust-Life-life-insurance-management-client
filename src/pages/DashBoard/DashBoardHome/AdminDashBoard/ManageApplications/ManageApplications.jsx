@@ -88,7 +88,10 @@ const ManageApplications = () => {
               </tr>
             ) : (
               applications.map((app) => (
-                <tr key={app._id} className="border-t">
+                <tr
+                  key={app._id}
+                  className="bg-white border-b hover:bg-gray-50"
+                >
                   <td className="px-1 py-3 font-medium">{app.policyTitle}</td>
                   <td className="px-1 py-3">{app.name}</td>
                   <td className="px-1 py-3">{app.email}</td>

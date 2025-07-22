@@ -80,7 +80,10 @@ const ManageUsers = () => {
             </thead>
             <tbody>
               {users.map((user) => (
-                <tr key={user._id} className="border-t hover:bg-gray-50">
+                <tr
+                  key={user._id}
+                  className="bg-white border-b hover:bg-gray-50"
+                >
                   <td className="p-3 font-medium">{user.customerName}</td>
                   <td className="p-3">{user.email}</td>
                   <td className="p-3 capitalize">{user.role}</td>

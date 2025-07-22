@@ -31,7 +31,7 @@ const ClaimRequestPage = () => {
         <p className="text-gray-500">No applications available for claim.</p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-full text-sm text-left text-gray-500">
+          <table className="min-w-full text-sm text-left text-gray-500 border border-gray-200">
             <thead className="bg-gray-100 text-gray-700 uppercase">
               <tr>
                 <th className="px-4 py-3">Policy Title</th>
@@ -42,7 +42,10 @@ const ClaimRequestPage = () => {
             </thead>
             <tbody>
               {applications.map((app) => (
-                <tr key={app._id} className="bg-white border-b">
+                <tr
+                  key={app._id}
+                  className="bg-white border-b hover:bg-gray-50"
+                >
                   <td className="px-4 py-3">{app.policyTitle}</td>
                   <td className="px-4 py-3">{app.agentName}</td>
                   <td className="px-4 py-3 capitalize">

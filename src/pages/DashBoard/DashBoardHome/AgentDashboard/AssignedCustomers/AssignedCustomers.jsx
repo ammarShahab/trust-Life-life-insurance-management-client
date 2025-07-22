@@ -78,7 +78,10 @@ const AssignedCustomers = () => {
             </thead>
             <tbody>
               {applications.map((app) => (
-                <tr key={app._id} className="border-t">
+                <tr
+                  key={app._id}
+                  className="bg-white border-b hover:bg-gray-50"
+                >
                   <td className="p-3">{app.name}</td>
                   <td className="p-3">{app.email}</td>
                   <td className="p-3">{app.policyTitle}</td>

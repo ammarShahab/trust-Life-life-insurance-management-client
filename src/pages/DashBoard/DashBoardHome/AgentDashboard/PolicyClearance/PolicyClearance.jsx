@@ -89,12 +89,10 @@ const PolicyClearance = () => {
               </tr>
             </thead>
             <tbody>
-              {claims.map((app, idx) => (
+              {claims.map((app) => (
                 <tr
                   key={app._id}
-                  className={`border-t ${
-                    idx % 2 === 0 ? "bg-gray-50" : "bg-white"
-                  } hover:bg-gray-100 transition`}
+                  className={`bg-white border-b hover:bg-gray-50 transition`}
                 >
                   <td className="py-3 px-4">{app.name}</td>
                   <td className="py-3 px-4">{app.policyTitle}</td>

@@ -92,7 +92,10 @@ const MyPolicies = () => {
                 </tr>
               ) : (
                 applications.map((app) => (
-                  <tr key={app._id} className="border-t">
+                  <tr
+                    key={app._id}
+                    className="bg-white border-b hover:bg-gray-50"
+                  >
                     <td className="p-3">
                       <div className="font-semibold">{app.policyTitle}</div>
                       <div className="text-xs text-gray-500">
@@ -101,7 +104,7 @@ const MyPolicies = () => {
                     </td>
                     <td className="p-3">{app.coverage || "N/A"}</td>
                     <td className="p-3">{app.duration || "N/A"} Years</td>
-                    <td className="p-3">${app.estimatedPremiumMonthly} /mo</td>
+                    <td className="p-3">৳{app.estimatedPremiumMonthly} /mo</td>
                     <td className="p-3">
                       <span
                         className={`text-xs font-semibold px-2.5 py-0.5 rounded ${getBadgeColor(
