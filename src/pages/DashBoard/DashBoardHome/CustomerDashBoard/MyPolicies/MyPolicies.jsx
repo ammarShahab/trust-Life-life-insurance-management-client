@@ -64,7 +64,7 @@ const MyPolicies = () => {
       <Helmet>
         <title>Trust Life | Dashboard My Policies</title>
       </Helmet>
-      <h2 className="text-2xl font-bold mb-6 text-center">
+      <h2 className="text-2xl font-bold mb-6 text-center text-green-800">
         My Applied Policies
       </h2>
 

@@ -62,7 +62,9 @@ const ManageUsers = () => {
       <Helmet>
         <title>Trust Life | Dashboard Manage Users</title>
       </Helmet>
-      <h2 className="text-2xl font-bold mb-6 text-center">Manage Users</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center text-green-800">
+        Manage Users
+      </h2>
 
       {users.length === 0 ? (
         <p className="text-center text-gray-500">No users found.</p>

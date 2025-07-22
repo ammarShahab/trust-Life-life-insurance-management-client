@@ -63,7 +63,7 @@ const ManageApplications = () => {
       <Helmet>
         <title>Trust Life | Dashboard Manage Application</title>
       </Helmet>
-      <h2 className="text-2xl font-bold mb-6 text-center">
+      <h2 className="text-2xl font-bold mb-6 text-center text-green-800">
         Manage Applications
       </h2>
       <div className="overflow-x-auto">

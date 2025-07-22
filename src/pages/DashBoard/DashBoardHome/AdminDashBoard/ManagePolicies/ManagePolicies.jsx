@@ -147,7 +147,7 @@ const ManagePolicies = () => {
         <title>Trust Life | Dashboard Manage Policies</title>
       </Helmet>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
+        <h1 className="text-2xl font-bold text-green-800 dark:text-white">
           Manage Policies
         </h1>
         <button

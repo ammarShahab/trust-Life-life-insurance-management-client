@@ -56,7 +56,7 @@ const AssignedCustomers = () => {
       <Helmet>
         <title>Trust Life | Dashboard Assigned Customers</title>
       </Helmet>
-      <h2 className="text-2xl font-bold mb-6 text-center">
+      <h2 className="text-2xl font-bold mb-6 text-center text-green-800">
         Assigned Applications
       </h2>
 

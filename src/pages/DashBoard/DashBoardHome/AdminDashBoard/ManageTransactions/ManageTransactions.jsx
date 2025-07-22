@@ -30,7 +30,7 @@ const ManageTransactions = () => {
         <title>Trust Life | Dashboard Manage Transaction</title>
       </Helmet>
       {/* Title */}
-      <h2 className="text-2xl font-bold">Manage Transactions</h2>
+      <h2 className="text-2xl font-bold text-green-800">Manage Transactions</h2>
 
       {/* Filter Options */}
       <div className="flex flex-wrap gap-4">

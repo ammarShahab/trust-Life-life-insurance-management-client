@@ -136,7 +136,7 @@ const ManageBlogs = () => {
         <title>Trust Life | Dashboard Manage Blogs</title>
       </Helmet>
       <div className="flex justify-between items-center flex-wrap gap-3">
-        <h2 className="text-2xl font-bold">Manage Blogs</h2>
+        <h2 className="text-2xl font-bold text-green-800">Manage Blogs</h2>
         <button
           onClick={() => setShowModal(true)}
           className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition"

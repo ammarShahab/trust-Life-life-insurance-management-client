@@ -57,7 +57,9 @@ const PaymentStatus = () => {
       <Helmet>
         <title>Trust Life | Dashboard Payment Status</title>
       </Helmet>
-      <h2 className="text-2xl font-bold mb-6 text-center">Payment Status</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center text-green-800">
+        Payment Status
+      </h2>
 
       {isLoading ? (
         <Loading />

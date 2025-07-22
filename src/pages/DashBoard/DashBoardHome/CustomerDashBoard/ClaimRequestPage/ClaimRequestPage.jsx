@@ -26,7 +26,9 @@ const ClaimRequestPage = () => {
       <Helmet>
         <title>Trust Life | Dashboard Claim Request</title>
       </Helmet>
-      <h2 className="text-2xl font-bold mb-6">Claim Request</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center text-green-800">
+        Claim Request
+      </h2>
       {applications.length === 0 ? (
         <p className="text-gray-500">No applications available for claim.</p>
       ) : (

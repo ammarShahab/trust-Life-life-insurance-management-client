@@ -134,7 +134,7 @@ const PaymentForm = () => {
 
   return (
     <div className="max-w-4xl lg:w-xl mx-auto px-4 py-10">
-      <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
+      <h2 className="text-2xl font-bold text-center mb-6 text-green-800">
         Complete Your Payment
       </h2>
 
@@ -150,6 +150,28 @@ const PaymentForm = () => {
             <input
               type="text"
               value={state?.policyTitle || "Unknown"}
+              readOnly
+              className="w-full px-4 py-2 border rounded bg-gray-100 text-gray-700"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Applicant's Name
+            </label>
+            <input
+              type="text"
+              value={user?.displayName || "Unknown"}
+              readOnly
+              className="w-full px-4 py-2 border rounded bg-gray-100 text-gray-700"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Applicant's Email
+            </label>
+            <input
+              type="text"
+              value={user?.email || "Unknown"}
               readOnly
               className="w-full px-4 py-2 border rounded bg-gray-100 text-gray-700"
             />
@@ -179,7 +201,7 @@ const PaymentForm = () => {
 
         <button
           type="submit"
-          className="w-full bg-[#1f2937] hover:bg-gray-800 text-white font-semibold py-2 rounded transition"
+          className="w-full bg-[#1f2937] hover:bg-gray-900 text-white font-semibold py-2 rounded transition"
           disabled={!stripe}
         >
           Pay
