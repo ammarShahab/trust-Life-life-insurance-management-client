@@ -17,7 +17,7 @@ const Footer = () => {
         }  dark:bg-zinc-600 bg-gradient-to-l from-[#114b5f] via-[#1a936f] to-[#88d498] max-h-screen`}
       >
         <div
-          className={`max-w-7xl flex flex-col justify-between py-10 px-2 mx-auto space-y-8 lg:flex-row lg:space-y-0 text-gray-800 ${
+          className={`max-w-7xl flex flex-col justify-between px-4 py-2 sm:px-6 lg:px-8 mx-auto space-y-8 lg:flex-row lg:space-y-0 text-gray-800 ${
             theme ? "dark" : ""
           }  dark:bg-zinc-600 `}
         >
