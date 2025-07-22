@@ -12,7 +12,7 @@ const Blogs = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const { role } = useCustomerRole();
-  // console.log("role", role);
+  console.log("role", role);
 
   const { data: blogs = [], isLoading } = useQuery({
     queryKey: ["blogs"],
