@@ -13,7 +13,7 @@ const Error404 = () => {
         />
         {/* <h1 className="text-5xl font-bold text-gray-800 mb-3">404</h1> */}
         <p className="text-2xl font-bold text-gray-600 mb-6">
-          Oops! You seems lost in Himalayas
+          Oops! You seems lost
         </p>
         <Link
           to="/"

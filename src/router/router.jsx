@@ -78,10 +78,6 @@ const router = createBrowserRouter([
         path: "/blogs/:id",
         Component: BlogDetailsPage,
       },
-      {
-        path: "/forbidden",
-        Component: ForbiddenPage,
-      },
     ],
   },
   {
@@ -121,6 +117,10 @@ const router = createBrowserRouter([
   {
     path: "/*",
     Component: Error404,
+  },
+  {
+    path: "/forbidden",
+    Component: ForbiddenPage,
   },
 ]);
 
