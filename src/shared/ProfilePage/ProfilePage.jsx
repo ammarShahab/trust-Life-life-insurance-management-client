@@ -13,7 +13,7 @@ const ProfilePage = () => {
   const queryClient = useQueryClient();
   const { role } = useCustomerRole();
 
-  console.log("profile user", user);
+  // console.log("profile user", user);
 
   const {
     register,

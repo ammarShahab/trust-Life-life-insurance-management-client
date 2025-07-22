@@ -40,14 +40,14 @@ const useAxiosSecure = () => {
       return res;
     },
     (error) => {
-      console.log("Inside res interceptor", error.status);
+      // console.log("Inside res interceptor", error.status);
       const status = error.status;
       if (status === 403) {
         navigate("/forbidden");
       } else if (status === 401) {
         logOut()
           .then(() => {
-            console.log("SIgnout successfully");
+            // console.log("SIgnout successfully");
           })
           .catch((err) => {
             console.log(err);

@@ -39,14 +39,14 @@ const ClaimFormPage = () => {
       import.meta.env.VITE_IMAGE_UPLOAD_KEY
     }`;
     const res = await axios.post(imageUploadURL, formData);
-    console.log("Uploaded image url", res.data.data.url);
+    // console.log("Uploaded image url", res.data.data.url);
     setUploadedDoc(res.data.data.url);
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
 
-    console.log(data.claim_reason, uploadedDoc);
+    // console.log(data.claim_reason, uploadedDoc);
 
     const claimRes = await axiosSecure.patch(
       `/claim-request/${applicationId}`,
@@ -57,7 +57,7 @@ const ClaimFormPage = () => {
       }
     );
 
-    console.log(claimRes.data);
+    // console.log(claimRes.data);
     if (claimRes.data.modifiedCount) {
       Swal.fire(
         "Claim Submitted!",

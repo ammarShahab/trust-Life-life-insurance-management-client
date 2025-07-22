@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 
 const PaymentForm = () => {
   const { state } = useLocation();
-  console.log("state from payment form", state);
+  // console.log("state from payment form", state);
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
@@ -33,20 +33,20 @@ const PaymentForm = () => {
     return <Loading></Loading>;
   }
 
-  console.log("Application info", applicationInfo);
+  // console.log("Application info", applicationInfo);
 
   // console.log("application id", applicationId);
   const amountInDecimal = parseFloat(state?.premium);
   const amount = amountInDecimal;
   const paymentDuration = state?.paymentType;
 
-  console.log(amount);
-  console.log(paymentDuration);
+  // console.log(amount);
+  // console.log(paymentDuration);
 
   applicationInfo.premiumAmount = amount;
   applicationInfo.paymentTerm = paymentDuration;
 
-  console.log(applicationInfo);
+  // console.log(applicationInfo);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,14 +67,14 @@ const PaymentForm = () => {
       console.log("error", error);
       setError(error.message);
     } else {
-      console.log("Payment Method", paymentMethod);
+      // console.log("Payment Method", paymentMethod);
       setError("");
       const res = await axiosSecure.post("/create-payment-intent", {
         amount,
         applicationId,
         paymentDuration,
       });
-      console.log("res from intent", res);
+      // console.log("res from intent", res);
 
       const clientSecret = res.data.clientSecret;
       const result = await stripe.confirmCardPayment(clientSecret, {
@@ -97,8 +97,8 @@ const PaymentForm = () => {
           // The payment has been processed!
           // setError(null);
           // setSucceeded(true);
-          console.log("Payment succeeded:", result.paymentIntent);
-          console.log(result);
+          // console.log("Payment succeeded:", result.paymentIntent);
+          // console.log(result);
 
           const transactionId = result.paymentIntent.id;
 
@@ -114,11 +114,11 @@ const PaymentForm = () => {
             status: applicationInfo.status,
           };
 
-          console.log("payment data", paymentData);
+          // console.log("payment data", paymentData);
 
           const paymentRes = await axiosSecure.post("/payments", paymentData);
           if (paymentRes.data.insertedId) {
-            console.log("Successfully Paid for the parcel");
+            // console.log("Successfully Paid for the parcel");
             Swal.fire({
               title: "✅ Payment Successful!",
               html: `Your transaction ID is:<br><strong>${transactionId}</strong>`,

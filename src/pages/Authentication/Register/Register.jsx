@@ -24,7 +24,7 @@ const Register = () => {
   const handleImageUpload = async (e) => {
     e.preventDefault();
     const image = e.target.files[0];
-    console.log(image);
+    // console.log(image);
     const formData = new FormData();
     formData.append("image", image);
 
@@ -32,7 +32,7 @@ const Register = () => {
       import.meta.env.VITE_IMAGE_UPLOAD_KEY
     }`;
     const res = await axios.post(imageUploadURL, formData);
-    console.log("Uploaded image url", res.data.data.url);
+    // console.log("Uploaded image url", res.data.data.url);
     setProfilePic(res.data.data.url);
   };
 
@@ -59,18 +59,18 @@ const Register = () => {
     createUser(data.email, data.password)
       .then(async (userCredential) => {
         const currentUser = userCredential.user;
-        console.log(currentUser);
-        console.log(currentUser.metadata.lastSignInTime);
+        // console.log(currentUser);
+        // console.log(currentUser.metadata.lastSignInTime);
 
         const profileInfo = {
           displayName: data.name,
           photoURL: profilePic,
         };
-        console.log(profileInfo);
+        // console.log(profileInfo);
 
         updateUser(profileInfo)
           .then(() => {
-            console.log("name and pic updated successfully");
+            // console.log("name and pic updated successfully");
           })
           .catch((err) => {
             console.log(err);
@@ -100,13 +100,13 @@ const Register = () => {
           lastSignInTime: currentUser.metadata.lastSignInTime,
           registrationDate: bdTime,
         };
-        console.log("customer Info from Registration", customerInfo);
+        // console.log("customer Info from Registration", customerInfo);
 
         const customerRes = await axiosInstance.post(
           "/customers",
           customerInfo
         );
-        console.log(customerRes.data);
+        // console.log(customerRes.data);
       })
       .catch((err) => {
         const errorCode = err.code;
@@ -114,7 +114,7 @@ const Register = () => {
         console.log(errorCode, errorMessage);
       });
 
-    console.log("Form data:", data);
+    // console.log("Form data:", data);
     toast.success("Registration successful!");
     navigate("/");
     reset();

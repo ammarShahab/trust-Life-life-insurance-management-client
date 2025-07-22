@@ -40,7 +40,7 @@ const PolicyApplyForm = () => {
       status: "pending",
     };
 
-    console.log(applicationData);
+    // console.log(applicationData);
 
     try {
       const res = await axiosSecure.post(

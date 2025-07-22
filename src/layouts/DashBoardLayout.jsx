@@ -23,7 +23,7 @@ const DashBoardLayout = () => {
 
   const { role, isLoading } = useCustomerRole();
 
-  console.log("role from DashBoard layout", role);
+  // console.log("role from DashBoard layout", role);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const closeSidebar = () => setIsSidebarOpen(false);

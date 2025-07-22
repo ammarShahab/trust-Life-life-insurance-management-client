@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { data, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { FaEye } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCustomerRole from "../../hooks/useCustomerRole";
@@ -12,6 +12,7 @@ const Blogs = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const { role } = useCustomerRole();
+  // console.log("role", role);
 
   const { data: blogs = [], isLoading } = useQuery({
     queryKey: ["blogs"],

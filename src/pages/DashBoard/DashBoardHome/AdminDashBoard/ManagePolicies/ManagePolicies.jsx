@@ -34,7 +34,7 @@ const ManagePolicies = () => {
       return res.data; // Make sure this includes `modifiedCount`
     },
     onSuccess: (result) => {
-      console.log(result);
+      // console.log(result);
       // queryClient.invalidateQueries({ queryKey: ["policies"] });
       if (result.modifiedCount > 0) {
         refetch();
@@ -51,7 +51,7 @@ const ManagePolicies = () => {
   });
 
   const handleDelete = (id, title) => {
-    console.log(id);
+    // console.log(id);
 
     Swal.fire({
       title: "Are you sure?",
@@ -66,7 +66,7 @@ const ManagePolicies = () => {
         axiosSecure
           .delete(`/policies/${id}`)
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
 
             if (res.data.deletedCount > 0) {
               Swal.fire("Deleted!", "Policy has been deleted.", "success");
@@ -117,12 +117,12 @@ const ManagePolicies = () => {
       image: data.image,
       purchasedCount: parseInt(0),
     };
-    console.log(newPolicy);
-    console.log(data);
+    // console.log(newPolicy);
+    // console.log(data);
 
     try {
       await axiosSecure.post("/policies", newPolicy).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.insertedId) {
           refetch();
           reset();

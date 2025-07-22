@@ -24,8 +24,8 @@ const Login = () => {
 
     userLogin(data.email, data.password)
       .then(async (res) => {
-        console.log(res.user);
-        const user = res.user;
+        // console.log(res.user);
+        // const user = res.user;
 
         // const email = user.email;
         // const lastSignInTime = user.metadata.lastSignInTime;
