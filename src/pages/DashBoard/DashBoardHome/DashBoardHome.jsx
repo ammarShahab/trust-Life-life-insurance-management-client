@@ -9,6 +9,8 @@ import CustomerDashBoardHome from "./CustomerDashBoard/CustomerDashBoardHome/Cus
 const DashBoardHome = () => {
   const { role, isLoading } = useCustomerRole();
 
+  console.log("role from dash", role);
+
   if (isLoading) {
     return <Loading></Loading>;
   }

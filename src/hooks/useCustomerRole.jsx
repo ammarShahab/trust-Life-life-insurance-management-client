@@ -14,10 +14,12 @@ const useCustomerRole = () => {
     enabled: !!user?.email,
     queryKey: ["customerRole", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/customers/role/${user.email}`);
+      const res = await axiosSecure.get(`/customers/role/${user?.email}`);
+      console.log(res.data.role);
       return res.data.role;
     },
   });
+  console.log(role);
 
   return {
     role,
