@@ -6,13 +6,17 @@ import useCustomerRole from "../../hooks/useCustomerRole";
 import Loading from "../../components/Loading/Loading";
 import { Helmet } from "react-helmet-async";
 import useAxios from "../../hooks/useAxios";
+import useAuth from "../../hooks/useAuth/useAuth";
 
 const Blogs = () => {
   const axiosInstance = useAxios();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
-  const { role } = useCustomerRole();
-  console.log("role", role);
+  // const { role } = useCustomerRole();
+  // console.log("role", role);
+  const { user } = useAuth();
+  // console.log("user", user);
+  // console.log("user", user?.accessToken);
 
   const { data: blogs = [], isLoading } = useQuery({
     queryKey: ["blogs"],
@@ -23,10 +27,10 @@ const Blogs = () => {
   });
 
   const handleReadMore = async (blog) => {
-    if (role === "customer") {
+    if (user) {
       try {
         await axiosSecure.patch(`/blogs/visit/${blog._id}`);
-        navigate(`/blogs/${blog._id}`);
+        // navigate(`/blogs/${blog._id}`);
       } catch (err) {
         console.error("Failed to increase visit count", err);
       }

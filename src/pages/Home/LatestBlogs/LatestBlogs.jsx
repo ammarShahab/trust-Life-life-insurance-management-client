@@ -5,12 +5,16 @@ import useAxios from "../../../hooks/useAxios";
 import Loading from "../../../components/Loading/Loading";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useCustomerRole from "../../../hooks/useCustomerRole";
+import useAuth from "../../../hooks/useAuth/useAuth";
 
 const LatestBlogs = () => {
   const axiosInstance = useAxios();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
-  const { role } = useCustomerRole();
+  // const { role } = useCustomerRole();
+  const { user } = useAuth();
+  // console.log("user", user);
+
   const { data: blogs = [], isLoading } = useQuery({
     queryKey: ["latestBlogs"],
     queryFn: async () => {
@@ -29,7 +33,7 @@ const LatestBlogs = () => {
   };
 
   const handleViewDetails = async (blog) => {
-    if (role === "customer") {
+    if (user) {
       try {
         await axiosSecure.patch(`/blogs/visit/${blog._id}`);
         navigate(`/blogs/${blog._id}`);
@@ -37,7 +41,6 @@ const LatestBlogs = () => {
         console.error("Failed to increase visit count", err);
       }
     }
-
     navigate(`/blogs/${blog._id}`);
   };
 
