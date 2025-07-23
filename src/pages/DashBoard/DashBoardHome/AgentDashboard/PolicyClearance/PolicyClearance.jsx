@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../../hooks/useAuth/useAuth";
 import { Helmet } from "react-helmet-async";
+import Loading from "../../../../../components/Loading/Loading";
 
 const PolicyClearance = () => {
   const axiosSecure = useAxiosSecure();
@@ -60,6 +61,10 @@ const PolicyClearance = () => {
     setSelectedPolicy(null);
     setIsOpen(false);
   };
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div className="p-4">
