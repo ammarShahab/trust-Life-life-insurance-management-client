@@ -1,12 +1,49 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { FaFileDownload, FaStar, FaEye } from "react-icons/fa";
+import { FaStar, FaEye, FaFileDownload } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../../../hooks/useAuth/useAuth";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import Loading from "../../../../../components/Loading/Loading";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import {
+  PDFDownloadLink,
+  Document,
+  Page,
+  Text,
+  StyleSheet,
+} from "@react-pdf/renderer";
+
+const styles = StyleSheet.create({
+  page: { padding: 30 },
+  section: { marginBottom: 10 },
+  heading: { fontSize: 18, marginBottom: 10 },
+  text: { fontSize: 12 },
+});
+
+const PolicyPDF = ({ policy }) => (
+  <Document>
+    <Page size="A4" style={styles.page}>
+      <Text style={styles.heading}>Policy Document</Text>
+      <Text style={styles.text}>Name: {policy.name}</Text>
+      <Text style={styles.text}>Email: {policy.email}</Text>
+      <Text style={styles.text}>Address: {policy.address}</Text>
+      <Text style={styles.text}>NID: {policy.nid}</Text>
+      <Text style={styles.text}>Policy Title: {policy.policyTitle}</Text>
+      <Text style={styles.text}>Policy ID: {policy.policyId}</Text>
+      <Text style={styles.text}>Coverage: {policy.coverage}</Text>
+      <Text style={styles.text}>Duration: {policy.duration} years</Text>
+      <Text style={styles.text}>
+        Monthly Premium: ${policy.estimatedPremiumMonthly}
+      </Text>
+      <Text style={styles.text}>
+        Yearly Premium: ${policy.estimatedPremiumYearly}
+      </Text>
+      <Text style={styles.text}>Status: {policy.status}</Text>
+    </Page>
+  </Document>
+);
 
 const MyPolicies = () => {
   const { user } = useAuth();
@@ -64,7 +101,7 @@ const MyPolicies = () => {
       <Helmet>
         <title>Trust Life | Dashboard My Policies</title>
       </Helmet>
-      <h2 className="text-2xl font-bold mb-6 text-center text-green-800">
+      <h2 className="text-2xl font-bold mb-6 text-center">
         My Applied Policies
       </h2>
 
@@ -92,10 +129,7 @@ const MyPolicies = () => {
                 </tr>
               ) : (
                 applications.map((app) => (
-                  <tr
-                    key={app._id}
-                    className="bg-white border-b hover:bg-gray-50"
-                  >
+                  <tr key={app._id} className="border-t">
                     <td className="p-3">
                       <div className="font-semibold">{app.policyTitle}</div>
                       <div className="text-xs text-gray-500">
@@ -104,7 +138,7 @@ const MyPolicies = () => {
                     </td>
                     <td className="p-3">{app.coverage || "N/A"}</td>
                     <td className="p-3">{app.duration || "N/A"} Years</td>
-                    <td className="p-3">৳{app.estimatedPremiumMonthly} /mo</td>
+                    <td className="p-3">${app.estimatedPremiumMonthly} /mo</td>
                     <td className="p-3">
                       <span
                         className={`text-xs font-semibold px-2.5 py-0.5 rounded ${getBadgeColor(
@@ -114,7 +148,7 @@ const MyPolicies = () => {
                         {app.status}
                       </span>
                     </td>
-                    <td className="p-3 flex flex-col sm:flex-row sm:mt-3 gap-2">
+                    <td className="p-3 flex flex-col sm:flex-row sm:mt-2 gap-2">
                       <button
                         onClick={() => {
                           setSelectedPolicy(app);
@@ -132,9 +166,6 @@ const MyPolicies = () => {
                         className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-[10px]"
                       >
                         <FaEye /> View Details
-                      </button>
-                      <button className="flex items-center gap-1 bg-gray-700 hover:bg-gray-800 text-white px-3 py-1 rounded text-[10px]">
-                        <FaFileDownload /> Download
                       </button>
                     </td>
                   </tr>
@@ -164,7 +195,6 @@ const MyPolicies = () => {
                   ))}
                 </select>
               </div>
-
               <div>
                 <label className="block mb-1">Feedback</label>
                 <textarea
@@ -174,7 +204,6 @@ const MyPolicies = () => {
                   placeholder="Share your thoughts..."
                 />
               </div>
-
               <div className="flex justify-end gap-3">
                 <button
                   type="button"
@@ -208,11 +237,10 @@ const MyPolicies = () => {
                 <strong>Policy ID:</strong> {selectedPolicy.policyId}
               </li>
               <li>
-                <strong>Coverage:</strong> {selectedPolicy.coverage || "N/A"}
+                <strong>Coverage:</strong> {selectedPolicy.coverage}
               </li>
               <li>
-                <strong>Duration:</strong> {selectedPolicy.duration || "N/A"}{" "}
-                years
+                <strong>Duration:</strong> {selectedPolicy.duration} years
               </li>
               <li>
                 <strong>Monthly Premium:</strong> $
@@ -223,7 +251,27 @@ const MyPolicies = () => {
                 {selectedPolicy.estimatedPremiumYearly}
               </li>
             </ul>
-            <div className="flex justify-end mt-6">
+
+            <div className="flex justify-end gap-2 mt-4">
+              <PDFDownloadLink
+                document={<PolicyPDF policy={selectedPolicy} />}
+                fileName={`Policy-${selectedPolicy.policyId}.pdf`}
+                className={`flex items-center gap-1 px-4 py-2 text-sm rounded ${
+                  selectedPolicy.status === "approved"
+                    ? "bg-gray-700 hover:bg-gray-800 text-white"
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+                style={{
+                  pointerEvents:
+                    selectedPolicy.status !== "approved" ? "none" : "auto",
+                }}
+              >
+                <FaFileDownload />
+                {selectedPolicy.status === "approved"
+                  ? "Download Policy"
+                  : "Not Approved"}
+              </PDFDownloadLink>
+
               <button
                 onClick={() => setIsDetailModalOpen(false)}
                 className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
