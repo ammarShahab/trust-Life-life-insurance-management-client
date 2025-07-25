@@ -129,7 +129,10 @@ const MyPolicies = () => {
                 </tr>
               ) : (
                 applications.map((app) => (
-                  <tr key={app._id} className="border-t">
+                  <tr
+                    key={app._id}
+                    className="border-t bg-white border-b hover:bg-gray-50"
+                  >
                     <td className="p-3">
                       <div className="font-semibold">{app.policyTitle}</div>
                       <div className="text-xs text-gray-500">
