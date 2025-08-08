@@ -80,9 +80,6 @@ Trust Life is designed to offer a reliable, intuitive, and responsive insurance 
 | Command           | Description              |
 | ----------------- | ------------------------ |
 | `npm run dev`     | Start development server |
-| `npm run build`   | Build for production     |
-| `npm run preview` | Preview production build |
-| `npm run lint`    | Run ESLint checks        |
 
 ---
 
