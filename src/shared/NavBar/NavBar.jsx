@@ -36,7 +36,7 @@ const NavBar = () => {
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow sticky top-0 z-50">
+    <nav className="bg-gradient-to-l from-[#114b5f] via-[#1a936f] to-[#88d498] dark:bg-gray-900 shadow z-50 fixed top-0 w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -53,9 +53,9 @@ const NavBar = () => {
                   className={({ isActive }) =>
                     `text-sm font-medium ${
                       isActive
-                        ? "text-blue-600 dark:text-blue-400"
-                        : "text-gray-700 dark:text-gray-200"
-                    } hover:text-blue-600 dark:hover:text-blue-400 transition`
+                        ? "text-[#fcd547] dark:text-blue-400"
+                        : "text-gray-100 dark:text-gray-200"
+                    } hover:text-[#fcd547] dark:hover:text-blue-400 transition`
                   }
                 >
                   {link.name}

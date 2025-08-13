@@ -13,6 +13,7 @@ const PopularPolicies = () => {
       return res.data;
     },
   });
+  console.log(policies);
 
   if (isLoading) return <Loading></Loading>;
 
@@ -34,7 +35,7 @@ const PopularPolicies = () => {
           trust, reliability, and value. With high purchase volumes and proven
           customer satisfaction
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 mb-12">
           {policies.map((policy) => (
             <div
               key={policy._id}
@@ -43,33 +44,35 @@ const PopularPolicies = () => {
               <img
                 src={policy.image}
                 alt={policy.title}
-                className="w-full h-48 object-cover"
+                className="w-full h-36 object-cover"
               />
-              <div className="p-5 flex-1 flex flex-col justify-between">
+              <div className="p-3 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">{policy.title}</h3>
-                  <p className="text-sm text-gray-500 mb-1">
+                  <h3 className="text-lg font-semibold ">{policy.title}</h3>
+                  <p className="text-[12px] text-gray-500 mb-1">
                     <strong>Duration:</strong> {policy.duration}
                   </p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-[12px] text-gray-500">
                     <strong>Popularity:</strong>{" "}
                     <span className="text-green-600 font-medium">
                       {policy.purchasedCount ?? 0} purchased
                     </span>
                   </p>
-                  <p className="text-sm text-gray-500 mb-3">
-                    <strong>Coverage Amount:</strong>{" "}
+                  <p className="text-[12px] text-gray-500 mb-1">
+                    <strong>Coverage Amount:</strong>
                     <span className="text-green-600 font-medium">
                       {policy.coverage}
                     </span>
                   </p>
                 </div>
-                <Link
-                  to={`/policy/${policy._id}`}
-                  className="inline-block mt-4 bg-[#baa53a] hover:bg-[#fcd547] transition text-white px-4 py-2 rounded-lg text-sm  text-center"
-                >
-                  View Details
-                </Link>
+                <div className="flex justify-center items-center mt-2">
+                  <Link
+                    to={`/policy/${policy._id}`}
+                    className="  w-2/5 bg-[#baa53a] hover:bg-[#fcd547] transition text-white py-1 rounded-sm text-sm  text-center"
+                  >
+                    View Details
+                  </Link>
+                </div>
               </div>
             </div>
           ))}

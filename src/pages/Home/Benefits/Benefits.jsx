@@ -71,15 +71,15 @@ const Benefits = () => {
         </p>
       </div>
 
-      <div className="max-w-7xl px-4 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="max-w-7xl px-2 mx-auto grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-2">
         {features.map((feature, index) => (
           <div
             key={index}
-            className={`bg-gradient-to-br ${feature.gradient} rounded-lg shadow-lg p-6 text-white transition-transform hover:scale-[1.02] duration-300 text-center`}
+            className={`bg-gradient-to-br ${feature.gradient} rounded-lg shadow-lg p-4 text-white transition-transform hover:scale-[1.02] duration-300 text-center`}
           >
             <div className="flex flex-col justify-center items-center gap-2 mb-4">
               {feature.icon}
-              <h3 className="text-xl font-bold bg-gradient-to-r from-white to-yellow-100 bg-clip-text text-transparent">
+              <h3 className="text-lg font-bold bg-gradient-to-r from-white to-yellow-100 bg-clip-text text-transparent">
                 {feature.title}
               </h3>
             </div>
