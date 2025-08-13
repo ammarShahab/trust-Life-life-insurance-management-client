@@ -10,7 +10,7 @@ const AllPolicies = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchText, setSearchText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const limit = 9;
+  const limit = 8;
 
   const { data, isLoading } = useQuery({
     queryKey: ["policies", selectedCategory, searchText, currentPage],
@@ -53,7 +53,7 @@ const AllPolicies = () => {
       </div>
 
       {/* Filters and Search */}
-      <div className="flex justify-between items-center flex-wrap gap-4 mb-6 mt-10">
+      <div className="flex justify-between items-center flex-wrap gap-4 mb-2 mt-8">
         <div className="flex flex-wrap gap-2">
           {["all", "Term Life", "Senior Plan", "Family Plan", "Child Plan"].map(
             (cat) => (
@@ -89,11 +89,11 @@ const AllPolicies = () => {
       ) : (
         <>
           {/* Policies Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
             {data.policies.map((policy) => (
               <div
                 key={policy._id}
-                className="bg-white rounded-lg shadow-md hover:shadow-2xl transition duration-200 overflow-hidden"
+                className="bg-white rounded-lg shadow-md hover:shadow-2xl transition  overflow-hidden"
               >
                 <img
                   src={policy.image}
@@ -110,12 +110,14 @@ const AllPolicies = () => {
                   <p className="text-sm text-gray-600 mt-1 mb-3">
                     {policy.description?.slice(0, 80)}...
                   </p>
-                  <Link
-                    to={`/policy/${policy._id}`}
-                    className="inline-block text-sm font-medium text-[#baa53a] hover:underline"
-                  >
-                    View Details →
-                  </Link>
+                  <div className="flex justify-center items-center mt-2">
+                    <Link
+                      to={`/policy/${policy._id}`}
+                      className="w-2/5 bg-[#baa53a] hover:bg-[#fcd547] transition text-white py-1 rounded-sm text-sm  text-center "
+                    >
+                      View Details
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
