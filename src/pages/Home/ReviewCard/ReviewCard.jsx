@@ -58,11 +58,7 @@ const ReviewCard = () => {
   };
 
   return (
-    <section
-      className={`py-10 md:py-16 lg:py-20 text-white font-bitter ${
-        theme ? "dark" : ""
-      } bg-[radial-gradient(ellipse_at_top_left,_#ebf0f6,_#98ccd3,_#364e68)]`}
-    >
+    <section className="py-10 md:py-16 lg:py-20 text-white font-bitter bg-[radial-gradient(ellipse_at_top_left,_#ebf0f6,_#98ccd3,_#364e68)] dark:bg-none dark:bg-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {theme === "dark" ? (
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-6">
