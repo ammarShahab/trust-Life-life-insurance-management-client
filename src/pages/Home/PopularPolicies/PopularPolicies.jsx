@@ -18,18 +18,18 @@ const PopularPolicies = () => {
   if (isLoading) return <Loading></Loading>;
 
   return (
-    <section className=" bg-gradient-to-bl from-[#ffe4e6]  to-[#ccfbf1] dark:bg-gray-900">
+    <section className=" bg-gradient-to-bl from-[#ffe4e6]  to-[#ccfbf1] dark:bg-gray-900 dark:from-transparent dark:via-transparent dark:to-transparent">
       <div className="px-4 py-10 max-w-7xl mx-auto">
         <h2
           style={{
             backgroundImage:
               "linear-gradient(90deg, rgba(45, 140, 85, 1) 0%, rgba(82, 122, 66, 1) 60%, rgba(140, 150, 130, 1) 100%)",
           }}
-          className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mt-10 bg-clip-text text-transparent py-2"
+          className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mt-10 bg-clip-text text-transparent py-2 dark:text-gray-300"
         >
           🌟 Most Popular Policies
         </h2>
-        <p className="text-center mb-12 mt-3">
+        <p className="text-center mb-12 mt-3 dark:text-gray-300">
           Discover our most chosen insurance policies, selected by thousands of
           satisfied customers. These plans reflect a strong track record of
           trust, reliability, and value. With high purchase volumes and proven
@@ -39,7 +39,7 @@ const PopularPolicies = () => {
           {policies.map((policy) => (
             <div
               key={policy._id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all  flex flex-col  hover:scale-[1.02] duration-300"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all  flex flex-col  hover:scale-[1.02] duration-300 dark:bg-gradient-to-br dark:from-gray-700 dark:via-gray-600 dark:to-gray-500"
             >
               <img
                 src={policy.image}
@@ -48,19 +48,21 @@ const PopularPolicies = () => {
               />
               <div className="p-3 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold ">{policy.title}</h3>
-                  <p className="text-[12px] text-gray-500 mb-1">
+                  <h3 className="text-lg dark:text-white font-semibold ">
+                    {policy.title}
+                  </h3>
+                  <p className="text-[12px] text-gray-500 dark:text-gray-300 mb-1">
                     <strong>Duration:</strong> {policy.duration}
                   </p>
-                  <p className="text-[12px] text-gray-500">
+                  <p className="text-[12px] text-gray-500 dark:text-gray-300">
                     <strong>Popularity:</strong>{" "}
-                    <span className="text-green-600 font-medium">
+                    <span className="text-green-600 dark:text-gray-300 font-medium">
                       {policy.purchasedCount ?? 0} purchased
                     </span>
                   </p>
-                  <p className="text-[12px] text-gray-500 mb-1">
+                  <p className="text-[12px] text-gray-500 dark:text-gray-300 mb-1">
                     <strong>Coverage Amount:</strong>
-                    <span className="text-green-600 font-medium">
+                    <span className="text-green-600 dark:text-gray-300 font-medium">
                       {policy.coverage}
                     </span>
                   </p>
