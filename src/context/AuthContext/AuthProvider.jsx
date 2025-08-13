@@ -14,7 +14,7 @@ import { auth } from "../../../public/firebase/firebase.config";
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [theme, setTheme] = useState("");
+  // const [theme, setTheme] = useState("");
 
   const provider = new GoogleAuthProvider();
   const createUser = (email, password) => {
@@ -64,8 +64,8 @@ const AuthProvider = ({ children }) => {
     googleSignIn,
     isLoading,
     setIsLoading,
-    theme,
-    setTheme,
+    /* theme,
+    setTheme, */
   };
   return <AuthContext value={authInfo}>{children}</AuthContext>;
 };

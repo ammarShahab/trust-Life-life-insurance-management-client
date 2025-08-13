@@ -13,8 +13,8 @@ const TrustLife = () => {
       />
 
       {/* Website Name */}
-      <span className="text-xl sm:text-2xl font-semibold text-gray-800">
-        Trust<span className="text-[#baa53a]">Life</span>
+      <span className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white">
+        Trust<span className="text-[#baa53a] ">Life</span>
       </span>
     </Link>
   );

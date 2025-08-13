@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import { LuMoon, LuSun } from "react-icons/lu";
 import TrustLife from "../TrustLife/TrustLife";
 import useAuth from "../../hooks/useAuth/useAuth";
 import LogoutButton from "../LogoutButton/LogoutButton";
+import ThemeContext from "../../context/ThemeContext/ThemeContext";
+import { DarkThemeToggle } from "flowbite-react";
 
 const NavBar = () => {
   const { user, logOut, setUser } = useAuth();
   const navigate = useNavigate();
+  // const { theme, toggleTheme } = useContext(ThemeContext);
+  // console.log(theme);
 
   // console.log(user);
 
@@ -36,8 +40,8 @@ const NavBar = () => {
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
   return (
-    <nav className="bg-gradient-to-l from-[#114b5f] via-[#1a936f] to-[#88d498] dark:bg-gray-900 shadow z-50 fixed top-0 w-full">
-      <div className="max-w-7xl mx-auto px-2 ">
+    <nav className="bg-gradient-to-l from-[#114b5f] via-[#1a936f] to-[#88d498]  dark:bg-gray-900 dark:from-transparent dark:via-transparent dark:to-transparent shadow z-50 fixed top-0 w-full">
+      <div className="max-w-7xl mx-auto px-2 dark:bg-gray-900">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           {/* <NavLink to="/" className="flex items-center gap-2"> */}
@@ -53,9 +57,9 @@ const NavBar = () => {
                   className={({ isActive }) =>
                     `text-sm font-medium ${
                       isActive
-                        ? "text-[#fcd547] dark:text-blue-400"
+                        ? "text-[#fcd547] "
                         : "text-gray-100 dark:text-gray-200"
-                    } hover:text-[#fcd547] dark:hover:text-blue-400 transition`
+                    } hover:text-[#fcd547]  transition`
                   }
                 >
                   {link.name}
@@ -71,9 +75,9 @@ const NavBar = () => {
                     className={({ isActive }) =>
                       `text-sm font-medium ${
                         isActive
-                          ? "text-[#fcd547] dark:text-blue-400"
+                          ? "text-[#fcd547] "
                           : "text-gray-100 dark:text-gray-200"
-                      } hover:text-[#fcd547] dark:hover:text-blue-400 transition`
+                      } hover:text-[#fcd547]  transition`
                     }
                   >
                     {link.name}
@@ -83,6 +87,15 @@ const NavBar = () => {
           </ul>
 
           <div className="flex justify-center items-center gap-2">
+            {/* toggle dark/light */}
+            {/*  <button
+              onClick={toggleTheme}
+              className="p-2 rounded bg-gray-200 dark:bg-gray-700 text-black dark:text-white"
+            >
+              {theme === "light" ? "🌙 Dark" : "☀ Light"}
+            </button> */}
+
+            <DarkThemeToggle></DarkThemeToggle>
             {/* Auth Buttons / Profile */}
             <div className="md:flex items-center gap-4">
               {!user ? (

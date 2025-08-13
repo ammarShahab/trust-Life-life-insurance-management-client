@@ -18,7 +18,7 @@ const PopularPolicies = () => {
   if (isLoading) return <Loading></Loading>;
 
   return (
-    <section className=" bg-gradient-to-bl from-[#ffe4e6]  to-[#ccfbf1]">
+    <section className=" bg-gradient-to-bl from-[#ffe4e6]  to-[#ccfbf1] dark:bg-gray-900">
       <div className="px-4 py-10 max-w-7xl mx-auto">
         <h2
           style={{

@@ -13,7 +13,7 @@ const features = [
     description:
       "Generate precise quotes instantly with our streamlined calculator, saving you time and effort.",
     icon: <FaCalculator className="text-4xl text-green-800" />,
-    gradient: "from-[#8dd95d] to-green-400",
+    gradient: "from-[#8dd95d] to-green-400 ",
   },
   {
     title: "Expert Agent Support",
@@ -33,7 +33,7 @@ const features = [
     title: "Secure Online Payments",
     description:
       "Pay securely with our encrypted online payment system, ensuring your data is protected.",
-    icon: <FaLock className="text-4xl text-green-900" />,
+    icon: <FaLock className="text-4xl text-green-900 " />,
     gradient: "from-[#8cda5d] to-green-500",
   },
   {
@@ -48,16 +48,16 @@ const features = [
     description:
       "Manage your account and preferences through a tailored, user-friendly dashboard.",
     icon: <FaUserCircle className="text-4xl text-yellow-800" />,
-    gradient: "from-[#b9a447] to-yellow-500",
+    gradient: "from-[#b9a447] to-yellow-500 ",
   },
 ];
 
 const Benefits = () => {
   return (
-    <section className="bg-[#deecf6] dark:bg-gray-900 py-16 px-4 mx-auto">
+    <section className="dark:bg-gray-900 py-16 px-4 mx-auto">
       <div className="mx-auto text-center mb-12 mt-10">
         <h2
-          className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-transparent bg-clip-text py-2"
+          className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-transparent bg-clip-text py-2 dark:text-white"
           style={{
             backgroundImage:
               "linear-gradient(90deg,rgba(112, 215, 120, 1) 0%, rgba(198, 168, 78, 1) 82%, rgba(116, 181, 241, 1) 100%)",
@@ -75,9 +75,9 @@ const Benefits = () => {
         {features.map((feature, index) => (
           <div
             key={index}
-            className={`bg-gradient-to-br ${feature.gradient} rounded-lg shadow-lg p-4 text-white transition-transform hover:scale-[1.02] duration-300 text-center`}
+            className={`bg-gradient-to-br ${feature.gradient} rounded-lg shadow-lg p-4 text-white transition-transform hover:scale-[1.02] duration-300 text-center dark:bg-gradient-to-br dark:from-gray-700 dark:via-gray-600 dark:to-gray-500`}
           >
-            <div className="flex flex-col justify-center items-center gap-2 mb-4">
+            <div className="flex flex-col justify-center items-center dark:text-white gap-2 mb-4">
               {feature.icon}
               <h3 className="text-lg font-bold bg-gradient-to-r from-white to-yellow-100 bg-clip-text text-transparent">
                 {feature.title}

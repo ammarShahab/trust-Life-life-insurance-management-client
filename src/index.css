@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap");
 
 @import "tailwindcss";
+/* still in src/index.css, after @import "tailwindcss" */
+@custom-variant dark (&:where(.dark, .dark *));
 @plugin "flowbite/plugin";
 @import "flowbite/src/themes/default";
 @source "../node_modules/flowbite";
