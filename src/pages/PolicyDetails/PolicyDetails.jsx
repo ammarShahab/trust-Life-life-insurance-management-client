@@ -29,7 +29,7 @@ const PolicyDetails = () => {
       <Helmet>
         <title>Trust Life | Policy | {id}</title>
       </Helmet>
-      <div className="grid md:grid-cols-2 gap-8 items-stretch">
+      <div className="grid md:grid-cols-2 gap-8 items-stretch mt-10">
         {/* Image Section */}
         <div className="h-full">
           <img

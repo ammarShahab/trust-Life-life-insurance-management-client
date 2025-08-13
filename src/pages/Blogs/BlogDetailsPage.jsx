@@ -27,7 +27,7 @@ const BlogDetailsPage = () => {
       <Helmet>
         <title>Trust Life | Blogs | {id}</title>
       </Helmet>
-      <div className="bg-white shadow-lg rounded-xl overflow-hidden">
+      <div className="bg-white shadow-lg rounded-xl overflow-hidden mt-10">
         <img
           src={blog.imageUrl}
           alt={blog.title}

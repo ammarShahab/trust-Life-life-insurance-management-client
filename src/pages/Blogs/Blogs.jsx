@@ -46,14 +46,14 @@ const Blogs = () => {
       <Helmet>
         <title>Trust Life | Blogs</title>
       </Helmet>
-      <div className="mt-10 bg-white rounded-sm p-3 text-xl font-semibold">
+      <div className="mt-10 bg-white rounded-sm p-3 text-xl font-semibold mb-2">
         Blogs
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 py-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 ">
         {blogs.map((blog) => (
           <div
             key={blog._id}
-            className="flex flex-col max-w-lg p-6 space-y-4 overflow-hidden rounded-lg shadow-md bg-white text-gray-800"
+            className="flex flex-col max-w-lg p-2 space-y-4 overflow-hidden rounded-lg shadow-md bg-white text-gray-800 hover:shadow-2xl transition"
           >
             {/* Author Section */}
             <div className="flex space-x-4 items-center">
@@ -98,15 +98,15 @@ const Blogs = () => {
               <span className="flex items-center gap-1">
                 <FaEye className="text-yellow-600" /> {blog.totalVisit || 0}
               </span>
+              <button
+                onClick={() => handleReadMore(blog)}
+                className="w-1/2 px-4 py-2 bg-[#baa53a] hover:bg-[#fcd547] text-white font-semibold transition rounded"
+              >
+                Read more
+              </button>
             </div>
 
             {/* Read More Button */}
-            <button
-              onClick={() => handleReadMore(blog)}
-              className="w-full px-4 py-2 bg-[#baa53a] hover:bg-[#fcd547] text-white font-semibold transition rounded"
-            >
-              Read more
-            </button>
           </div>
         ))}
       </div>

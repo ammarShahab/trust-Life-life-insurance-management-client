@@ -71,9 +71,9 @@ const NavBar = () => {
                     className={({ isActive }) =>
                       `text-sm font-medium ${
                         isActive
-                          ? "text-blue-600 dark:text-blue-400"
-                          : "text-gray-700 dark:text-gray-200"
-                      } hover:text-blue-600 dark:hover:text-blue-400 transition`
+                          ? "text-[#fcd547] dark:text-blue-400"
+                          : "text-gray-100 dark:text-gray-200"
+                      } hover:text-[#fcd547] dark:hover:text-blue-400 transition`
                     }
                   >
                     {link.name}
@@ -212,9 +212,9 @@ const NavBar = () => {
                 className={({ isActive }) =>
                   `block py-2 px-4 rounded-md text-sm font-medium ${
                     isActive
-                      ? "text-blue-600 dark:text-blue-400"
-                      : "text-gray-700 dark:text-gray-200"
-                  } hover:bg-gray-100 dark:hover:bg-gray-800 transition`
+                      ? "text-[#fcd547] dark:text-blue-400"
+                      : "text-gray-100 dark:text-gray-200"
+                  } hover:text-[#fcd547] dark:hover:text-blue-400 transition`
                 }
                 onClick={() => setIsOpen(false)}
               >
