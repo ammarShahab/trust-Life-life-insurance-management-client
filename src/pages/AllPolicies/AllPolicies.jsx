@@ -48,9 +48,12 @@ const AllPolicies = () => {
       <Helmet>
         <title>Trust Life | All Policies</title>
       </Helmet>
+      <div className="mt-10 bg-white rounded-sm p-3 text-xl font-semibold">
+        All Policies
+      </div>
 
       {/* Filters and Search */}
-      <div className="flex justify-between items-center flex-wrap gap-4 mb-6">
+      <div className="flex justify-between items-center flex-wrap gap-4 mb-6 mt-10">
         <div className="flex flex-wrap gap-2">
           {["all", "Term Life", "Senior Plan", "Family Plan", "Child Plan"].map(
             (cat) => (

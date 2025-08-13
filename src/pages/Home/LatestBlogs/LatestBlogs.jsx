@@ -49,8 +49,8 @@ const LatestBlogs = () => {
   }
 
   return (
-    <section className=" py-12 md:px-10 lg:px-20 bg-[radial-gradient(ellipse_at_top_left,_#e1f0ec,_#aed9d9,_#2e4a62)]">
-      <div className="max-w-7xl mx-auto mt-10">
+    <section className=" py-12  bg-[radial-gradient(ellipse_at_top_left,_#e1f0ec,_#aed9d9,_#2e4a62)]">
+      <div className="max-w-7xl px-4 py-10 mx-auto mt-10">
         <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center py-2 bg-gradient-to-r from-[#2b6777] via-[#3b8ea5] to-[#66bfbf] text-transparent bg-clip-text">
           Latest Insights from Trust Life
         </h2>
@@ -62,18 +62,18 @@ const LatestBlogs = () => {
           you real-life guidance from trusted experts and customer stories.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
           {blogs.map((blog) => (
             <div
               key={blog._id}
-              className="bg-white text-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col"
+              className="bg-white text-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col hover:scale-[1.02] duration-300"
             >
               <img
                 src={blog.imageUrl}
                 alt={blog.title}
                 className="w-full h-52 object-cover"
               />
-              <div className="p-5 flex-1 flex flex-col justify-between">
+              <div className="px-2 py-2 flex-1 flex flex-col justify-center">
                 <div>
                   <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
                   <p className="text-sm mb-4 text-gray-600">
@@ -88,7 +88,8 @@ const LatestBlogs = () => {
                   </span>
                   <button
                     onClick={() => handleViewDetails(blog)}
-                    className="text-blue-600 hover:underline font-semibold"
+                    // className="text-blue-600 hover:underline font-semibold"
+                    className="  w-2/5 bg-[#baa53a] hover:bg-[#fcd547] transition text-white py-1 rounded-sm text-sm  text-center"
                   >
                     Read More →
                   </button>
