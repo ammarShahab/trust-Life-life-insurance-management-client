@@ -49,12 +49,12 @@ const LatestBlogs = () => {
   }
 
   return (
-    <section className=" py-12  bg-[radial-gradient(ellipse_at_top_left,_#e1f0ec,_#aed9d9,_#2e4a62)]">
+    <section className=" py-12  bg-[radial-gradient(ellipse_at_top_left,_#e1f0ec,_#aed9d9,_#2e4a62] dark:bg-none dark:bg-gray-900">
       <div className="max-w-7xl px-4 py-10 mx-auto mt-10">
-        <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center py-2 bg-gradient-to-r from-[#2b6777] via-[#3b8ea5] to-[#66bfbf] text-transparent bg-clip-text">
+        <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center py-2 bg-gradient-to-r from-[#2b6777] via-[#3b8ea5] to-[#66bfbf] dark:text-gray-300 text-transparent bg-clip-text ">
           Latest Insights from Trust Life
         </h2>
-        <p className="mt-4 mx-auto text-[#3b8ea5] text-center mb-12">
+        <p className="mt-4 mx-auto text-[#3b8ea5] text-center mb-12 dark:text-gray-300 ">
           At TrustLife, we believe that knowledge is power. Our blog offers you
           insights into the world of insurance, helping you make informed
           decisions for your future. Whether you're curious about life plans,
@@ -66,7 +66,7 @@ const LatestBlogs = () => {
           {blogs.map((blog) => (
             <div
               key={blog._id}
-              className="bg-white text-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col hover:scale-[1.02] duration-300"
+              className="bg-white text-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col hover:scale-[1.02] duration-300 dark:bg-gradient-to-br dark:from-gray-700 dark:via-gray-600 dark:to-gray-500"
             >
               <img
                 src={blog.imageUrl}
@@ -75,15 +75,17 @@ const LatestBlogs = () => {
               />
               <div className="px-2 py-2 flex-1 flex flex-col justify-center">
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
-                  <p className="text-sm mb-4 text-gray-600">
+                  <h3 className="text-xl font-semibold mb-2 dark:text-gray-300 ">
+                    {blog.title}
+                  </h3>
+                  <p className="text-sm mb-4 text-gray-600 dark:text-gray-300 ">
                     {blog.content.length > 120
                       ? blog.content.slice(0, 120) + "..."
                       : blog.content}
                   </p>
                 </div>
                 <div className="flex items-center justify-between text-xs mt-2">
-                  <span className="text-gray-500">
+                  <span className="text-gray-500 dark:text-gray-300 ">
                     {formatBDDate(blog.publishDate)}
                   </span>
                   <button

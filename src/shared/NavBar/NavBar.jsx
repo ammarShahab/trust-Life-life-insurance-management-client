@@ -5,7 +5,6 @@ import { LuMoon, LuSun } from "react-icons/lu";
 import TrustLife from "../TrustLife/TrustLife";
 import useAuth from "../../hooks/useAuth/useAuth";
 import LogoutButton from "../LogoutButton/LogoutButton";
-import ThemeContext from "../../context/ThemeContext/ThemeContext";
 import { DarkThemeToggle } from "flowbite-react";
 
 const NavBar = () => {
