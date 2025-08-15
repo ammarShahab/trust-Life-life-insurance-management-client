@@ -51,10 +51,16 @@ const LatestBlogs = () => {
   return (
     <section className=" py-12  bg-[conic-gradient(at_top_right,_#f9f3df,_#fdfce5,_#d7e9f7)] dark:bg-none dark:bg-gray-900 ">
       <div className="max-w-7xl px-4 py-10 mx-auto mt-10">
-        <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center py-2 bg-gradient-to-r from-[#2b6777] via-[#3b8ea5] to-[#66bfbf] dark:text-gray-300 text-transparent bg-clip-text ">
+        <h2
+          style={{
+            backgroundImage:
+              "linear-gradient(90deg,rgba(112, 215, 120, 1) 0%, rgba(198, 168, 78, 1) 82%, rgba(116, 181, 241, 1) 100%)",
+          }}
+          className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center py-2  dark:text-gray-300 text-transparent bg-clip-text "
+        >
           Latest Insights from Trust Life
         </h2>
-        <p className="mt-4 mx-auto text-[#3b8ea5] text-center mb-12 dark:text-gray-300 ">
+        <p className="mt-4 mx-auto text-slate-500 text-center mb-12 dark:text-gray-300 ">
           At TrustLife, we believe that knowledge is power. Our blog offers you
           insights into the world of insurance, helping you make informed
           decisions for your future. Whether you're curious about life plans,

@@ -65,7 +65,7 @@ const Benefits = () => {
         >
           Benefits of Trust Life
         </h2>
-        <p className="mt-3 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-sm sm:text-base">
+        <p className="mt-3 text-slate-500 dark:text-gray-300 max-w-2xl mx-auto text-sm sm:text-base">
           Discover how Trust Life simplifies your insurance journey — from
           instant quotes to real-time claim tracking and more.
         </p>

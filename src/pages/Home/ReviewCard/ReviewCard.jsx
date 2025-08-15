@@ -1,16 +1,12 @@
-import React, { use } from "react";
+import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import AuthContext from "../../../context/AuthContext/AuthContext";
 import TextAnimationGallery from "../../../components/animation/TextAnimationGallery";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../../hooks/useAxios";
 
 const ReviewCard = () => {
-  const { theme } = use(AuthContext);
-  console.log(theme);
-
   const axiosInstance = useAxios();
 
   const { data: reviews = [] } = useQuery({
@@ -62,15 +58,9 @@ const ReviewCard = () => {
   return (
     <section className="py-10 md:py-16 lg:py-20 text-white font-bitter bg-gradient-to-bl from-[#ffe4e6]  to-[#ccfbf1] dark:bg-gray-900 dark:from-transparent dark:via-transparent dark:to-transparent">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {theme === "dark" ? (
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-6">
-            Our Customers Speak For Us
-          </h2>
-        ) : (
-          <TextAnimationGallery />
-        )}
+        <TextAnimationGallery />
 
-        <p className="text-center max-w-2xl mx-auto text-lg md:text-xl mb-10 opacity-90 text-slate-600">
+        <p className="text-center max-w-2xl mx-auto text-lg md:text-xl mb-10 opacity-90 text-slate-600 dark:text-gray-300">
           Dive into the voices of our community. Real stories, real impact, real
           people.
         </p>
@@ -87,14 +77,14 @@ const ReviewCard = () => {
                       className="w-16 h-16 rounded-full object-cover border-2 border-white"
                     />
                     <div>
-                      <h4 className="text-lg font-semibold text-slate-600">
+                      <h4 className="text-lg font-semibold text-slate-600 dark:text-gray-300">
                         {review.userName}
                       </h4>
                       <div>{renderStars(review.rating)}</div>
                     </div>
                   </div>
 
-                  <p className="mt-4 text-sm sm:text-base text-slate-600 italic leading-relaxed">
+                  <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-gray-300 italic leading-relaxed">
                     "{review.feedback}"
                   </p>
                 </div>

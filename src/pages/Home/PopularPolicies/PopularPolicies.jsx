@@ -29,7 +29,7 @@ const PopularPolicies = () => {
         >
           🌟 Most Popular Policies
         </h2>
-        <p className="text-center mb-12 mt-3 dark:text-gray-300">
+        <p className="text-center text-slate-500 mb-12 mt-3 dark:text-gray-300">
           Discover our most chosen insurance policies, selected by thousands of
           satisfied customers. These plans reflect a strong track record of
           trust, reliability, and value. With high purchase volumes and proven
