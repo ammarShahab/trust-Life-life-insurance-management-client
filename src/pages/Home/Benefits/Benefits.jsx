@@ -54,7 +54,7 @@ const features = [
 
 const Benefits = () => {
   return (
-    <section className="dark:bg-gray-900 py-16 px-4 mx-auto">
+    <section className=" py-16 px-4 mx-auto bg-[conic-gradient(at_top_right,_#f9f3df,_#fdfce5,_#d7e9f7)] dark:bg-none dark:bg-gray-900">
       <div className="mx-auto text-center mb-12 mt-10">
         <h2
           className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-transparent bg-clip-text py-2 dark:text-gray-300"

@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion"; // Fix: `motion/react` is incorrect, use `framer-motion`
+import { motion } from "framer-motion";
 
 const TextAnimationGallery = () => {
   return (
@@ -7,12 +7,11 @@ const TextAnimationGallery = () => {
       className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 sm:mb-6 "
       animate={{
         color: [
-          "#ebf0f6", // light from the background
-          "#98ccd3", // middle tone
-          "#ffffff", // high contrast white
-          "#ffecd1", // warm contrast
-          "#ffe156", // punch of gold
-          "#ffffff", // back to white
+          "#0f172a", // dark / navy — high contrast
+          "#064e3b", // deep teal
+          "#f8fafc", // near white
+          "#b45309", // warm amber for pop
+          "#f8fafc", // back to near white
         ],
       }}
       transition={{ duration: 6, repeat: Infinity }}

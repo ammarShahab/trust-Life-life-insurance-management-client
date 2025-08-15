@@ -49,7 +49,7 @@ const LatestBlogs = () => {
   }
 
   return (
-    <section className=" py-12  bg-[radial-gradient(ellipse_at_top_left,_#e1f0ec,_#aed9d9,_#2e4a62] dark:bg-none dark:bg-gray-900">
+    <section className=" py-12  bg-[conic-gradient(at_top_right,_#f9f3df,_#fdfce5,_#d7e9f7)] dark:bg-none dark:bg-gray-900 ">
       <div className="max-w-7xl px-4 py-10 mx-auto mt-10">
         <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center py-2 bg-gradient-to-r from-[#2b6777] via-[#3b8ea5] to-[#66bfbf] dark:text-gray-300 text-transparent bg-clip-text ">
           Latest Insights from Trust Life
@@ -66,7 +66,7 @@ const LatestBlogs = () => {
           {blogs.map((blog) => (
             <div
               key={blog._id}
-              className="bg-white text-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col hover:scale-[1.02] duration-300 dark:bg-gradient-to-br dark:from-gray-700 dark:via-gray-600 dark:to-gray-500"
+              className="bg-gray-100 text-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col hover:scale-[1.02] duration-300 dark:bg-gradient-to-br dark:from-gray-700 dark:via-gray-600 dark:to-gray-500"
             >
               <img
                 src={blog.imageUrl}

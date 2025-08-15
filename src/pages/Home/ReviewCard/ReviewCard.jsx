@@ -9,6 +9,8 @@ import useAxios from "../../../hooks/useAxios";
 
 const ReviewCard = () => {
   const { theme } = use(AuthContext);
+  console.log(theme);
+
   const axiosInstance = useAxios();
 
   const { data: reviews = [] } = useQuery({
@@ -58,7 +60,7 @@ const ReviewCard = () => {
   };
 
   return (
-    <section className="py-10 md:py-16 lg:py-20 text-white font-bitter bg-[radial-gradient(ellipse_at_top_left,_#ebf0f6,_#98ccd3,_#364e68)] dark:bg-none dark:bg-gray-900">
+    <section className="py-10 md:py-16 lg:py-20 text-white font-bitter bg-gradient-to-bl from-[#ffe4e6]  to-[#ccfbf1] dark:bg-gray-900 dark:from-transparent dark:via-transparent dark:to-transparent">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {theme === "dark" ? (
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-6">
@@ -68,7 +70,7 @@ const ReviewCard = () => {
           <TextAnimationGallery />
         )}
 
-        <p className="text-center max-w-2xl mx-auto text-lg md:text-xl mb-10 opacity-90">
+        <p className="text-center max-w-2xl mx-auto text-lg md:text-xl mb-10 opacity-90 text-slate-600">
           Dive into the voices of our community. Real stories, real impact, real
           people.
         </p>
@@ -77,7 +79,7 @@ const ReviewCard = () => {
           <Slider {...settings}>
             {reviews.map((review, index) => (
               <div key={index} className="px-3">
-                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl p-6 transition duration-300 hover:scale-105">
+                <div className="bg-white/40 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl p-6 transition duration-300 hover:scale-105">
                   <div className="flex items-center gap-5">
                     <img
                       src={review.userImage}
@@ -85,14 +87,14 @@ const ReviewCard = () => {
                       className="w-16 h-16 rounded-full object-cover border-2 border-white"
                     />
                     <div>
-                      <h4 className="text-lg font-semibold">
+                      <h4 className="text-lg font-semibold text-slate-600">
                         {review.userName}
                       </h4>
                       <div>{renderStars(review.rating)}</div>
                     </div>
                   </div>
 
-                  <p className="mt-4 text-sm sm:text-base text-white/90 italic leading-relaxed">
+                  <p className="mt-4 text-sm sm:text-base text-slate-600 italic leading-relaxed">
                     "{review.feedback}"
                   </p>
                 </div>

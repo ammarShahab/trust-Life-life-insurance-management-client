@@ -23,7 +23,7 @@ const NewsletterSubscription = () => {
 
   return (
     // <section className="  p-10 relative bg-[conic-gradient(at_left,_#f5eee6,_#fff8e3,_#f3d7ca)]">
-    <section className="p-10 relative bg-[conic-gradient(at_top_right,_#f9f3df,_#fdfce5,_#d7e9f7)] ">
+    <section className="p-10 relative bg-gradient-to-bl from-[#ffe4e6]  to-[#ccfbf1] dark:bg-gray-900 dark:from-transparent dark:via-transparent dark:to-transparent ">
       <div className=" max-w-7xl mx-auto flex sm:flex-row flex-col justify-center items-center gap-7 sm:gap-24 mt-10 mb-12">
         <div className="w-1/2">
           <img
