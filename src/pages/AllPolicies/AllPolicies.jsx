@@ -49,7 +49,7 @@ const AllPolicies = () => {
         <Helmet>
           <title>Trust Life | All Policies</title>
         </Helmet>
-        <div className="mt-10 bg-white rounded-sm p-3 text-xl font-semibold dark:bg-gradient-to-br dark:from-gray-700 dark:via-gray-600 dark:to-gray-500 text-gray-300">
+        <div className="mt-10 bg-white rounded-sm p-3 text-xl font-semibold dark:bg-gradient-to-br dark:from-gray-700 dark:via-gray-600 dark:to-gray-500 dark:text-gray-300">
           All Policies
         </div>
 
@@ -90,7 +90,9 @@ const AllPolicies = () => {
         {isLoading ? (
           <Loading />
         ) : data?.policies?.length === 0 ? (
-          <p className="text-center text-gray-500">No policies found.</p>
+          <p className="text-center text-gray-500 dark:text-gray-300">
+            No policies found.
+          </p>
         ) : (
           <>
             {/* Policies Grid */}
