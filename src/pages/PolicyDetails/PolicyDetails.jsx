@@ -42,43 +42,52 @@ const PolicyDetails = () => {
         {/* Text Info */}
         <div className="flex flex-col justify-between">
           <div>
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 dark:text-gray-300">
               {policy.title}
             </h2>
 
-            <p className="text-md mb-2">
+            <p className="text-md mb-2 dark:text-gray-300">
               <span className="font-semibold">Category:</span>{" "}
-              <span className="text-[#baa53a] font-medium">
+              <span className="text-[#baa53a] font-medium dark:text-gray-300">
                 {policy.category}
               </span>
             </p>
 
-            <p className="text-md mb-2">
-              <span className="font-semibold">Eligibility:</span> Age{" "}
-              {policy.minAge} - {policy.maxAge} years
+            <p className="text-md mb-2 dark:text-gray-300">
+              <span className="font-semibold dark:text-gray-300">
+                Eligibility:
+              </span>{" "}
+              Age {policy.minAge} - {policy.maxAge} years
             </p>
 
-            <p className="text-md mb-2">
-              <span className="font-semibold">Coverage Amount:</span>{" "}
+            <p className="text-md mb-2 dark:text-gray-300">
+              <span className="font-semibold dark:text-gray-300">
+                Coverage Amount:
+              </span>{" "}
               {policy.coverage}
             </p>
 
-            <p className="text-md mb-2">
-              <span className="font-semibold">Duration Options:</span>{" "}
+            <p className="text-md mb-2 dark:text-gray-300">
+              <span className="font-semibold dark:text-gray-300">
+                Duration Options:
+              </span>{" "}
               {policy.duration}
             </p>
 
-            <p className="text-md mb-2">
-              <span className="font-semibold">Premium Calculation Logic:</span>{" "}
+            <p className="text-md mb-2 dark:text-gray-300">
+              <span className="font-semibold dark:text-gray-300">
+                Premium Calculation Logic:
+              </span>{" "}
               Premiums are calculated based on age, gender, coverage, amount,
               policy duration, and smoker status.
             </p>
 
-            <p className="text-md mb-2">
-              <span className="font-semibold">Premium:</span> {policy.premium}
+            <p className="text-md mb-2 dark:text-gray-300">
+              <span className="font-semibold dark:text-gray-300">Premium:</span>{" "}
+              {policy.premium}
             </p>
 
-            <p className="text-gray-600 my-4 leading-relaxed">
+            <p className="text-gray-600 my-4 leading-relaxed dark:text-gray-300">
               {policy.description}
             </p>
           </div>
