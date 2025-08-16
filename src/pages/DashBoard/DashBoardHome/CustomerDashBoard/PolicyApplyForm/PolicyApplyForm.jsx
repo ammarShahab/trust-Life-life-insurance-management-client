@@ -59,15 +59,12 @@ const PolicyApplyForm = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
+    <div className="max-w-3xl mx-auto px-4 py-8 dark:bg-gradient-to-br dark:from-gray-700 dark:via-gray-600 dark:to-gray-500 dark:text-gray-300 mt-26 rounded mb-10 bg-white">
       <h2 className="text-2xl font-bold mb-6 text-center">
         Policy Application Form
       </h2>
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="bg-white p-6 rounded shadow space-y-4"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className=" p-6 space-y-4">
         {/* Prefilled Name */}
         <div>
           <label className="block mb-1 font-medium">Full Name</label>
@@ -75,7 +72,7 @@ const PolicyApplyForm = () => {
             type="text"
             value={user?.displayName || ""}
             readOnly
-            className="w-full border px-3 py-2 rounded bg-gray-100"
+            className="w-full border px-3 py-2 rounded dark:bg-gray-600"
           />
         </div>
 
@@ -86,7 +83,7 @@ const PolicyApplyForm = () => {
             type="email"
             value={user?.email || ""}
             readOnly
-            className="w-full border px-3 py-2 rounded bg-gray-100"
+            className="w-full border px-3 py-2 rounded  dark:bg-gray-600 dark:text-gray-300"
           />
         </div>
 

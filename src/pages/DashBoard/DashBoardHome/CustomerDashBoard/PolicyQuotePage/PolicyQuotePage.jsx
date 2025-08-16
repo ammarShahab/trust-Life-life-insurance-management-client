@@ -63,7 +63,7 @@ const PolicyQuotePage = () => {
     <div className="max-w-xl mx-auto px-4 py-10">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-4 bg-white p-6 rounded shadow mt-10"
+        className="space-y-4 bg-white p-6 rounded shadow mt-10 dark:bg-gradient-to-br dark:from-gray-700 dark:via-gray-600 dark:to-gray-500 dark:text-gray-300"
       >
         <h2 className="text-2xl font-bold text-center mb-6 ">
           Get a Quote for "{policy.title}"
@@ -73,7 +73,7 @@ const PolicyQuotePage = () => {
           <input
             type="number"
             {...register("age", { required: true })}
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border px-3 py-2 rounded dark:bg-gray-700 dark:text-gray-300"
             placeholder="e.g. 35"
           />
         </div>
@@ -82,20 +82,28 @@ const PolicyQuotePage = () => {
           <label className="block mb-1 font-medium">Gender</label>
           <select
             {...register("gender")}
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border px-3 py-2 rounded dark:bg-gray-700 dark:text-gray-300"
           >
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
+            <option className="dark:text-gray-300" value="male">
+              Male
+            </option>
+            <option className="dark:text-gray-300" value="female">
+              Female
+            </option>
+            <option className="dark:text-gray-300" value="other">
+              Other
+            </option>
           </select>
         </div>
 
         <div>
-          <label className="block mb-1 font-medium">Coverage Amount (৳)</label>
+          <label className="block mb-1 font-medium dark:text-gray-300">
+            Coverage Amount (৳)
+          </label>
           <input
             type="number"
             {...register("coverage", { required: true })}
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border px-3 py-2 rounded dark:bg-gray-700 dark:text-gray-300"
             placeholder="e.g. 2000000"
           />
         </div>
@@ -105,7 +113,7 @@ const PolicyQuotePage = () => {
           <input
             type="number"
             {...register("duration", { required: true })}
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border px-3 py-2 rounded dark:bg-gray-700 dark:text-gray-300"
             placeholder="e.g. 20"
           />
         </div>
@@ -114,7 +122,7 @@ const PolicyQuotePage = () => {
           <label className="block mb-1 font-medium">Smoker?</label>
           <select
             {...register("smoker")}
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border px-3 py-2 rounded dark:bg-gray-700 dark:text-gray-300"
           >
             <option value="no">No</option>
             <option value="yes">Yes</option>
@@ -130,16 +138,20 @@ const PolicyQuotePage = () => {
       </form>
 
       {result && (
-        <div className="mt-6 p-4 border rounded bg-gray-50 text-center">
-          <p className="text-lg font-semibold text-gray-700">
+        <div className="mt-6 p-4 border rounded bg-gray-50 text-center dark:bg-gradient-to-br dark:from-gray-700 dark:via-gray-600 dark:to-gray-500 dark:text-gray-300 dark:border-0">
+          <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">
             Estimated Premium
           </p>
-          <p className="text-gray-800 mt-1">Monthly: ৳{result.monthly}</p>
-          <p className="text-gray-800">Yearly: ৳{result.yearly}</p>
+          <p className="text-gray-800 mt-1 dark:text-gray-300">
+            Monthly: ৳{result.monthly}
+          </p>
+          <p className="text-gray-800 dark:text-gray-300">
+            Yearly: ৳{result.yearly}
+          </p>
 
           <button
             onClick={handleApplyClick}
-            className="mt-4 bg-[#1f2937] hover:bg-gray-800 text-white px-5 py-2 rounded"
+            className="mt-4 bg-[#baa53a] hover:bg-[#fcd547] transition text-white px-5 py-2 rounded"
           >
             Apply for Policy
           </button>
