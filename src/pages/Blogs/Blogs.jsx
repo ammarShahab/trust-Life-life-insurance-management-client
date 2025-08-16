@@ -90,7 +90,7 @@ const Blogs = () => {
                   alt={blog.title}
                   className="object-cover w-full mb-4 h-48 rounded-md"
                 />
-                <h2 className="mb-2 text-xl font-bold ">{blog.title}</h2>
+                <h2 className="mb-2 text-xl font-semibold">{blog.title}</h2>
                 <p className="text-sm text-gray-700 dark:text-gray-300">
                   {blog.content.split(" ").slice(0, 30).join(" ")}...
                 </p>
