@@ -61,9 +61,16 @@ const PopularPolicies = () => {
                     </span>
                   </p>
                   <p className="text-[12px] text-gray-500 dark:text-gray-300 mb-1">
-                    <strong>Coverage Amount:</strong>
+                    {/* <strong>Coverage Amount:</strong>
                     <span className="text-green-600 dark:text-gray-300 font-medium">
                       {policy.coverage}
+                    </span> */}
+                    <strong>Description:</strong>
+                    <span className="text-gray-500 dark:text-gray-300 font-medium pl-0.5">
+                      {policy.description.length > 100
+                        ? policy.description.slice(0, 79)
+                        : policy.description}
+                      ...
                     </span>
                   </p>
                 </div>
